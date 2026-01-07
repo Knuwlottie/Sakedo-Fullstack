@@ -1,0 +1,24 @@
+:root {
+  --primary-gold: #d4b884;
+  --primary-beige: #f5f0e6;
+  --text-dark: #333333;
+  --text-light: #666666;
+  --white: #ffffff;
+  --border-light: #eeeeee;
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  --border-radius-card: 30px;
+  --border-radius-input: 12px;
+  --border-radius-btn: 50px;
+  --font-main: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  --primary-color: #d8b26e;
+  --primary-hover: #c59f5e;
+  --text-dark: #1a1a1a;
+  --text-gray: #666666;
+  --bg-light: #f9f9f9;
+  --bg-dark: #111111;
+  --font-heading: "Fruktur", cursive;
+  --font-body: "Epilogue", sans-serif;
+  --container-width: 1200px;
+  --header-height: 80px;
+  --border-radius: 8px;
+}

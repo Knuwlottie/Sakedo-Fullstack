@@ -1,0 +1,11 @@
+.food-card .card-header a {
+  position: relative; /* Kích hoạt khả năng xếp lớp */
+  z-index: 5; /* Cao hơn z-index: 1 của .img-bg */
+  display: block; /* Để thẻ a ôm trọn ảnh */
+}
+
+/* Đảm bảo ảnh bên trong không bị ảnh hưởng */
+.food-card .food-img {
+  position: relative;
+  z-index: 6; /* An toàn thì cho cao hơn thẻ a luôn */
+}

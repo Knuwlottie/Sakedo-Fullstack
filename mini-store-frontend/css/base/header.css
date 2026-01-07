@@ -1,0 +1,153 @@
+/* --- USER DROPDOWN (AVATAR & MENU) --- */
+.user-dropdown {
+  position: relative;
+  margin-left: 15px;
+}
+
+/* 1. Phần kích hoạt (Avatar) */
+.user-trigger {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 2px;
+  border-radius: 50px; /* Bo tròn bao quanh */
+}
+
+.user-trigger:hover {
+  background-color: #f5f5f5; /* Hiệu ứng nền nhẹ khi rê chuột */
+}
+
+.user-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #d4af37; /* Viền vàng kim sang trọng */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.user-caret {
+  color: #888;
+  font-size: 12px;
+  transition: transform 0.3s;
+}
+
+.user-trigger:hover .user-caret {
+  transform: rotate(180deg); /* Mũi tên xoay khi hover */
+  color: #d4af37;
+}
+
+/* 2. Menu xổ xuống (Dropdown) */
+.dropdown-menu {
+  position: absolute;
+  top: 140%; /* Cách xa header một chút */
+  right: 0;
+  width: 240px; /* Rộng hơn để chữ không bị xuống dòng */
+  background: #fff;
+  border-radius: 12px; /* Bo góc mềm mại */
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15); /* Bóng đổ mờ ảo cao cấp */
+  padding: 8px 0;
+
+  /* Hiệu ứng ẩn hiện mượt mà */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+  z-index: 1000;
+}
+
+/* Class để kích hoạt hiển thị menu */
+.dropdown-menu.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* Mũi tên nhọn chỉ lên trên (Trang trí) */
+.dropdown-menu::before {
+  content: "";
+  position: absolute;
+  top: -6px;
+  right: 20px;
+  width: 12px;
+  height: 12px;
+  background: #fff;
+  transform: rotate(45deg);
+  box-shadow: -2px -2px 5px rgba(0, 0, 0, 0.04);
+}
+
+/* 3. Header trong Menu (Tên user) */
+.dropdown-header {
+  padding: 15px 20px;
+  border-bottom: 1px solid #f5f5f5;
+  margin-bottom: 5px;
+}
+
+.dropdown-name {
+  display: block;
+  font-weight: 700;
+  color: #333;
+  font-size: 16px;
+  margin-bottom: 3px;
+}
+
+.dropdown-role {
+  display: block;
+  font-size: 12px;
+  color: #d4af37; /* Màu vàng */
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* 4. Các mục trong Menu (Items) */
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 12px 20px;
+  color: #555;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.dropdown-item i {
+  width: 20px;
+  text-align: center;
+  color: #aaa; /* Icon màu xám nhạt */
+  transition: color 0.2s;
+}
+
+/* Hover vào mục menu */
+.dropdown-item:hover {
+  background-color: #fafafa;
+  color: #d4af37; /* Chữ chuyển vàng */
+  padding-left: 25px; /* Hiệu ứng trượt nhẹ sang phải */
+}
+
+.dropdown-item:hover i {
+  color: #d4af37; /* Icon chuyển vàng */
+}
+
+/* 5. Nút Đăng xuất (Riêng biệt) */
+.dropdown-item.logout {
+  border-top: 1px solid #f5f5f5;
+  margin-top: 5px;
+  color: #d32f2f; /* Màu đỏ */
+}
+
+.dropdown-item.logout:hover {
+  background-color: #fff5f5; /* Nền đỏ nhạt */
+  color: #b71c1c;
+}
+
+.dropdown-item.logout i {
+  color: #ef9a9a;
+}
+.dropdown-item.logout:hover i {
+  color: #d32f2f;
+}

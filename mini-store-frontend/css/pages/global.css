@@ -1,0 +1,1489 @@
+@import url("https://fonts.googleapis.com/css2?family=Fruktur&display=swap");
+/* ================= RESET CƠ BẢN ================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Epilogue", sans-serif;
+}
+
+/* Khung giới hạn chiều rộng chuẩn */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  width: 100%;
+}
+
+/* ================= HEADER ĐÃ CHỈNH SỬA THEO YÊU CẦU ================= */
+.header {
+  background-color: #fff;
+  /* 3. CHIỀU CAO GỌN LẠI: Đặt cố định 70px và bỏ padding thừa */
+  height: 70px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 1px solid #eee;
+}
+
+.header-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+}
+
+/* 1. LOGO  */
+.logo img {
+  height: 68px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+}
+
+/* 2. KHOẢNG CÁCH MENU*/
+.nav-list {
+  display: flex;
+  list-style: none;
+  gap: 40px;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #1a1a1a;
+  font-weight: 700;
+  font-size: 15px;
+  text-transform: uppercase;
+  transition: 0.2s;
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.5px;
+}
+
+/* Hiệu ứng hover màu vàng */
+.nav-link:hover,
+.nav-link.active {
+  color: #d8b26e;
+}
+
+/* Icon mũi tên nhỏ ở Trang Chủ */
+.nav-link i {
+  font-size: 11px;
+  margin-left: 6px;
+  margin-top: -2px; /* Canh chỉnh vị trí mũi tên */
+  color: #d8b26e;
+}
+
+/* ================= PHẦN BÊN PHẢI (Đúng chuẩn Figma) ================= */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 30px; /* Tăng khoảng cách giữa giỏ hàng và nút */
+}
+
+/* Giỏ hàng màu xanh lá */
+.cart-btn {
+  position: relative;
+  color: #28a745;
+  font-size: 22px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+
+/* Số lượng: Nền đen chữ trắng */
+.cart-count {
+  position: absolute;
+  top: -7px;
+  right: -10px;
+  background: #000;
+  color: #fff;
+  font-size: 10px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+}
+
+/* Nút Đăng Nhập: Nền vàng CHỮ TRẮNG */
+.btn-primary {
+  background-color: #d8b26e; /* Màu vàng */
+  color: #ffffff !important; /* BẮT BUỘC CHỮ TRẮNG */
+  padding: 10px 28px; /* Padding gọn gàng */
+  border-radius: 4px;
+  font-weight: 700;
+  font-size: 14px;
+  text-decoration: none;
+  text-transform: uppercase;
+  border: none;
+  box-shadow: 0 4px 6px rgba(216, 178, 110, 0.2);
+  transition: 0.3s;
+  white-space: nowrap; /* Giữ chữ trên 1 dòng */
+}
+
+.btn-primary:hover {
+  background-color: #c59f5e; /* Màu vàng tối hơn khi hover */
+  transform: translateY(-1px);
+}
+
+/* --- HERO SECTION --- */
+.hero-section {
+  background-color: #000; /* Nền đen dự phòng */
+
+  /* === SỬA LẠI PHẦN NÀY ĐỂ HIỆN TÔ PHỞ === */
+  background-image: url("../../assets/images/baner.png");
+
+  /* Sử dụng cover để phủ kín, nhưng nếu vẫn mất ảnh thì thử đổi thành 'contain' để kiểm tra */
+  background-size: cover;
+
+  /* QUAN TRỌNG: Căn ảnh sát lề phải và giữa theo chiều dọc */
+  background-position: right center !important;
+
+  background-repeat: no-repeat;
+
+  /* Tăng chiều cao tối thiểu để đảm bảo đủ chỗ hiển thị tô phở */
+  min-height: 650px;
+
+  padding: 100px 0;
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  /* ======================================= */
+}
+
+/* --- HERO SECTION --- */
+.hero-section {
+  background-color: #000; /* Nền đen */
+  /* Ảnh nền Tô phở */
+  background-image: url("../../assets/images/baner.png");
+  background-size: cover;
+  background-position: center right; /* Đẩy hình tô phở sang phải */
+  background-repeat: no-repeat;
+
+  padding: 150px 0; /* Tăng độ cao để hình thoáng hơn */
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.hero-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+}
+
+/* Cột trái: Chữ */
+.hero-content {
+  flex: 1;
+  max-width: 650px; /* Cho phép chữ trải rộng hơn */
+  z-index: 2;
+}
+
+.hero-title {
+  font-family: var(--font-heading); /* Font Fruktur */
+  font-size: 3.5rem;
+  line-height: 1.4; /* Tăng độ cao dòng để chữ trên và dưới không dính nhau */
+  margin-bottom: 25px;
+  color: #ffffff;
+
+  /* SỬA LẠI: Bỏ bóng đen đậm, chỉ dùng bóng mờ nhẹ để tách nền */
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+
+  font-weight: 400; /* Font này đã đậm sẵn, không để bold */
+  letter-spacing: 1px; /* Tăng khoảng cách chữ cho thoáng */
+}
+
+.hero-desc {
+  color: #f0f0f0;
+  font-size: 1.1rem;
+  margin-bottom: 40px;
+  line-height: 1.8;
+  max-width: 90%;
+}
+
+/* Nút bấm */
+.hero-buttons {
+  display: flex;
+  gap: 20px;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  color: #000; /* Chữ màu đen trên nền vàng */
+  padding: 15px 35px;
+  border-radius: 5px;
+  font-weight: 700;
+  text-decoration: none;
+  text-transform: uppercase;
+  display: inline-block;
+}
+
+.btn-outline {
+  border: 2px solid #fff;
+  color: #fff;
+  padding: 12px 30px;
+  border-radius: 5px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+}
+
+/* Cột phải */
+.hero-image-wrapper {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end; /* Đẩy thẻ cơm tấm về phía bên phải */
+  align-items: flex-end;
+  margin-top: 100px; /* Đẩy thẻ xuống dưới một chút */
+}
+
+/* Thẻ Cơm Tấm */
+.hero-card {
+  background: rgba(0, 0, 0, 0.8);
+  border: 1px solid var(--primary-color);
+  border-radius: 50px;
+  padding: 15px 30px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  /* Canh chỉnh vị trí thẻ cho giống hình mẫu */
+  margin-right: 50px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.card-info h3 {
+  color: #fff;
+  margin: 5px 0;
+  font-size: 1.4rem;
+}
+
+.card-info p {
+  color: #ccc;
+  font-size: 1rem;
+  margin: 0;
+}
+
+.badge {
+  background: var(--primary-color);
+  color: #000;
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.stars {
+  color: var(--primary-color);
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.card-img {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #fff;
+}
+
+/* =========================================
+   PHẦN 2: VỀ CHÚNG TÔI (ABOUT SECTION)
+   ========================================= */
+.about-section {
+  padding: 100px 0;
+  background-color: #fff; /* Nền trắng */
+}
+
+/* --- PHẦN CHỮ --- */
+.about-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start; /* Căn hàng trên cùng */
+  margin-bottom: 60px;
+  gap: 50px;
+}
+
+.sub-heading {
+  color: #ff5722; /* Màu đỏ cam cho chữ nhỏ */
+  font-weight: 700;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.section-heading {
+  font-family: "Fruktur", cursive; /* Font Fruktur */
+  font-size: 3rem;
+  line-height: 1.2;
+  color: #1a1a1a;
+}
+
+.about-desc {
+  flex: 1;
+  max-width: 500px; /* Giới hạn chiều rộng đoạn văn */
+  color: #666;
+  text-align: justify; /* Căn đều 2 bên cho đẹp */
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-top: 10px;
+}
+
+/* --- PHẦN HÌNH ẢNH (GALLERY) --- */
+.about-gallery {
+  display: flex;
+  justify-content: center;
+  gap: 40px; /* Khoảng cách giữa các hình */
+  margin-top: 50px;
+}
+
+.gallery-item {
+  position: relative;
+  width: 300px; /* Chiều rộng mỗi thẻ hình */
+  text-align: center;
+}
+
+/* Đẩy hình giữa xuống thấp tạo hiệu ứng so le */
+.center-item {
+  margin-top: 50px;
+}
+
+/* Khung chứa ảnh để tạo viền vàng */
+.img-frame {
+  position: relative;
+  border-radius: 20px;
+  padding: 0;
+  z-index: 1;
+}
+
+/* Tạo viền vàng mảnh bao quanh ảnh (dùng pseudo-element) */
+.img-frame::before {
+  content: "";
+  position: absolute;
+  top: -10px; /* Nhô lên trên */
+  left: -10px; /* Nhô sang trái */
+  right: -10px;
+  bottom: -10px;
+  border: 1px solid var(--primary-color); /* Viền vàng */
+  border-radius: 25px; /* Bo cong viền */
+  z-index: -1; /* Nằm dưới ảnh */
+}
+
+.img-frame img {
+  width: 100%;
+  height: 350px; /* Chiều cao cố định cho đều */
+  object-fit: cover;
+  border-radius: 20px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  display: block;
+}
+
+/* Nhãn tên (Nhà hàng, Giải khát...) */
+.gallery-label {
+  display: inline-block;
+  background-color: var(--primary-color);
+  color: #000;
+  font-weight: 700;
+  padding: 10px 30px;
+  border-radius: 30px; /* Bo tròn kiểu viên thuốc */
+  margin-top: -20px; /* Đẩy lên đè vào ảnh 1 chút */
+  position: relative;
+  z-index: 2;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  text-transform: capitalize;
+}
+
+/* =========================================
+   PHẦN 3: MENU HIGHLIGHT (DANH MỤC)
+   ========================================= */
+.menu-highlight-section {
+  padding: 80px 0 100px 0;
+  background-color: #fff; /* Hoặc #fafafa nếu muốn nền hơi xám */
+}
+
+/* --- THANH DANH MỤC (TABS) --- */
+.category-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-bottom: 60px;
+}
+
+.cat-item {
+  width: 110px;
+  height: 110px;
+  background: #fff;
+  border: 2px solid #eee; /* Viền mỏng */
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: 0.3s;
+  position: relative;
+}
+
+.icon-box img {
+  width: 45px;
+  height: 45px;
+  object-fit: contain;
+  margin-bottom: 10px;
+  transition: 0.3s;
+}
+
+.cat-item span {
+  font-weight: 700;
+  font-size: 14px;
+  color: #333;
+}
+
+/* === TRẠNG THÁI ACTIVE (ĐANG CHỌN) === */
+.cat-item.active {
+  background-color: #d3b673; /* Màu vàng cát */
+  border-color: #d3b673;
+  box-shadow: 0 10px 20px rgba(211, 182, 115, 0.4);
+}
+
+/* Đổi màu chữ sang trắng */
+.cat-item.active span {
+  color: #fff;
+}
+
+.cat-item.active .icon-box img {
+  filter: invert(1);
+  mix-blend-mode: screen;
+}
+.cat-item:not(.active):hover {
+  transform: translateY(-5px);
+  border-color: #d3b673;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.cat-item.active::after {
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  width: 20px;
+  height: 10px;
+
+  background-color: #e91e63;
+
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  border-radius: 0 0 5px 5px;
+}
+
+.featured-card {
+  display: flex;
+  background: #f8f9fb;
+  border-radius: 25px;
+  overflow: hidden;
+  max-width: 900px;
+  margin: 0 auto;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.05);
+}
+
+.featured-img-box {
+  flex: 1;
+  padding: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+}
+
+.featured-img-box img {
+  width: 100%;
+  max-width: 300px;
+  border-radius: 15px;
+  object-fit: cover;
+}
+
+.featured-content {
+  flex: 1.3;
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.featured-title {
+  font-family: var(--font-heading);
+  font-size: 2.2rem;
+  margin-bottom: 30px;
+  color: #000;
+}
+
+/* MENU LIST */
+.menu-list {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.menu-item {
+  border-bottom: 1px dashed #e0e0e0;
+  padding-bottom: 15px;
+}
+.menu-item:last-child {
+  border-bottom: none;
+}
+
+.item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 5px;
+}
+
+.item-name {
+  font-family: "Dancing Script", cursive; /* Font viết tay cho tên món (nếu có) */
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.item-price {
+  font-weight: 800;
+  color: #d34b56; /* Màu đỏ */
+}
+
+.item-desc {
+  font-size: 0.9rem;
+  color: #777;
+  font-style: italic;
+}
+
+/* =========================================
+   PHẦN 4: KHÁM PHÁ ƯU ĐÃI (PROMOTION)
+   ========================================= */
+.promotion-section {
+  padding: 80px 0 120px 0;
+  background-color: #fff;
+}
+
+/* --- TIÊU ĐỀ --- */
+.promotion-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.promo-title {
+  font-family: var(--font-body);
+  font-weight: 800;
+  font-size: 2.5rem;
+  color: #000;
+  display: inline-block;
+  font-family: "Fruktur", cursive;
+}
+
+/* Chữ "Ưu Đãi" viết tay */
+.highlight-text {
+  font-family: "Dancing Script", cursive;
+  font-weight: 400;
+  color: #d8b26e;
+  margin-left: 10px;
+  font-style: italic;
+}
+
+/* Gạch chân dưới tiêu đề */
+.title-underline {
+  width: 150px;
+  height: 4px;
+  background-color: #d8b26e;
+  margin: 10px auto 0;
+  border-radius: 2px;
+}
+
+/* --- LƯỚI THẺ ƯU ĐÃI --- */
+.promo-grid {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+}
+
+.promo-card {
+  position: relative;
+  width: 500px;
+  height: 300px;
+  border-radius: 20px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: 0.3s;
+  z-index: 1;
+}
+
+.promo-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Hình ảnh nền */
+.promo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: 0.5s;
+  border-radius: 20px;
+}
+
+.promo-card:hover .promo-img {
+  transform: scale(1.05);
+}
+
+/* Lớp phủ chứa chữ */
+.promo-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 20px;
+}
+
+.dish-name {
+  font-family: var(--font-heading);
+  color: #fff;
+  font-size: 2.2rem;
+  line-height: 1.2;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  margin-bottom: 5px;
+  text-transform: uppercase;
+}
+
+.dish-sub {
+  color: #eee;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+}
+
+/* --- NHÃN GIẢM GIÁ (HÌNH TRÒN VÀNG) --- */
+.discount-badge {
+  position: absolute;
+  bottom: -13px;
+  left: 30px;
+  width: 80px;
+  height: 80px;
+  background-color: #ffd600;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.3);
+  z-index: 10;
+}
+
+.discount-badge span {
+  color: #d32f2f;
+  font-weight: 800;
+  font-size: 1.5rem;
+}
+
+/* =========================================
+   PHẦN 5: MÓN NGON PHẢI THỬ (CAROUSEL)
+   ========================================= */
+.must-try-section {
+  padding: 80px 0 100px 0;
+  background-color: #f5f8fd; /* Màu nền bạn yêu cầu */
+}
+
+/* --- CAROUSEL CONTAINER --- */
+.carousel-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden; /* Ẩn các phần bị tràn ra ngoài */
+  padding: 20px 0 40px 0;
+}
+
+/* Đường ray trượt */
+.carousel-track {
+  display: flex;
+  gap: 30px; /* Khoảng cách giữa các thẻ */
+  transition: transform 0.5s ease-in-out; /* Hiệu ứng trượt mượt mà */
+  width: max-content; /* Độ rộng bằng tổng nội dung bên trong */
+}
+
+/* =========================================
+   GIAO DIỆN THẺ MÓN ĂN MỚI (VIỀN VÀNG & BẦU DỤC)
+   ========================================= */
+
+/* 1. KHUNG THẺ CHÍNH */
+.food-card {
+  background: #fff;
+  width: 350px; /* Giữ nguyên độ rộng để khớp với tính toán Slide */
+  height: 400px; /* Chiều cao cố định */
+
+  /* VIỀN VÀNG SANG TRỌNG */
+  border: 2px solid #d3b673;
+  border-radius: 25px; /* Bo góc mềm mại */
+
+  padding: 20px;
+  position: relative;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+  transition: 0.3s;
+
+  /* Flex để căn chỉnh nội dung */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden; /* Đảm bảo không có gì tràn ra ngoài */
+}
+
+/* Hiệu ứng khi di chuột vào thẻ */
+.food-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(211, 182, 115, 0.3); /* Bóng màu vàng nhạt */
+  border-color: #bfa363;
+}
+
+/* 2. PHẦN HÌNH ẢNH & NỀN BẦU DỤC */
+.card-header {
+  position: relative;
+  height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+/* Hình bầu dục màu vàng nằm sau món ăn */
+.img-bg {
+  position: absolute;
+  width: 280px;
+  height: 140px;
+  background-color: #e8d6b0;
+  border-radius: 50%;
+  top: 50px;
+  z-index: 1;
+  transform: rotate(-5deg);
+}
+
+/* Ảnh món ăn */
+.food-img {
+  width: 220px;
+  height: 220px;
+  object-fit: cover;
+  z-index: 10;
+  filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.2));
+  transition: 0.3s;
+  border-radius: 50%;
+}
+
+.food-card:hover .food-img {
+  transform: scale(1.05); /* Phóng to nhẹ khi hover */
+}
+
+/* Nhãn SALE tròn góc trái */
+.sale-badge {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 45px;
+  height: 45px;
+  background-color: #d3b673; /* Nền vàng đậm */
+  color: #000;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 11px;
+  z-index: 10;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* 3. PHẦN NỘI DUNG (TÊN & GIÁ) */
+.card-body {
+  padding-top: 10px;
+}
+
+.food-title {
+  font-family: var(--font-heading); /* Font Fruktur */
+  font-size: 1.6rem;
+  color: #000;
+  margin-bottom: 15px;
+  line-height: 1.2;
+}
+
+/* Hàng chứa Giá và Nút giỏ hàng */
+.price-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.price-info {
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+}
+
+.old-price {
+  font-size: 0.85rem;
+  color: #888;
+  text-decoration: line-through; /* Gạch ngang giá cũ */
+  font-weight: 600;
+}
+
+.new-price {
+  font-size: 1.2rem;
+  color: #d3b673; /* Màu vàng cam cho giá mới */
+  font-weight: 800;
+}
+
+/* 4. NÚT GIỎ HÀNG (VUÔNG BO GÓC) */
+.cart-btn-small {
+  width: 38px;
+  height: 38px;
+  background-color: #d3b673; /* Nền vàng */
+  border: none;
+  border-radius: 8px; /* Bo góc nhẹ hình vuông */
+  color: #222;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: 0.2s;
+  font-size: 14px;
+}
+
+.cart-btn-small:hover {
+  background-color: #000; /* Đổi màu đen khi hover */
+  color: #d3b673;
+}
+
+/* ==================================================
+   CSS CHO CHẤM TRÒN ĐIỀU HƯỚNG (BẮT BUỘC PHẢI CÓ)
+   ================================================== */
+.carousel-dots {
+  display: flex;
+  justify-content: center; /* Căn giữa màn hình */
+  gap: 12px; /* Khoảng cách giữa các chấm */
+  margin-top: 20px; /* Cách xa thẻ món ăn ra một chút cho thoáng */
+  padding-bottom: 20px;
+  position: relative;
+  z-index: 9999;
+}
+
+.dot {
+  width: 14px;
+  height: 14px;
+  background-color: #d1d1d1; /* Màu xám nhạt khi chưa chọn */
+  border-radius: 50%; /* Bo tròn thành hình tròn */
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid transparent; /* Chuẩn bị viền */
+}
+
+/* Hiệu ứng khi lướt chuột vào hoặc đang được chọn */
+.dot.active,
+.dot:hover {
+  background-color: #e91e63; /* MÀU HỒNG ĐỎ giống thiết kế */
+  transform: scale(1.3); /* Phóng to lên chút xíu */
+  box-shadow: 0 4px 10px rgba(233, 30, 99, 0.4); /* Đổ bóng hồng nhẹ */
+}
+
+/* =====================================================
+   PHẦN REVIEW (FIX FINAL - CHUẨN FIGMA)
+   ===================================================== */
+
+.review-section {
+  padding: 60px 0 80px 0; /* Thu gọn padding trên để tiêu đề gần banner hơn */
+  background-color: #f9f9f9;
+  overflow: hidden;
+}
+
+/* 1. TIÊU ĐỀ: Nằm gọn gàng, khoảng cách vừa phải */
+.review-heading {
+  font-family: "Fruktur", cursive;
+  font-size: 3.5rem;
+  color: #000;
+  line-height: 1.1;
+  margin-bottom: 30px; /* Cách nội dung bên dưới 30px (Không quá xa) */
+  padding-left: 0;
+}
+
+/* 2. SLIDER WRAPPER */
+.review-slider-wrapper {
+  width: 100%;
+  /* overflow: visible; Đảm bảo ảnh thò ra không bị cắt */
+}
+
+.review-track {
+  display: flex;
+  width: max-content;
+  transition: transform 0.6s ease-in-out;
+  padding-bottom: 20px; /* Tránh bóng đổ bị cắt */
+}
+
+/* 3. ITEM SLIDE: Căn chỉnh bố cục 2 cột */
+.review-slide-item {
+  width: 1200px;
+  display: flex;
+
+  /* QUAN TRỌNG: Đẩy tất cả lên trên cùng để xóa khoảng trống thừa */
+  align-items: flex-start;
+
+  justify-content: space-between;
+  gap: 40px;
+}
+
+/* --- CỘT TRÁI: KHUNG CHỮ + CHẤM TRÒN --- */
+.review-content {
+  flex: 0 0 45%;
+  max-width: 500px;
+  margin-top: 40px; /* Đẩy khung chữ xuống xíu cho cân với ảnh cao nhất bên phải */
+}
+
+.review-card {
+  background: #fff;
+  border: 3px solid #ffd600;
+  border-radius: 20px;
+  padding: 40px;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  min-height: 250px; /* Chiều cao tối thiểu cho đẹp */
+}
+
+.review-card p {
+  font-family: "Epilogue", sans-serif;
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+
+.customer-name {
+  font-family: "Fruktur", cursive;
+  font-size: 1.5rem;
+  color: #000;
+}
+
+.yellow-circle {
+  width: 45px;
+  height: 45px;
+  background-color: #ffd600;
+  border-radius: 50%;
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
+}
+
+/* Chấm tròn: Nằm ngay dưới khung chữ */
+.review-dots {
+  display: flex;
+  justify-content: flex-start !important;
+  gap: 12px;
+  padding-left: 0;
+  margin-top: -150px !important;
+  position: relative;
+  pointer-events: auto;
+}
+
+/* --- CỘT PHẢI: CỤM ẢNH NGHỆ THUẬT (SỬA LẠI VỊ TRÍ) --- */
+.review-images {
+  flex: 0 0 50%;
+  position: relative;
+  height: 480px; /* Khung chứa ảnh đủ cao */
+}
+
+/* Ảnh 1: Ảnh Dọc (Góc Trên Phải) - Nổi cao nhất */
+.img-sub-top {
+  position: absolute;
+  top: -30px; /* Nhô lên cao hơn khung chữ một chút */
+  right: 20px;
+  width: 200px;
+  height: 280px;
+  border-radius: 20px;
+  object-fit: cover;
+  z-index: 1;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Ảnh 2: Ảnh Chính (Bên Trái) - Có phủ màu đỏ */
+.img-main-box {
+  position: absolute;
+  top: 60px; /* Nằm thấp hơn ảnh trên, ngang tầm với Text */
+  left: 0;
+  width: 250px;
+  height: 250px; /* Hình vuông */
+  border-radius: 20px;
+  overflow: hidden;
+  z-index: 2; /* Đè lên ảnh trên */
+  box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.img-main-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Ảnh 3: Ảnh Nhỏ (Góc Dưới Phải) */
+.img-sub-bottom {
+  position: absolute;
+  bottom: 20px;
+  right: 10px;
+  width: 170px;
+  height: 170px;
+  border-radius: 20px;
+  object-fit: cover;
+  z-index: 3;
+  border: 5px solid #fff; /* Viền trắng dày tách biệt */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* =========================================
+   VIDEO MODAL (POPUP)
+   ========================================= */
+.video-modal-overlay {
+  display: none; /* Ẩn mặc định */
+  position: fixed;
+  z-index: 10000; /* Nổi lên trên cùng, cao hơn cả Header */
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8); /* Nền đen mờ */
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(5px); /* Làm mờ nền web phía sau */
+}
+
+.video-modal-content {
+  position: relative;
+  width: 80%;
+  max-width: 900px; /* Giới hạn chiều rộng */
+  background-color: #000;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  animation: zoomIn 0.3s ease;
+}
+
+/* Tỷ lệ khung hình 16:9 */
+.video-wrapper {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+  height: 0;
+}
+
+.video-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Nút tắt X */
+.close-video {
+  position: absolute;
+  top: -40px;
+  right: 0;
+  color: #fff;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+  line-height: 1;
+}
+
+.close-video:hover {
+  color: var(--primary-color);
+}
+
+/* Hiệu ứng phóng to khi hiện */
+@keyframes zoomIn {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* =====================================================
+   PHẦN DELIVERY (FIX BACKGROUD CHUẨN)
+   ===================================================== */
+
+/* 1. Thiết lập Section chính với Ảnh nền Full */
+.delivery-section-bg {
+  position: relative;
+  width: 100%;
+
+  /* SỬA ĐƯỜNG DẪN: Dùng ../../ để lùi ra đúng thư mục assets */
+  background-image: url("../../assets/images/nengiaohang.png");
+
+  /* Đảm bảo ảnh phủ kín toàn bộ khung */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  /* Tăng chiều cao để thấy rõ ảnh nền */
+  padding: 100px 0;
+  overflow: hidden;
+}
+
+/* 2. Khối nội dung chữ (Nằm bên trái) */
+.delivery-content-wrap {
+  max-width: 550px; /* Giới hạn chiều rộng để không che mất hình người bên phải */
+  position: relative;
+  z-index: 2;
+}
+
+/* --- Typography & Style --- */
+.delivery-sub {
+  display: block;
+  font-family: "Fruktur", cursive;
+  font-size: 1.2rem;
+  color: #f3274c;
+  margin-bottom: 20px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.delivery-title {
+  font-family: "Fruktur", cursive;
+  font-size: 3rem;
+  color: #000;
+  line-height: 1.2;
+  margin-bottom: 30px;
+}
+
+.delivery-list {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 40px;
+}
+
+.delivery-list li {
+  display: flex;
+  align-items: flex-start;
+  font-family: "Epilogue", sans-serif;
+  font-size: 1.1rem;
+  color: #333;
+  margin-bottom: 15px;
+  font-weight: 500;
+}
+
+.delivery-list li i {
+  color: #ffd600;
+  font-size: 1rem;
+  margin-right: 15px;
+  margin-top: 5px;
+}
+
+/* Nút bấm */
+.delivery-buttons {
+  display: flex;
+  gap: 15px;
+}
+
+.btn-app {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 60px;
+  padding: 0 35px;
+  border-radius: 12px;
+  font-family: "Fruktur", cursive; /* Dùng font này cho nút cho đẹp */
+  font-size: 1rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.btn-zalo {
+  background-color: #f3274c;
+  color: #fff;
+  box-shadow: 0 10px 20px rgba(243, 39, 76, 0.3);
+}
+
+.btn-hotline {
+  background-color: #000;
+  color: #fff;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.btn-app:hover {
+  transform: translateY(-3px);
+  opacity: 0.9;
+}
+
+/* =====================================================
+   PHẦN TIN TỨC & SỰ KIỆN
+   ===================================================== */
+.news-section {
+  padding: 80px 0;
+  background-color: #fff;
+}
+
+/* 1. Tiêu đề mục (Căn giữa) */
+.news-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+/* Gạch chân màu vàng ở giữa */
+.title-underline-center {
+  width: 150px;
+  height: 5px;
+  background-color: #d4af37; /* Màu vàng đồng */
+  margin: 15px auto 0; /* Căn giữa */
+  border-radius: 10px;
+}
+
+/* 2. Lưới bố cục (2 Bài viết nằm ngang) */
+.news-grid {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px; /* Khoảng cách giữa 2 bài */
+}
+
+/* 3. Thẻ bài viết (Card) */
+.news-card {
+  flex: 1;
+  display: flex; /* Flex để ảnh và chữ nằm ngang */
+  align-items: center; /* Căn giữa dọc */
+  gap: 25px;
+}
+
+/* Khung hình ảnh */
+.news-img-box {
+  width: 200px;
+  height: 200px;
+  flex-shrink: 0; /* Không cho ảnh bị co lại */
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.news-img-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+/* Hiệu ứng zoom nhẹ khi rê chuột */
+.news-card:hover .news-img-box img {
+  transform: scale(1.1);
+}
+
+/* Phần thông tin bên phải */
+.news-info {
+  flex: 1;
+}
+
+/* Ngày tháng (Badge vàng) */
+.news-date {
+  display: inline-block;
+  background-color: #eedc82; /* Màu vàng nhạt giống mẫu */
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-family: "Epilogue", sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #444;
+  margin-bottom: 15px;
+}
+
+/* Tiêu đề bài viết */
+.news-title {
+  font-family: "Fruktur", cursive;
+  font-size: 1.8rem;
+  line-height: 1.2;
+  color: #000;
+  margin-bottom: 20px;
+}
+
+/* Tác giả */
+.news-author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.news-author img {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%; /* Tròn xoe */
+  object-fit: cover;
+}
+
+.author-name {
+  font-family: "Epilogue", sans-serif;
+  font-weight: 500;
+  font-size: 1rem;
+  color: #333;
+}
+
+/* =====================================================
+   PHẦN FOOTER (CHÂN TRANG)
+   ===================================================== */
+.footer-section {
+  position: relative;
+  /* Ảnh nền: lùi ra 2 cấp thư mục để vào assets */
+  background-image: url("../../assets/images/nen.png");
+  background-size: cover;
+  background-position: center bottom;
+  background-repeat: no-repeat;
+
+  padding-top: 80px;
+  padding-bottom: 30px;
+  color: #333;
+}
+
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-bottom: 50px; /* Khoảng cách với đường kẻ vàng */
+}
+
+/* --- CỘT 1: KHUNG VÀNG (CARD) --- */
+.footer-card-box {
+  background-color: #d6b268; /* Màu vàng nâu đất giống mẫu */
+  width: 320px;
+  border-radius: 30px;
+  padding: 30px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+}
+
+.footer-logo img {
+  max-width: 180px;
+  height: auto;
+}
+
+.footer-info-text {
+  font-family: "Fruktur", cursive;
+  color: #fff;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.footer-info-text .slogan {
+  text-decoration: underline; /* Gạch chân slogan */
+}
+
+.footer-note {
+  font-family: "Epilogue", sans-serif;
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 300;
+  margin-top: 20px;
+}
+
+/* --- CÁC CỘT LINKS --- */
+.footer-col {
+  padding-top: 30px;
+  flex: 1;
+  margin-left: 40px;
+}
+
+.footer-heading {
+  font-family: "Fruktur", cursive;
+  font-size: 1.8rem;
+  color: #000;
+  margin-bottom: 25px;
+  display: inline-block;
+
+  /* Gạch chân vàng đậm */
+  border-bottom: 4px solid #ffd600;
+  padding-bottom: 5px;
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-links li {
+  margin-bottom: 12px;
+}
+
+.footer-links a {
+  text-decoration: none;
+  color: #333;
+  font-family: "Epilogue", sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.footer-links a i {
+  font-size: 0.8rem;
+  color: #555;
+}
+
+.footer-links a:hover {
+  color: #f3274c; /* Hover chuyển màu đỏ */
+  transform: translateX(5px);
+}
+
+/* --- THANH CUỐI TRANG --- */
+.footer-bottom {
+  border-top: 5px solid #ffd600; /* Đường kẻ vàng đậm */
+  padding-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.copyright {
+  font-family: "Fruktur", cursive; /* Logo chữ dùng Fruktur cho ngầu */
+  font-size: 1rem;
+  color: #555;
+}
+
+.social-links {
+  display: flex;
+  gap: 30px;
+}
+
+.social-links a {
+  text-decoration: none;
+  color: #000;
+  font-family: "Epilogue", sans-serif;
+  font-weight: 800;
+  font-size: 1rem;
+  transition: 0.3s;
+}
+
+.social-links a:hover {
+  color: #f3274c;
+}

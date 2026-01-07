@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chi Tiết Món Ăn - Sakedo</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;600;700;800&family=Fruktur&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../css/base/variables.css" />
+    <link rel="stylesheet" href="../css/pages/global.css" />
+    <link rel="stylesheet" href="../css/base/header.css" />
+
+    <style>
+      /* --- LAYOUT CHUNG --- */
+      .detail-container {
+        max-width: 1100px;
+        margin: 40px auto;
+        display: grid;
+        grid-template-columns: 1fr 1.2fr;
+        gap: 50px;
+        padding: 0 20px;
+      }
+
+      /* CỘT TRÁI: ẢNH */
+      .product-image-box img {
+        width: 100%;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        object-fit: cover;
+      }
+
+      /* CỘT PHẢI: THÔNG TIN */
+      .product-info h1 {
+        font-family: "Fruktur", cursive;
+        color: var(--primary-color);
+        font-size: 2.5rem;
+        margin-bottom: 10px;
+      }
+      .product-price {
+        font-size: 2rem;
+        color: #d32f2f;
+        font-weight: 700;
+        margin: 15px 0;
+      }
+      .product-desc {
+        font-size: 1.1rem;
+        color: #555;
+        line-height: 1.6;
+        margin-bottom: 25px;
+      }
+
+      /* --- PHẦN MỚI: GHI CHÚ MÓN ĂN --- */
+      .note-box {
+        margin-bottom: 25px;
+      }
+      .note-label {
+        font-weight: 700;
+        display: block;
+        margin-bottom: 8px;
+        color: #333;
+      }
+      .note-input {
+        width: 100%;
+        padding: 12px;
+        border: 2px solid #eee;
+        border-radius: 10px;
+        font-family: "Epilogue", sans-serif;
+        resize: none;
+        height: 80px;
+        transition: 0.3s;
+      }
+      .note-input:focus {
+        border-color: #d8b26e;
+        outline: none;
+      }
+
+      /* --- ACTION AREA (SỐ LƯỢNG & BUTTONS) --- */
+      .action-area {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        align-items: center;
+        margin-bottom: 40px;
+      }
+
+      .qty-wrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+      }
+      .qty-input {
+        width: 60px;
+        height: 50px;
+        text-align: center;
+        border: 2px solid #ddd;
+        border-radius: 8px;
+        font-weight: bold;
+        font-size: 1.1rem;
+      }
+
+      .btn {
+        height: 50px;
+        padding: 0 25px;
+        border-radius: 8px;
+        font-weight: 700;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        transition: 0.3s;
+        border: none;
+        font-size: 1rem;
+      }
+
+      /* Nút Thêm Giỏ (Vàng) */
+      .btn-add-cart {
+        background-color: #ffeeb0;
+        color: #d8b26e;
+        border: 2px solid #d8b26e;
+      }
+      .btn-add-cart:hover {
+        background-color: #d8b26e;
+        color: #fff;
+      }
+
+      /* Nút Mua Ngay (Đỏ) */
+      .btn-buy-now {
+        background-color: #f3274c;
+        color: #fff;
+        flex: 1;
+        box-shadow: 0 5px 15px rgba(243, 39, 76, 0.3);
+      }
+      .btn-buy-now:hover {
+        background-color: #d61c3d;
+        transform: translateY(-2px);
+      }
+
+      /* --- CAM KẾT --- */
+      .policy-box {
+        background: #f9f9f9;
+        padding: 15px;
+        border-radius: 10px;
+        display: flex;
+        gap: 20px;
+        font-size: 0.9rem;
+        color: #555;
+      }
+      .policy-item i {
+        color: #28a745;
+        margin-right: 5px;
+      }
+
+      /* --- PHẦN ĐÁNH GIÁ (REVIEW) --- */
+      .reviews-box {
+        max-width: 800px;
+        margin: 0 auto 60px;
+        padding: 0 20px;
+      }
+
+      /* Form viết đánh giá */
+      .write-review-area {
+        background: #fff;
+        border: 1px solid #eee;
+        padding: 25px;
+        border-radius: 15px;
+        margin-bottom: 40px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+      }
+      .write-title {
+        font-weight: 700;
+        margin-bottom: 15px;
+        display: block;
+        font-size: 1.2rem;
+      }
+
+      .star-rating {
+        display: flex;
+        gap: 5px;
+        margin-bottom: 15px;
+        cursor: pointer;
+      }
+      .star-rating i {
+        font-size: 24px;
+        color: #ddd;
+        transition: 0.2s;
+      }
+      .star-rating i.active {
+        color: #ffd600;
+      }
+
+      .review-input {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        margin-bottom: 15px;
+        font-family: inherit;
+      }
+      .btn-submit-review {
+        background: #333;
+        color: #fff;
+        padding: 10px 25px;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+        font-weight: bold;
+      }
+
+      /* Danh sách review cũ */
+      .review-list {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+      .review-item {
+        background: #fcfcfc;
+        padding: 20px;
+        border-radius: 10px;
+        border-bottom: 1px solid #eee;
+      }
+      .reviewer-top {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 8px;
+      }
+      .reviewer-name {
+        font-weight: 700;
+        color: #333;
+      }
+      .review-stars {
+        color: #ffd600;
+        font-size: 0.9rem;
+      }
+      .review-text {
+        color: #555;
+        line-height: 1.5;
+        font-style: italic;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <div class="container header-inner">
+        <a href="/index.html" class="logo"
+          ><img src="/assets/images/logo.png" alt="Sakedo Logo"
+        /></a>
+        <nav class="navbar">
+          <ul class="nav-list">
+            <li><a href="/index.html" class="nav-link active">Trang Chủ</a></li>
+            <li><a href="/pages/menu.html" class="nav-link">Thực Đơn</a></li>
+            <li><a href="/pages/booking.html" class="nav-link">Đặt Bàn</a></li>
+            <li><a href="/pages/contact.html" class="nav-link">Liên Hệ</a></li>
+            <li><a href="/pages/auth.html" class="nav-link">Cá Nhân</a></li>
+          </ul>
+        </nav>
+        <div class="header-actions">
+          <a href="cart.html" class="cart-btn"
+            ><i class="fas fa-shopping-basket"></i>
+            <span class="cart-count">0</span></a
+          >
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <div class="container detail-container">
+        <div class="product-image-box">
+          <img id="detail-img" src="" alt="Đang tải..." />
+        </div>
+
+        <div class="product-info">
+          <h1 id="detail-name">...</h1>
+
+          <div class="rating-overview">
+            <span class="review-stars"
+              ><i class="fas fa-star"></i><i class="fas fa-star"></i
+              ><i class="fas fa-star"></i><i class="fas fa-star"></i
+              ><i class="fas fa-star"></i
+            ></span>
+            <span style="color: #777; margin-left: 10px; font-size: 0.9rem"
+              >(Đánh giá khách hàng)</span
+            >
+          </div>
+
+          <div class="product-price" id="detail-price">...</div>
+          <p class="product-desc" id="detail-desc">...</p>
+
+          <div class="note-box">
+            <label class="note-label"
+              ><i class="fas fa-pen"></i> Ghi chú cho món ăn:</label
+            >
+            <textarea
+              id="order-note"
+              class="note-input"
+              placeholder="Ví dụ: Không hành, ít cay, nước sốt để riêng..."
+            ></textarea>
+          </div>
+
+          <div class="action-area">
+            <div class="qty-wrapper">
+              <input
+                type="number"
+                id="qty-input"
+                class="qty-input"
+                value="1"
+                min="1"
+              />
+            </div>
+
+            <button class="btn btn-add-cart" onclick="addToCartDetail(false)">
+              <i class="fas fa-cart-plus"></i> Thêm vào giỏ
+            </button>
+
+            <button class="btn btn-buy-now" onclick="addToCartDetail(true)">
+              <i class="fas fa-bolt"></i> MUA NGAY
+            </button>
+          </div>
+
+          <div class="policy-box">
+            <div class="policy-item">
+              <i class="fas fa-check-circle"></i> ATVSTP 100%
+            </div>
+            <div class="policy-item">
+              <i class="fas fa-truck"></i> Giao nhanh 30p
+            </div>
+            <div class="policy-item">
+              <i class="fas fa-undo"></i> Đổi trả nếu lỗi
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="reviews-box">
+        <h2
+          class="section-heading"
+          style="margin-bottom: 20px; text-align: center"
+        >
+          Đánh Giá Từ Thực Khách
+        </h2>
+
+        <div class="write-review-area">
+          <span class="write-title">Viết nhận xét của bạn</span>
+
+          <div class="star-rating" id="star-rating-input">
+            <i class="fas fa-star" data-value="1"></i>
+            <i class="fas fa-star" data-value="2"></i>
+            <i class="fas fa-star" data-value="3"></i>
+            <i class="fas fa-star" data-value="4"></i>
+            <i class="fas fa-star active" data-value="5"></i>
+          </div>
+          <input type="hidden" id="rating-value" value="5" />
+
+          <textarea
+            id="review-comment"
+            class="review-input"
+            rows="3"
+            placeholder="Món ăn thế nào? Hãy chia sẻ cảm nhận của bạn..."
+          ></textarea>
+
+          <button class="btn-submit-review" onclick="submitReview()">
+            Gửi đánh giá
+          </button>
+        </div>
+
+        <div id="review-list" class="review-list"></div>
+      </div>
+    </main>
+
+    <script src="../js/pages/global.js"></script>
+    <script src="../js/pages/product-detail.js"></script>
+  </body>
+</html>

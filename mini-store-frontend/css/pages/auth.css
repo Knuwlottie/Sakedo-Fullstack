@@ -1,0 +1,209 @@
+/* css/pages/auth.css */
+
+/* 1. CẤU TRÚC CHUNG (LAYOUT) */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; /* Hoặc font bạn thích */
+}
+
+body {
+  background-color: #f9f9f9;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.auth-container {
+  display: flex;
+  width: 90%;
+  max-width: 1100px;
+  height: 600px; /* Chiều cao cố định hoặc auto */
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  overflow: hidden; /* Bo tròn góc đè lên ảnh */
+}
+
+/* 2. CỘT HÌNH ẢNH (BÊN TRÁI) */
+.auth-image {
+  flex: 1; /* Chiếm 50% hoặc phần còn lại */
+  position: relative;
+  background-color: #eee;
+}
+
+.auth-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Đảm bảo ảnh phủ kín mà không méo */
+}
+
+/* 3. CỘT FORM (BÊN PHẢI) */
+.auth-form-wrapper {
+  flex: 1; /* Chiếm 50% */
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Căn giữa dọc */
+  align-items: center; /* Căn giữa ngang */
+  background-color: #fff;
+}
+
+.auth-content {
+  width: 100%;
+  max-width: 400px; /* Giới hạn chiều rộng nội dung cho đẹp */
+}
+
+.auth-content h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #333;
+  text-transform: uppercase;
+}
+
+/* 4. TABS CHUYỂN ĐỔI (ĐĂNG NHẬP / ĐĂNG KÝ) */
+.auth-tabs {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 30px;
+  border-bottom: 1px solid #eee;
+}
+
+.auth-tabs button {
+  background: none;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  color: #999;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+/* Hiệu ứng khi tab đang active */
+.auth-tabs button.active {
+  color: #d4af37; /* Màu vàng kim giống ảnh */
+}
+
+.auth-tabs button.active::after {
+  content: "";
+  position: absolute;
+  bottom: -1px; /* Đè lên đường viền dưới */
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #d4af37;
+}
+
+/* 5. CÁC Ô NHẬP LIỆU */
+.input-group {
+  margin-bottom: 20px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #eee;
+  border-radius: 5px;
+  font-size: 14px;
+  background-color: #fcfcfc;
+  transition: border-color 0.3s;
+}
+
+.input-group input:focus {
+  outline: none;
+  border-color: #d4af37;
+  background-color: #fff;
+}
+
+/* 6. NÚT SUBMIT & LIÊN KẾT */
+.form-footer {
+  text-align: right;
+  margin-bottom: 20px;
+}
+
+.form-footer a {
+  text-decoration: none;
+  font-size: 13px;
+  color: #666;
+}
+
+.btn-submit {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 25px; /* Nút bo tròn */
+  background-color: #dfcda4; /* Màu be vàng nhạt */
+  background: linear-gradient(
+    to right,
+    #dfcda4,
+    #d4b685
+  ); /* Gradient cho sang */
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+}
+
+/* 7. SOCIAL LOGIN (FACEBOOK/GOOGLE) */
+.social-login {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.social-login p {
+  font-size: 14px;
+  color: #999;
+  margin-bottom: 15px;
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.social-icons i {
+  font-size: 24px;
+  cursor: pointer;
+  color: #555;
+  transition: color 0.3s;
+}
+
+/* Icon giả lập (vì bạn chưa chắc đã cài FontAwesome) */
+.icon-facebook::before {
+  content: "FB";
+  font-weight: bold;
+  font-style: normal;
+}
+.icon-google::before {
+  content: "G+";
+  font-weight: bold;
+  font-style: normal;
+}
+
+/* Responsive cho màn hình điện thoại */
+@media (max-width: 768px) {
+  .auth-container {
+    flex-direction: column; /* Xếp chồng dọc */
+    height: auto;
+  }
+  .auth-image {
+    display: none; /* Ẩn ảnh trên mobile cho gọn */
+  }
+  .auth-form-wrapper {
+    padding: 20px;
+  }
+}

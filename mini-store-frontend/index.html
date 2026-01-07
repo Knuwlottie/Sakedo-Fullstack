@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trang Chủ - Sakedo</title>
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;600;700;800&family=Fruktur&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="/css/base/variables.css" />
+    <link rel="stylesheet" href="/css/base/header.css" />
+    <link rel="stylesheet" href="/css/pages/global.css" />
+    <link rel="stylesheet" href="/css/pages/home.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <!-- HEADER -->
+    <header class="header">
+      <div class="container header-inner">
+        <a href="/index.html" class="logo" aria-label="Trang chủ Sakedo">
+          <img src="/assets/images/logo.png" alt="Logo Sakedo" />
+        </a>
+        <nav class="navbar" aria-label="Điều hướng chính">
+          <ul class="nav-list">
+            <li><a href="/index.html" class="nav-link active">Trang Chủ</a></li>
+            <li><a href="/pages/menu.html" class="nav-link">Thực Đơn</a></li>
+            <li><a href="/pages/booking.html" class="nav-link">Đặt Bàn</a></li>
+            <li><a href="/pages/contact.html" class="nav-link">Liên Hệ</a></li>
+            <li><a href="/pages/auth.html" class="nav-link">Cá Nhân</a></li>
+          </ul>
+        </nav>
+        <div class="header-actions">
+          <a href="#" class="cart-btn" aria-label="Giỏ hàng">
+            <i class="fas fa-shopping-basket"></i>
+            <span class="cart-count">0</span>
+          </a>
+          <a href="/pages/auth.html" class="btn btn-primary">Đăng Nhập</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main>
+      <!-- HERO SECTION -->
+      <section class="hero-section">
+        <div class="container hero-container">
+          <div class="hero-content">
+            <h1 class="hero-title">
+              Tinh Hoa Ẩm Thực & <br />
+              Không Gian Đẳng Cấp
+            </h1>
+            <p class="hero-desc">
+              Thưởng thức sự kết hợp hoàn hảo giữa ẩm thực Việt Nam trong không
+              gian hiện đại.
+            </p>
+            <div class="hero-buttons">
+              <a href="/pages/menu.html" class="btn btn-primary"
+                >Xem Thực Đơn</a
+              >
+              <a
+                href="#"
+                class="btn btn-outline"
+                id="openVideoBtn"
+                aria-label="Xem video giới thiệu"
+              >
+                <i class="fas fa-play"></i> VIDEO
+              </a>
+            </div>
+          </div>
+          <div class="hero-image-wrapper">
+            <div class="hero-card float-card">
+              <div class="card-info">
+                <span class="badge">Best Seller</span>
+                <h3>159.000 đ</h3>
+                <p>Cơm tấm</p>
+                <div class="stars" aria-label="Đánh giá 5 sao">★★★★★</div>
+              </div>
+              <img
+                src="/assets/images/comtam.png"
+                alt="Món cơm tấm best-seller tại Sakedo"
+                class="card-img"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ABOUT SECTION -->
+      <section class="about-section">
+        <div class="container">
+          <div class="about-header">
+            <div class="about-title-box">
+              <span class="sub-heading">VỀ CHÚNG TÔI</span>
+              <h2 class="section-heading">
+                Hành Trình Đánh <br />
+                Thức Vị Giác
+              </h2>
+            </div>
+            <p class="about-desc">
+              Chúng tôi tự hào mang đến những món ăn được chế biến từ nguồn
+              nguyên liệu tươi sạch, được tuyển chọn kỹ lưỡng mỗi ngày. Với tâm
+              huyết của đội ngũ đầu bếp giàu kinh nghiệm, mỗi món ăn không chỉ
+              là hương vị mà còn là một tác phẩm nghệ thuật, hứa hẹn mang lại
+              cho thực khách trải nghiệm ẩm thực khó quên trong không gian sang
+              trọng và ấm cúng.
+            </p>
+          </div>
+          <div class="about-gallery">
+            <div class="gallery-item">
+              <div class="img-frame">
+                <img
+                  src="/assets/images/nhahang.png"
+                  alt="Không gian nhà hàng Sakedo"
+                />
+              </div>
+              <span class="gallery-label">Nhà hàng</span>
+            </div>
+            <div class="gallery-item center-item">
+              <div class="img-frame">
+                <img
+                  src="/assets/images/nuocdau.png"
+                  alt="Các loại đồ uống giải khát tự làm"
+                />
+              </div>
+              <span class="gallery-label">Giải khát</span>
+            </div>
+            <div class="gallery-item">
+              <div class="img-frame">
+                <img
+                  src="/assets/images/thitkho.png"
+                  alt="Món ăn đặc trưng ẩm thực Việt"
+                />
+              </div>
+              <span class="gallery-label">Ẩm thực</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- MENU HIGHLIGHT SECTION -->
+      <section class="menu-highlight-section">
+        <div class="container">
+          <div class="category-tabs">
+            <div class="cat-item active" data-type="dessert">
+              <div class="icon-box">
+                <img src="/assets/images/icon_dessert.png" alt="Tráng miệng" />
+              </div>
+              <span>Tráng miệng</span>
+            </div>
+            <div class="cat-item" data-type="steak">
+              <div class="icon-box">
+                <img src="/assets/images/icon_steak.png" alt="Món chính" />
+              </div>
+              <span>Món chính</span>
+            </div>
+            <div class="cat-item" data-type="coffee">
+              <div class="icon-box">
+                <img src="/assets/images/icon_coffee.png" alt="Coffee" />
+              </div>
+              <span>Coffee</span>
+            </div>
+          </div>
+          <div class="featured-card">
+            <div class="featured-img-box">
+              <img
+                id="menu-img"
+                src="/assets/images/setche.png"
+                alt="Bộ chè tráng miệng"
+              />
+            </div>
+            <div class="featured-content">
+              <h3 id="menu-title" class="featured-title">Chè</h3>
+              <div id="menu-list" class="menu-list"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PROMOTION SECTION -->
+      <section class="promotion-section">
+        <div class="container">
+          <div class="promotion-header">
+            <h2 class="promo-title">
+              Khám Phá <span class="highlight-text">Ưu Đãi</span>
+            </h2>
+            <div class="title-underline"></div>
+          </div>
+          <div class="promo-grid" id="promo-container">
+            <!-- Nội dung ưu đãi sẽ được render động bằng JavaScript -->
+          </div>
+        </div>
+      </section>
+
+      <!-- MUST TRY SECTION -->
+      <section class="must-try-section">
+        <div class="container">
+          <div class="promotion-header">
+            <h2 class="promo-title">
+              Món Ngon <span class="highlight-text">Phải Thử</span>
+            </h2>
+            <div class="title-underline"></div>
+          </div>
+          <div class="carousel-container">
+            <div class="carousel-track" id="mustTryTrack">
+              <!-- Các món phải thử sẽ được render động nếu cần -->
+            </div>
+            <div class="carousel-dots">
+              <span class="dot active" data-index="0"></span>
+              <span class="dot" data-index="1"></span>
+              <span class="dot" data-index="2"></span>
+              <span class="dot" data-index="3"></span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- REVIEW SECTION -->
+      <section class="review-section">
+        <div class="container">
+          <h2 class="review-heading">
+            Khách Hàng Nói Gì Về <br />
+            Chúng Tôi?
+          </h2>
+          <div class="review-slider-wrapper">
+            <div class="review-track" id="reviewTrack">
+              <div class="review-slide-item">
+                <div class="review-content">
+                  <div class="review-card">
+                    <p>
+                      "Không gian quán rất sang trọng nhưng vẫn giữ được nét mộc
+                      mạc của Việt Nam. Nhân viên phục vụ chu đáo, món chè tráng
+                      miệng siêu ngon!"
+                    </p>
+                    <h4 class="customer-name">Khả Như</h4>
+                    <div class="yellow-circle"></div>
+                  </div>
+                </div>
+                <div class="review-images">
+                  <div class="img-main-box">
+                    <img
+                      src="/assets/images/nhahang4.png"
+                      alt="Không gian nhà hàng sang trọng"
+                    />
+                    <div class="red-overlay"></div>
+                  </div>
+                  <img
+                    src="/assets/images/nhahang1.png"
+                    class="img-sub-top"
+                    alt="Góc check-in 1"
+                  />
+                  <img
+                    src="/assets/images/nhahang2.png"
+                    class="img-sub-bottom"
+                    alt="Góc check-in 2"
+                  />
+                </div>
+              </div>
+              <div class="review-slide-item">
+                <div class="review-content">
+                  <div class="review-card">
+                    <p>
+                      "Món ăn đậm đà hương vị Việt, trình bày tinh tế và được
+                      chế biến tỉ mỉ trong từng chi tiết."
+                    </p>
+                    <h4 class="customer-name">Hoàng Nhớ</h4>
+                    <div class="yellow-circle"></div>
+                  </div>
+                </div>
+                <div class="review-images">
+                  <div class="img-main-box">
+                    <img
+                      src="/assets/images/bmichao.png"
+                      alt="Bánh mì chảo nóng hổi"
+                    />
+                    <div class="red-overlay"></div>
+                  </div>
+                  <img
+                    src="/assets/images/pho1.png"
+                    class="img-sub-top"
+                    alt="Tô phở bò"
+                  />
+                  <img
+                    src="/assets/images/mamcom.png"
+                    class="img-sub-bottom"
+                    alt="Mâm cơm gia đình"
+                  />
+                </div>
+              </div>
+              <div class="review-slide-item">
+                <div class="review-content">
+                  <div class="review-card">
+                    <p>
+                      "Phong cách phục vụ chu đáo kết hợp cùng không gian trang
+                      trí hài hòa, tinh tế."
+                    </p>
+                    <h4 class="customer-name">Nhật Thúy</h4>
+                    <div class="yellow-circle"></div>
+                  </div>
+                </div>
+                <div class="review-images">
+                  <div class="img-main-box">
+                    <img
+                      src="/assets/images/nhanvien1.png"
+                      alt="Nhân viên phục vụ chuyên nghiệp"
+                    />
+                    <div class="red-overlay"></div>
+                  </div>
+                  <img
+                    src="/assets/images/nhanvien2.png"
+                    class="img-sub-top"
+                    alt="Đội ngũ nhân viên thân thiện"
+                  />
+                  <img
+                    src="/assets/images/nhahang3.png"
+                    class="img-sub-bottom"
+                    alt="Không gian nội thất tinh tế"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-dots review-dots">
+            <span class="dot active" data-index="0"></span>
+            <span class="dot" data-index="1"></span>
+            <span class="dot" data-index="2"></span>
+          </div>
+        </div>
+      </section>
+
+      <!-- DELIVERY SECTION -->
+      <section class="delivery-section-bg">
+        <div class="container">
+          <div class="delivery-content-wrap">
+            <span class="delivery-sub">GIAO HÀNG TẬN NƠI & ĐẶT BÀN</span>
+            <h2 class="delivery-title">
+              THƯỞNG THỨC MÓN NGON TẠI NHÀ - NHANH CHÓNG & DỄ DÀNG!
+            </h2>
+            <ul class="delivery-list">
+              <li>
+                <i class="fas fa-dot-circle"></i
+                ><span>Giao hàng siêu tốc - Món ăn luôn nóng hổi</span>
+              </li>
+              <li>
+                <i class="fas fa-dot-circle"></i
+                ><span>Theo dõi đơn hàng & Đặt bàn cực dễ.</span>
+              </li>
+              <li>
+                <i class="fas fa-dot-circle"></i
+                ><span>Nhận hàng ngàn ưu đãi & Mã giảm giá độc quyền</span>
+              </li>
+            </ul>
+            <div class="delivery-buttons">
+              <a href="#" class="btn-app btn-zalo">Đặt qua ZaloOA</a>
+              <a href="tel:19006988" class="btn-app btn-hotline">1900 6988</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- NEWS SECTION -->
+      <section class="news-section">
+        <div class="container">
+          <div class="news-header">
+            <h2 class="section-heading">Tin Tức & Sự Kiện</h2>
+            <div class="title-underline-center"></div>
+          </div>
+          <div class="news-grid">
+            <div class="news-card">
+              <div class="news-img-box">
+                <img
+                  src="/assets/images/checkin1.png"
+                  alt="Điểm check-in tại Sakedo"
+                />
+              </div>
+              <div class="news-info">
+                <span class="news-date">20, tháng 01, 2026</span>
+                <h3 class="news-title">SAKEDO - Điểm Check in</h3>
+                <div class="news-author">
+                  <img src="/assets/images/avata1.png" alt="Tác giả Khả Như" />
+                  <span class="author-name">Khả Như</span>
+                </div>
+              </div>
+            </div>
+            <div class="news-card">
+              <div class="news-img-box">
+                <img src="/assets/images/checkin2.png" alt="Ngôi nhà Sakedo" />
+              </div>
+              <div class="news-info">
+                <span class="news-date">22 Tháng 01, 2026</span>
+                <h3 class="news-title">Ghé Thăm "Ngôi Nhà" SAKEDO</h3>
+                <div class="news-author">
+                  <img src="/assets/images/avata2.png" alt="Tác giả Thế Khải" />
+                  <span class="author-name">Thế Khải</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FOOTER -->
+      <footer class="footer-section">
+        <div class="container">
+          <div class="footer-top">
+            <div class="footer-card-box">
+              <div class="footer-logo">
+                <img src="/assets/images/logo.png" alt="Logo Sakedo" />
+              </div>
+              <div class="footer-info-text">
+                <p class="time">Thứ 2 - Thứ 7: 09:20 - 22:30</p>
+                <p class="slogan">Cơm ngon - Canh ngọt - An lành</p>
+              </div>
+              <p class="footer-note">Nguyên liệu tươi sạch mỗi ngày</p>
+            </div>
+            <div class="footer-col">
+              <h3 class="footer-heading">SAKEDO</h3>
+              <ul class="footer-links">
+                <li>
+                  <a href="#"
+                    ><i class="fas fa-chevron-right"></i> Món Ngon
+                    Best-seller</a
+                  >
+                </li>
+                <li>
+                  <a href="#"
+                    ><i class="fas fa-chevron-right"></i> Đặt Bàn / Đặt Tiệc</a
+                  >
+                </li>
+                <li>
+                  <a href="#"
+                    ><i class="fas fa-chevron-right"></i> Liên Hệ & Góp Ý</a
+                  >
+                </li>
+              </ul>
+            </div>
+            <div class="footer-col">
+              <h3 class="footer-heading">Menu</h3>
+              <ul class="footer-links">
+                <li>
+                  <a href="#"
+                    ><i class="fas fa-chevron-right"></i> Set Cơm Gia Đình</a
+                  >
+                </li>
+                <li>
+                  <a href="#"
+                    ><i class="fas fa-chevron-right"></i> Món Mặn / Món Kho</a
+                  >
+                </li>
+                <li>
+                  <a href="#"
+                    ><i class="fas fa-chevron-right"></i> Các món có nước</a
+                  >
+                </li>
+                <li>
+                  <a href="#"
+                    ><i class="fas fa-chevron-right"></i> Thức Uống Nhà Làm</a
+                  >
+                </li>
+                <li>
+                  <a href="#"
+                    ><i class="fas fa-chevron-right"></i> Tráng Miệng</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="footer-bottom">
+            <p class="copyright">© 2025 SAKEDO | Hương vị cơm nhà Việt.</p>
+            <div class="social-links">
+              <a href="#">Facebook</a>
+              <a href="#">Instagram</a>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </main>
+
+    <!-- VIDEO MODAL -->
+    <div id="videoModal" class="video-modal-overlay" aria-hidden="true">
+      <div class="video-modal-content">
+        <span class="close-video" aria-label="Đóng video">&times;</span>
+        <div class="video-wrapper">
+          <iframe
+            id="youtubeIframe"
+            width="100%"
+            height="100%"
+            src="https://www.youtube.com/embed/P2lDw3yyX3g?enablejsapi=1"
+            title="Video giới thiệu nhà hàng Sakedo"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </div>
+      </div>
+    </div>
+
+    <!-- JavaScript - Chỉ dùng file global.js đã kết hợp toàn bộ logic -->
+    <script src="/js/pages/global.js"></script>
+  </body>
+</html>

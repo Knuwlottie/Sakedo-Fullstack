@@ -1,0 +1,173 @@
+/* --- FILE: css/pages/checkout.css --- */
+
+.checkout-container {
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 40px;
+  min-height: 500px;
+}
+
+/* CỘT TRÁI: FORM NHẬP LIỆU */
+.section-title {
+  font-family: "Fruktur", cursive;
+  font-size: 1.8rem;
+  margin-bottom: 25px;
+  border-bottom: 2px solid #d8b26e;
+  padding-bottom: 10px;
+  display: inline-block;
+  color: #333;
+}
+
+/* --- STYLE CHO KHUNG LƯU Ý (MỚI) --- */
+.delivery-note {
+  background-color: #fff3cd; /* Màu nền vàng nhạt */
+  color: #856404; /* Màu chữ nâu vàng */
+  border: 1px solid #ffeeba;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 25px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.delivery-note i {
+  font-size: 1.2rem;
+  color: #d32f2f;
+  margin-top: 2px;
+}
+/* ----------------------------------- */
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.form-input {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-family: "Epilogue", sans-serif;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #d8b26e;
+  box-shadow: 0 0 0 3px rgba(216, 178, 110, 0.2);
+}
+
+textarea.form-input {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* CỘT PHẢI: TÓM TẮT ĐƠN HÀNG */
+.order-summary {
+  background: #f9f9f9;
+  padding: 30px;
+  border-radius: 15px;
+  border: 1px solid #eee;
+  height: fit-content;
+  position: sticky;
+  top: 100px; /* Trượt theo khi cuộn */
+}
+
+/* List món ăn thu nhỏ */
+#mini-cart-list {
+  margin-bottom: 20px;
+  max-height: 300px;
+  overflow-y: auto;
+  padding-right: 5px;
+}
+
+#mini-cart-list::-webkit-scrollbar {
+  width: 6px;
+}
+#mini-cart-list::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 10px;
+}
+
+.item-mini {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 15px;
+  font-size: 0.95rem;
+  align-items: center;
+  border-bottom: 1px dashed #eee;
+  padding-bottom: 10px;
+}
+
+.item-mini img {
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+  object-fit: cover;
+  border: 1px solid #eee;
+}
+
+/* Dòng tổng tiền */
+.order-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  color: #555;
+  font-size: 1rem;
+}
+
+.order-total {
+  font-weight: 800;
+  color: #d32f2f;
+  font-size: 1.4rem;
+  border-top: 2px dashed #ddd;
+  padding-top: 20px;
+  margin-top: 10px;
+  align-items: center;
+}
+
+/* Nút xác nhận */
+.btn-confirm {
+  width: 100%;
+  padding: 15px;
+  background: #d8b26e;
+  color: #fff;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  margin-top: 25px;
+  transition: 0.3s;
+  text-transform: uppercase;
+  box-shadow: 0 5px 15px rgba(216, 178, 110, 0.3);
+}
+
+.btn-confirm:hover {
+  background: #c59f5e;
+  transform: translateY(-2px);
+}
+
+/* Responsive Mobile */
+@media (max-width: 768px) {
+  .checkout-container {
+    grid-template-columns: 1fr;
+  }
+  .order-summary {
+    position: static;
+  }
+}

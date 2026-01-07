@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Welcome Sakdo</title>
+    <link rel="stylesheet" href="../css/pages/auth.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="auth-container">
+      <div class="auth-image">
+        <img src="../assets/images/auth-bg.jpg" alt="Interior Design" />
+      </div>
+
+      <div class="auth-form-wrapper">
+        <div class="auth-content">
+          <h2>WELCOME SAKDO!</h2>
+
+          <div class="auth-tabs">
+            <button id="tab-login" class="active">Đăng nhập</button>
+            <button id="tab-register">Đăng ký</button>
+          </div>
+
+          <form id="form-login" class="active-form">
+            <div class="input-group">
+              <input
+                type="email"
+                id="login-email"
+                placeholder="Email"
+                required
+              />
+            </div>
+            <div class="input-group">
+              <input
+                type="password"
+                id="login-password"
+                placeholder="Password"
+                required
+              />
+            </div>
+            <div class="form-footer">
+              <a href="forgot-password.html">Quên mật khẩu?</a>
+            </div>
+            <button type="submit" class="btn-submit">Continue</button>
+
+            <div class="social-login">
+              <p>Sign in With</p>
+              <div class="social-icons">
+                <i class="icon-facebook"></i>
+                <i class="icon-google"></i>
+              </div>
+            </div>
+          </form>
+
+          <form id="form-register" style="display: none">
+            <div class="input-group">
+              <input
+                type="text"
+                id="reg-name"
+                placeholder="Họ và tên"
+                required
+              />
+            </div>
+            <div class="input-group">
+              <input
+                type="text"
+                id="reg-phone"
+                placeholder="Số điện thoại"
+                required
+              />
+            </div>
+            <div class="input-group">
+              <input type="email" id="reg-email" placeholder="Email" required />
+            </div>
+            <div class="input-group">
+              <input
+                type="password"
+                id="reg-password"
+                placeholder="Password"
+                required
+              />
+            </div>
+            <button type="submit" class="btn-submit">Đăng ký</button>
+
+            <div class="social-login">
+              <p>Sign in With</p>
+              <div class="social-icons">
+                <i class="icon-facebook"></i>
+                <i class="icon-google"></i>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script src="../js/pages/auth.js"></script>
+  </body>
+</html>

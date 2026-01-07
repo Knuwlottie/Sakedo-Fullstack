@@ -1,0 +1,237 @@
+/* --- FILE: css/pages/cart.css --- */
+
+/* KHUNG CHỨA CHÍNH */
+.cart-container {
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 0 20px;
+  min-height: 400px;
+}
+
+.page-title {
+  font-family: "Fruktur", cursive;
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 40px;
+  color: #333;
+}
+
+/* BỐ CỤC 2 CỘT */
+.cart-layout {
+  display: flex;
+  gap: 30px;
+  align-items: flex-start;
+}
+
+.cart-list {
+  flex: 2; /* Chiếm 2 phần */
+}
+
+.cart-summary {
+  flex: 1; /* Chiếm 1 phần */
+  background: #f9f9f9;
+  padding: 30px;
+  border-radius: 15px;
+  position: sticky;
+  top: 100px; /* Trượt theo khi cuộn chuột */
+  border: 1px solid #eee;
+}
+
+/* ITEM GIỎ HÀNG (Từng món ăn) */
+.cart-item {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  margin-bottom: 15px;
+  background: #fff;
+  transition: 0.3s;
+}
+
+.cart-item:hover {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  border-color: #d8b26e;
+}
+
+.item-img {
+  width: 90px;
+  height: 90px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.item-info {
+  flex: 1;
+}
+
+.item-name {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #333;
+  display: block;
+  margin-bottom: 5px;
+  text-decoration: none;
+}
+
+.item-note {
+  font-size: 0.85rem;
+  color: #777;
+  font-style: italic;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.item-price {
+  color: #d32f2f;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+/* BỘ ĐIỀU CHỈNH SỐ LƯỢNG (+ -) */
+.qty-ctrl {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  overflow: hidden;
+  height: 35px;
+}
+
+.qty-btn {
+  width: 30px;
+  height: 100%;
+  background: #fff;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.2s;
+  color: #333;
+}
+
+.qty-btn:hover {
+  background: #eee;
+}
+
+.qty-val {
+  width: 40px;
+  text-align: center;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  line-height: 35px;
+}
+
+/* Nút xóa (Thùng rác) */
+.btn-remove {
+  margin-left: 20px;
+  color: #999;
+  cursor: pointer;
+  transition: 0.2s;
+  font-size: 1.2rem;
+  padding: 10px;
+}
+
+.btn-remove:hover {
+  color: #f3274c;
+  background-color: #ffebee;
+  border-radius: 50%;
+}
+
+/* PHẦN TỔNG KẾT TIỀN */
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  font-size: 1rem;
+  color: #555;
+}
+
+.summary-total {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 2px dashed #ddd;
+  font-weight: 800;
+  font-size: 1.3rem;
+  color: #000;
+}
+
+.btn-checkout {
+  width: 100%;
+  padding: 15px;
+  background: #d8b26e;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 1rem;
+  margin-top: 25px;
+  cursor: pointer;
+  transition: 0.3s;
+  box-shadow: 0 5px 15px rgba(216, 178, 110, 0.3);
+}
+
+.btn-checkout:hover {
+  background: #c59f5e;
+  transform: translateY(-2px);
+}
+
+/* TRẠNG THÁI GIỎ RỖNG */
+.empty-cart {
+  text-align: center;
+  padding: 80px 0;
+  display: none; /* Mặc định ẩn, JS sẽ hiện */
+}
+
+.empty-cart i {
+  font-size: 80px;
+  color: #eee;
+  margin-bottom: 20px;
+}
+
+.empty-cart h3 {
+  font-family: "Fruktur", cursive;
+  font-size: 1.8rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.empty-cart p {
+  color: #777;
+  margin-bottom: 30px;
+}
+
+.btn-back {
+  display: inline-block;
+  padding: 12px 30px;
+  border: 2px solid #d8b26e;
+  color: #d8b26e;
+  text-decoration: none;
+  border-radius: 50px;
+  font-weight: 700;
+  transition: 0.3s;
+}
+
+.btn-back:hover {
+  background: #d8b26e;
+  color: #fff;
+}
+
+/* Responsive Mobile */
+@media (max-width: 768px) {
+  .cart-layout {
+    flex-direction: column;
+  }
+
+  .cart-item {
+    flex-wrap: wrap;
+  }
+
+  .qty-ctrl {
+    margin-left: auto; /* Đẩy bộ đếm sang phải */
+  }
+}

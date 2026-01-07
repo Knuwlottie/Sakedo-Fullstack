@@ -1,0 +1,16 @@
+# --- Java / Spring Boot ---
+backend/target/
+backend/out/
+backend/*.class
+backend/.mvn/
+backend/mvnw
+backend/mvnw.cmd
+*.log
+.idea/
+*.iml
+.vscode/
+.DS_Store
+
+# --- Frontend (Nếu sau này có dùng Nodejs) ---
+frontend/node_modules/
+frontend/dist/
