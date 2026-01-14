@@ -8,7 +8,7 @@ function renderCart() {
   const emptyMsg = document.getElementById("empty-cart-msg");
   const itemsWrapper = document.getElementById("cart-items-wrapper");
 
-  // Nếu giỏ rỗng
+  // 1. Xử lý hiển thị khi giỏ rỗng
   if (cart.length === 0) {
     if (cartContent) cartContent.style.display = "none";
     if (emptyMsg) emptyMsg.style.display = "block";
@@ -22,30 +22,64 @@ function renderCart() {
   let subTotal = 0;
 
   cart.forEach((item, index) => {
-    // --- SỬA LỖI NaN TẠI ĐÂY ---
-    // Đảm bảo giá là số. Nếu lưu nhầm chuỗi "55.000" thì xóa dấu chấm đi
+    // 2. Xử lý giá (đảm bảo là số)
     let price = item.price;
     if (typeof price === "string") {
       price = parseFloat(price.replace(/\./g, "").replace("đ", ""));
     }
-    // ---------------------------
 
+    // Xử lý giá gốc (nếu có)
+    let originalPrice = item.originalPrice ? item.originalPrice : 0;
+    if (typeof originalPrice === "string") {
+      originalPrice = parseFloat(
+        originalPrice.replace(/\./g, "").replace("đ", "")
+      );
+    }
+
+    // Tính tổng tiền
     const itemTotal = price * item.quantity;
     subTotal += itemTotal;
 
+    // 3. Logic hiển thị giá (Có giảm giá vs Không giảm giá)
+    let priceHtml = "";
+    if (originalPrice > price) {
+      // Có giảm giá: Hiện 2 dòng
+      priceHtml = `
+            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                <span style="text-decoration: line-through; color: #999; font-size: 0.85rem;">
+                    ${originalPrice.toLocaleString()}đ
+                </span>
+                <span class="item-price" style="color: #d32f2f; font-weight: 700;">
+                    ${price.toLocaleString()}đ
+                </span>
+            </div>
+        `;
+    } else {
+      // Không giảm giá: Hiện 1 dòng
+      priceHtml = `<span class="item-price" style="font-weight: 700;">${price.toLocaleString()}đ</span>`;
+    }
+
+    // 4. Xử lý đường dẫn ảnh (Để tránh lỗi ảnh bị 404)
+    // Nếu trong storage đã lưu đường dẫn đầy đủ (có http hoặc assets) thì dùng luôn
+    // Nếu chỉ lưu tên file thì nối thêm /assets/images/
+    let imgSrc = item.image;
+    if (!imgSrc.includes("/") && !imgSrc.startsWith("http")) {
+      imgSrc = `/assets/images/${item.image}`;
+    }
+
+    // 5. Render HTML
     const html = `
             <div class="cart-item">
-                <img src="/assets/images/${item.image}" alt="${
-      item.name
-    }" class="item-img" 
+                <img src="${imgSrc}" alt="${item.name}" class="item-img" 
                      onerror="this.src='https://placehold.co/100x100?text=Food'">
                 
                 <div class="item-info">
                     <span class="item-name">${item.name}</span>
                     <span class="item-note">${
-                      item.note ? "Note: " + item.note : ""
+                      item.note ? "Ghi chú: " + item.note : ""
                     }</span>
-                    <span class="item-price">${price.toLocaleString()}đ</span>
+                    
+                    ${priceHtml}
                 </div>
 
                 <div class="qty-ctrl">

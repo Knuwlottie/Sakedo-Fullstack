@@ -1,16 +1,17 @@
-let currentProduct = null;
+let currentProduct = null; // Biến toàn cục lưu món ăn hiện tại
 
 // Chạy khi trang tải xong
 document.addEventListener("DOMContentLoaded", () => {
   const urlParams = new URLSearchParams(window.location.search);
   const productId = urlParams.get("id");
 
-  console.log("--> Đang xem sản phẩm ID:", productId); // Kiểm tra ID trên Console
+  console.log("--> Đang xem sản phẩm ID:", productId);
 
   if (productId) {
     fetchProductDetail(productId);
   } else {
     alert("Không tìm thấy ID sản phẩm trên đường dẫn!");
+    window.location.href = "/pages/menu.html";
   }
 
   updateCartBadge();
@@ -19,7 +20,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 async function fetchProductDetail(id) {
   try {
-    // Gọi API lấy dữ liệu từ Backend
     const response = await fetch(`http://localhost:8080/api/products/${id}`);
 
     if (!response.ok) {
@@ -28,124 +28,131 @@ async function fetchProductDetail(id) {
 
     const product = await response.json();
 
-    // --- QUAN TRỌNG: IN DỮ LIỆU GỐC RA ĐỂ KIỂM TRA ---
     console.log("--> Dữ liệu nhận được từ Backend:", product);
-    // Bạn hãy nhấn F12, chọn tab Console để xem tên các biến (name, price, image...) có đúng không nhé!
 
     currentProduct = product;
     renderProductInfo(product);
   } catch (error) {
     console.error("Lỗi khi tải sản phẩm:", error);
-
-    // Nếu lỗi (ví dụ Backend chưa chạy), dùng dữ liệu giả để test giao diện
-    console.warn("--> Đang sử dụng dữ liệu mẫu (Mock Data)");
-    const mockProduct = {
-      id: id,
-      name: "Món Ăn Mẫu (Do lỗi kết nối)",
-      price: 50000,
-      originalPrice: 65000,
-      image: "", // Để trống để test ảnh lỗi
-      description:
-        "Không thể lấy dữ liệu từ Server. Vui lòng kiểm tra Console (F12).",
-    };
-    currentProduct = mockProduct;
-    renderProductInfo(mockProduct);
+    // Xử lý lỗi hiển thị nếu cần
+    document.getElementById("detail-name").textContent = "Lỗi tải dữ liệu";
   }
 }
 
+// --- 1. HÀM HIỂN THỊ THÔNG TIN (SỬA LOGIC GIÁ) ---
 function renderProductInfo(product) {
-  // 1. Hiển thị Tên & Mô tả (Dùng toán tử || để tránh lỗi nếu thiếu dữ liệu)
+  // 1. Hiển thị Tên & Mô tả
   document.title = `${product.name || "Chi tiết món"} - Sakedo`;
   document.getElementById("detail-name").textContent =
-    product.name || "Tên món chưa cập nhật";
+    product.name || "Đang cập nhật...";
   document.getElementById("detail-desc").textContent =
-    product.description || "Chưa có mô tả.";
+    product.description || "Món ngon tuyệt vời từ Sakedo.";
 
-  // 2. Hiển thị Ảnh (Xử lý an toàn hơn)
+  // 2. Hiển thị Ảnh
   const imgElement = document.getElementById("detail-img");
   if (imgElement) {
-    // 1. Lấy dữ liệu ảnh (thử các tên biến phổ biến)
-    let rawImage =
-      product.image || product.imageUrl || product.thumbnail || product.img;
+    let rawImage = product.image || product.imageUrl || "";
 
-    // 2. Xử lý đường dẫn ảnh
+    // Xử lý đường dẫn ảnh (Dùng ../ để lùi ra khỏi thư mục pages)
     let finalImageSrc = "";
-
     if (!rawImage) {
-      // Trường hợp 1: Không có dữ liệu ảnh -> Dùng ảnh mặc định
-      finalImageSrc =
-        "https://via.placeholder.com/500x400?text=Sakedo+No+Image";
-    } else if (rawImage.startsWith("http") || rawImage.startsWith("/")) {
-      // Trường hợp 2: Đã là đường dẫn đầy đủ (VD: /assets/images/food/a.jpg)
+      finalImageSrc = "https://via.placeholder.com/500x400?text=Sakedo";
+    } else if (rawImage.startsWith("http")) {
       finalImageSrc = rawImage;
     } else {
-      // Trường hợp 3: Chỉ có tên file (VD: banhxeo.jpg) -> Tự nối thêm thư mục
-      // BẠN HÃY SỬA ĐƯỜNG DẪN DƯỚI ĐÂY CHO ĐÚNG VỚI THƯ MỤC ẢNH CỦA BẠN
-      finalImageSrc = `/assets/images/${rawImage}`;
+      finalImageSrc = `../assets/images/${rawImage}`;
     }
 
-    console.log("--> Đang hiển thị ảnh từ link:", finalImageSrc); // Xem log để debug
     imgElement.src = finalImageSrc;
-
-    // 3. Nếu ảnh vẫn lỗi (404) -> Tự chuyển về ảnh mặc định
     imgElement.onerror = function () {
-      console.warn("--> Ảnh bị lỗi (404), đang dùng ảnh thay thế.");
-      this.src = "https://via.placeholder.com/500x400?text=Anh+Bi+Loi";
+      this.src = "https://via.placeholder.com/500x400?text=Anh+Loi";
     };
   }
 
-  // 3. Hiển thị Giá (Logic an toàn, chống Crash)
+  // 3. Hiển thị Giá (LOGIC MỚI: TÍNH TOÁN GIẢM GIÁ)
   const priceBox = document.getElementById("detail-price");
   if (priceBox) {
-    // Chuyển đổi giá về dạng số (đề phòng backend trả về chuỗi "50000")
-    const price = parseFloat(product.price || 0);
-    const originalPrice = parseFloat(product.originalPrice || 0);
-
+    let finalPrice = product.price; // Mặc định là giá gốc
     let htmlContent = "";
 
-    // Nếu có giá gốc và giá gốc > giá bán -> Hiện cả 2
-    if (originalPrice > price) {
+    // Kiểm tra xem có giảm giá (discount > 0) không
+    if (product.discount && product.discount > 0) {
+      // Công thức: Giá sau giảm = Giá gốc * (100 - %giảm) / 100
+      finalPrice = (product.price * (100 - product.discount)) / 100;
+
+      // Lưu giá đã giảm vào biến toàn cục để tí nữa thêm vào giỏ dùng
+      currentProduct.finalPrice = finalPrice;
+
+      // HTML: Hiện giá cũ gạch ngang, giá mới to đỏ, và tem giảm giá
       htmlContent = `
-                <span class="old-price">${originalPrice.toLocaleString(
-                  "vi-VN"
-                )}đ</span>
-                <span>${price.toLocaleString("vi-VN")}đ</span>
-            `;
+        <div style="display: flex; align-items: center; gap: 15px; flex-wrap: wrap;">
+            <span class="old-price" style="text-decoration: line-through; color: #999; font-size: 1.3rem;">
+                ${product.price.toLocaleString("vi-VN")}đ
+            </span>
+            <span class="current-price" style="color: #d32f2f; font-size: 2.2rem; font-weight: 800;">
+                ${finalPrice.toLocaleString("vi-VN")}đ
+            </span>
+            <span style="background: #d32f2f; color: white; padding: 4px 10px; border-radius: 15px; font-weight: bold; font-size: 0.9rem;">
+                -${product.discount}%
+            </span>
+        </div>
+      `;
     } else {
-      // Chỉ hiện giá bán
-      htmlContent = `<span>${price.toLocaleString("vi-VN")}đ</span>`;
+      // Không giảm giá
+      currentProduct.finalPrice = product.price;
+      htmlContent = `<span class="current-price" style="color: #d32f2f; font-size: 2.2rem; font-weight: 800;">${product.price.toLocaleString(
+        "vi-VN"
+      )}đ</span>`;
     }
 
     priceBox.innerHTML = htmlContent;
   }
 }
 
-// ... (Các hàm addToCart, updateCartBadge, initStarRating giữ nguyên như cũ) ...
+// --- 2. HÀM THÊM VÀO GIỎ (SỬA ĐỂ LẤY GIÁ ĐÃ GIẢM) ---
 function addToCartDetail(isBuyNow) {
   if (!currentProduct) return;
+
   const qtyInput = document.getElementById("qty-input");
   const qty = parseInt(qtyInput.value) || 1;
   const note = document.getElementById("order-note").value;
 
-  // Lưu ý: Đảm bảo tên biến ở đây khớp với dữ liệu thật
+  // Lấy giá bán (đã giảm)
+  const priceToAdd = currentProduct.finalPrice
+    ? currentProduct.finalPrice
+    : currentProduct.price;
+
+  // --- QUAN TRỌNG: Lấy giá gốc để lưu vào ---
+  const originalPriceToAdd = currentProduct.price;
+
+  // Xử lý ảnh
+  let imgSrc = currentProduct.image;
+  if (imgSrc && !imgSrc.startsWith("http"))
+    imgSrc = `../assets/images/${imgSrc}`;
+
   const cartItem = {
     id: currentProduct.id,
     name: currentProduct.name,
-    price: parseFloat(currentProduct.price || 0), // Chuyển về số
-    image: currentProduct.image || product.imageUrl || "",
+    price: priceToAdd, // Giá bán thực tế
+    originalPrice: originalPriceToAdd, // <--- THÊM DÒNG NÀY: Lưu giá gốc
+    image: imgSrc,
     quantity: qty,
     note: note,
   };
 
+  // ... (Đoạn dưới lưu vào localStorage giữ nguyên) ...
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
   const existingItem = cart.find((item) => item.id == cartItem.id);
 
   if (existingItem) {
     existingItem.quantity += qty;
     if (note) existingItem.note = note;
+    // Cập nhật lại giá gốc nếu món cũ chưa có
+    existingItem.originalPrice = originalPriceToAdd;
   } else {
     cart.push(cartItem);
   }
+
   localStorage.setItem("cart", JSON.stringify(cart));
   updateCartBadge();
 
@@ -156,6 +163,7 @@ function addToCartDetail(isBuyNow) {
   }
 }
 
+// ... (Các hàm hỗ trợ giữ nguyên) ...
 function updateCartBadge() {
   const cart = JSON.parse(localStorage.getItem("cart")) || [];
   const totalQty = cart.reduce((sum, item) => sum + item.quantity, 0);

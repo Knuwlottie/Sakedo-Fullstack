@@ -1,0 +1,324 @@
+/* --- LAYOUT --- */
+.tracking-page {
+  padding: 120px 0 80px;
+  background-color: #f8f9fa;
+  min-height: 100vh;
+}
+
+.tracking-card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* HEADER */
+.tracking-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.order-title {
+  font-family: "Fruktur", cursive;
+  font-size: 2.2rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.order-title span {
+  color: #d8b26e; /* Vàng Sakedo */
+}
+
+.order-subtitle {
+  font-size: 1rem;
+  color: #666;
+}
+
+.order-subtitle span {
+  color: #28a745;
+  font-weight: 700;
+}
+
+/* --- THANH TIẾN TRÌNH (CORE DESIGN) --- */
+.progress-track {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  margin-bottom: 60px;
+  padding: 0 40px; /* Thụt vào để icon đầu cuối không bị sát lề */
+}
+
+/* Kẻ xám nền */
+.progress-bg-line {
+  position: absolute;
+  top: 25px;
+  left: 60px;
+  right: 60px;
+  height: 4px;
+  background: #eee;
+  z-index: 0;
+  border-radius: 4px;
+}
+
+/* Kẻ xanh chạy (Active) */
+.progress-active-line {
+  position: absolute;
+  top: 25px;
+  left: 60px;
+  height: 4px;
+  background: #28a745; /* Màu xanh lá */
+  z-index: 0;
+  width: 0%; /* JS sẽ điều khiển cái này */
+  transition: width 1s ease-in-out;
+  border-radius: 4px;
+}
+
+.step {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  width: 120px; /* Cố định chiều rộng để căn giữa */
+}
+
+.step-icon {
+  width: 50px;
+  height: 50px;
+  background: #fff;
+  border: 4px solid #eee;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 15px; /* Căn giữa icon */
+  font-size: 1.2rem;
+  color: #ccc;
+  transition: all 0.4s ease;
+}
+
+.step-text {
+  font-family: "Epilogue", sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #999;
+  margin-bottom: 5px;
+}
+
+.step-time {
+  font-size: 0.8rem;
+  color: #bbb;
+}
+
+/* --- TRẠNG THÁI ACTIVE (Đã hoàn thành) --- */
+.step.active .step-icon {
+  border-color: #28a745;
+  background: #28a745;
+  color: #fff;
+  box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+}
+
+.step.active .step-text {
+  color: #333;
+}
+
+.step.active .step-time {
+  color: #666;
+}
+
+/* --- TRẠNG THÁI CURRENT (Đang xử lý - Hiệu ứng Pulse) --- */
+.step.current .step-icon {
+  border-color: #d8b26e; /* Màu vàng */
+  background: #fff;
+  color: #d8b26e;
+  animation: pulse-yellow 1.5s infinite;
+}
+
+.step.current .step-text {
+  color: #d8b26e;
+}
+
+@keyframes pulse-yellow {
+  0% {
+    box-shadow: 0 0 0 0 rgba(216, 178, 110, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(216, 178, 110, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(216, 178, 110, 0);
+  }
+}
+
+/* --- INFO GRIDS --- */
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+.info-box {
+  background: #fdfdfd;
+  border: 1px solid #eee;
+  border-radius: 15px;
+  padding: 25px;
+}
+
+.info-box h3 {
+  font-family: "Fruktur", cursive;
+  font-size: 1.1rem;
+  color: #333;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #f0f0f0;
+  padding-bottom: 10px;
+}
+
+.info-box h3 i {
+  color: #d8b26e;
+  margin-right: 8px;
+}
+
+/* Driver Info */
+.driver-profile {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.driver-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #eee;
+  overflow: hidden;
+}
+.driver-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.driver-details h4 {
+  margin: 0 0 5px 0;
+  font-size: 1rem;
+  color: #333;
+}
+
+.driver-details p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.waiting-text {
+  font-style: italic;
+  color: #999;
+  width: 100%;
+  text-align: center;
+  padding: 20px 0;
+}
+
+/* Item List */
+.item-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.item-list li {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.item-list li.total-row {
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px dashed #ddd;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.total-price {
+  color: #d32f2f;
+}
+
+/* ACTIONS */
+.tracking-actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn-back,
+.btn-contact-support {
+  padding: 12px 25px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.btn-back {
+  background: #f0f0f0;
+  color: #555;
+}
+.btn-back:hover {
+  background: #e0e0e0;
+}
+
+.btn-contact-support {
+  background: #d8b26e;
+  color: #fff;
+  border: none;
+}
+.btn-contact-support:hover {
+  background: #c5a059;
+}
+
+/* Responsive Mobile */
+@media (max-width: 768px) {
+  .progress-track {
+    flex-direction: column;
+    align-items: flex-start;
+    padding-left: 20px;
+    gap: 0;
+  }
+
+  .progress-bg-line,
+  .progress-active-line {
+    width: 4px;
+    height: 100%;
+    top: 0;
+    left: 43px; /* Căn chỉnh với icon */
+    right: auto;
+  }
+
+  .progress-active-line {
+    width: 4px;
+    height: 0%; /* JS sẽ chỉnh height */
+    transition: height 1s ease;
+  }
+
+  .step {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    text-align: left;
+    margin-bottom: 30px;
+    background: #fff; /* Che đường kẻ */
+    gap: 15px;
+  }
+
+  .step-icon {
+    margin: 0;
+  }
+
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
+}

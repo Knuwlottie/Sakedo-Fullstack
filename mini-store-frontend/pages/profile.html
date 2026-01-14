@@ -16,97 +16,122 @@
 
     <link rel="stylesheet" href="../css/base/variables.css" />
     <link rel="stylesheet" href="../css/pages/global.css" />
+    <link rel="stylesheet" href="../css/pages/menu.css" />
     <link rel="stylesheet" href="../css/pages/profile.css" />
     <link rel="stylesheet" href="../css/components/header.css" />
     <link rel="stylesheet" href="../css/components/footer.css" />
   </head>
-
   <body>
     <div id="header-placeholder"></div>
 
     <main class="profile-page">
       <div class="container">
-        <!-- Personal Info Section -->
+        <section class="profile-card">
+          <div class="card-header-row">
+            <div class="card-title">
+              <i class="fas fa-box-open"></i>
+              <h2>Đơn Hàng Của Tôi</h2>
+            </div>
+            <a href="#" class="view-all-link">Xem tất cả đơn ></a>
+          </div>
+          <div class="order-list">
+            <div class="order-item active-process">
+              <div class="order-header">
+                <div class="order-left">
+                  <span class="order-id">#ORD-001</span>
+                  <span class="order-date">25/10/2025 - 10:30</span>
+                </div>
+                <span class="status-badge status-delivering">
+                  <i class="fas fa-motorcycle"></i> Đang giao hàng
+                </span>
+              </div>
+              <div class="order-body">
+                <div class="product-preview">
+                  <img
+                    src="../assets/images/comga.png"
+                    alt="Món ăn"
+                    onerror="this.src='https://via.placeholder.com/60'"
+                  />
+                  <div class="product-info-short">
+                    <h4>Cơm Gà Xối Mỡ (và 2 món khác)</h4>
+                    <p>Tổng tiền: <b>185.300đ</b></p>
+                  </div>
+                </div>
+                <div class="mini-progress-bar">
+                  <div class="bar-fill" style="width: 75%"></div>
+                </div>
+                <p class="status-text-mini">Tài xế đang giao đến bạn...</p>
+              </div>
+              <div class="order-footer">
+                <a href="tracking.html?id=ORD-001" class="btn-track-order"
+                  >Theo Dõi Đơn Hàng</a
+                >
+              </div>
+            </div>
+          </div>
+        </section>
+
         <section class="profile-card">
           <div class="card-header-row">
             <div class="card-title">
               <i class="fas fa-id-card"></i>
               <h2>Thông Tin Cá Nhân</h2>
             </div>
-            <button class="btn-edit">
-              <i class="fas fa-edit"></i>
-              Chỉnh sửa
+            <button class="btn-edit" id="btn-edit-profile">
+              <i class="fas fa-edit"></i><span>Chỉnh sửa</span>
             </button>
           </div>
-
           <div class="card-body-row">
-            <!-- Avatar Column -->
             <div class="avatar-column">
               <div class="avatar-frame">
                 <img
                   src="../assets/images/avata1.png"
                   alt="Avatar"
                   id="user-avatar"
+                  onerror="this.src='https://via.placeholder.com/150'"
                 />
+                <div
+                  class="avatar-upload"
+                  id="avatar-upload"
+                  style="display: none"
+                >
+                  <i class="fas fa-camera"></i>
+                </div>
               </div>
             </div>
-
-            <!-- Form Column -->
             <div class="form-column">
-              <!-- Họ và tên -->
               <div class="form-group">
-                <label>
-                  <i class="fas fa-user"></i>
-                  Họ và tên
-                </label>
-                <input
+                <label><i class="fas fa-user"></i> Họ và tên</label
+                ><input
                   type="text"
                   id="input-name"
                   value="Nguyễn Văn A"
                   readonly
                 />
               </div>
-
-              <!-- Email -->
               <div class="form-group">
-                <label>
-                  <i class="fas fa-envelope"></i>
-                  Email
-                </label>
-                <input
+                <label><i class="fas fa-envelope"></i> Email</label
+                ><input
                   type="email"
                   id="input-email"
                   value="usthy@1234gmail.com"
                   readonly
                 />
               </div>
-
-              <!-- Số điện thoại -->
               <div class="form-group">
-                <label>
-                  <i class="fas fa-phone"></i>
-                  Số điện thoại
-                </label>
-                <input
+                <label><i class="fas fa-phone"></i> Số điện thoại</label
+                ><input
                   type="tel"
                   id="input-phone"
                   value="0123456789"
                   readonly
                 />
               </div>
-
-              <!-- Địa chỉ -->
               <div class="form-group">
-                <label>
-                  <i class="fas fa-map-marker-alt"></i>
-                  Địa chỉ
-                </label>
+                <label><i class="fas fa-map-marker-alt"></i> Địa chỉ</label>
                 <div class="textarea-wrapper">
-                  <textarea id="input-address" readonly>
+                  <textarea id="input-address" rows="3" readonly>
 123 Đường ABC, Quận 8, TP.HCM</textarea
-                  >
-                  <span class="char-counter" id="char-counter"
-                    >29/1000 ký tự</span
                   >
                 </div>
               </div>
@@ -114,7 +139,6 @@
           </div>
         </section>
 
-        <!-- Security Section - Bảo Mật Tài Khoản -->
         <section class="profile-card security-card">
           <div class="card-header-row no-border">
             <div class="card-title">
@@ -122,56 +146,17 @@
               <h2>Bảo Mật Tài Khoản</h2>
             </div>
           </div>
-
           <div class="security-list">
-            <!-- Đổi mật khẩu -->
             <div class="security-item">
               <div class="security-info">
-                <div class="security-icon">
-                  <i class="fas fa-key"></i>
-                </div>
+                <div class="security-icon"><i class="fas fa-key"></i></div>
                 <div class="security-text">
                   <h4>Đổi mật khẩu</h4>
                   <p>Cập nhật mật khẩu để bảo vệ tài khoản</p>
                 </div>
               </div>
-              <button class="btn-security">
-                <i class="fas fa-edit"></i>
-                Đổi mật khẩu
-              </button>
-            </div>
-
-            <!-- Xác thực 2 yếu tố -->
-            <div class="security-item">
-              <div class="security-info">
-                <div class="security-icon">
-                  <i class="fas fa-mobile-alt"></i>
-                </div>
-                <div class="security-text">
-                  <h4>Xác thực 2 yếu tố</h4>
-                  <p>Tăng cường bảo mật với SMS hoặc email</p>
-                </div>
-              </div>
-              <button class="btn-security btn-toggle">
-                <i class="fas fa-toggle-off"></i>
-                Bật
-              </button>
-            </div>
-
-            <!-- Lịch sử đăng nhập -->
-            <div class="security-item">
-              <div class="security-info">
-                <div class="security-icon">
-                  <i class="fas fa-history"></i>
-                </div>
-                <div class="security-text">
-                  <h4>Lịch sử đăng nhập</h4>
-                  <p>Xem các thiết bị đã đăng nhập gần đây</p>
-                </div>
-              </div>
-              <button class="btn-security">
-                <i class="fas fa-eye"></i>
-                Xem lịch sử
+              <button class="btn-security" id="btn-open-password-modal">
+                <i class="fas fa-edit"></i> Đổi mật khẩu
               </button>
             </div>
           </div>
@@ -179,108 +164,17 @@
       </div>
     </main>
 
-    <!-- Modal Đổi Mật Khẩu -->
     <div class="modal-overlay" id="password-modal">
       <div class="modal-content">
         <button class="modal-close" id="modal-close">&times;</button>
-
         <div class="modal-header">
           <i class="fas fa-key"></i>
           <h3>Đổi Mật Khẩu</h3>
         </div>
-
         <form id="password-form">
-          <!-- Mật khẩu hiện tại -->
-          <div class="modal-form-group">
-            <label>
-              <i class="fas fa-lock"></i>
-              Mật khẩu hiện tại
-            </label>
-            <div class="password-input-wrapper">
-              <input
-                type="password"
-                id="current-password"
-                placeholder=""
-                required
-              />
-              <button type="button" class="toggle-password">
-                <i class="fas fa-eye"></i>
-              </button>
-            </div>
-          </div>
-
-          <!-- Mật khẩu mới -->
-          <div class="modal-form-group">
-            <label>
-              <i class="fas fa-key"></i>
-              Mật khẩu mới
-            </label>
-            <div class="password-input-wrapper">
-              <input
-                type="password"
-                id="new-password"
-                placeholder=""
-                required
-              />
-              <button type="button" class="toggle-password">
-                <i class="fas fa-eye"></i>
-              </button>
-            </div>
-            <div class="password-strength">
-              <span class="strength-text" id="strength-text">Chưa đủ mạnh</span>
-              <div class="strength-bar">
-                <div class="strength-fill" id="strength-fill"></div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Xác nhận mật khẩu mới -->
-          <div class="modal-form-group">
-            <label>
-              <i class="fas fa-check-circle"></i>
-              Xác nhận mật khẩu mới
-            </label>
-            <div class="password-input-wrapper">
-              <input
-                type="password"
-                id="confirm-password"
-                placeholder=""
-                required
-              />
-              <button type="button" class="toggle-password">
-                <i class="fas fa-eye"></i>
-              </button>
-            </div>
-          </div>
-
-          <!-- Yêu cầu mật khẩu -->
-          <div class="password-requirements">
-            <h4>Yêu cầu mật khẩu:</h4>
-            <ul>
-              <li id="req-length">
-                <span class="req-dot"></span> Ít nhất 8 ký tự
-              </li>
-              <li id="req-uppercase">
-                <span class="req-dot"></span> Có chữ hoa
-              </li>
-              <li id="req-lowercase">
-                <span class="req-dot"></span> Có chữ thường
-              </li>
-              <li id="req-number"><span class="req-dot"></span> Có số</li>
-              <li id="req-special">
-                <span class="req-dot"></span> Có ký tự đặc biệt
-              </li>
-            </ul>
-          </div>
-
-          <!-- Buttons -->
           <div class="modal-buttons">
-            <button type="submit" class="btn-update-password">
-              <i class="fas fa-save"></i>
-              Cập nhật mật khẩu
-            </button>
+            <button type="submit" class="btn-update-password">Cập nhật</button>
             <button type="button" class="btn-cancel" id="btn-cancel">
-              <i class="fas fa-times"></i>
               Hủy
             </button>
           </div>

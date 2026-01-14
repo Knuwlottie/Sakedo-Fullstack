@@ -17,42 +17,11 @@
     <link rel="stylesheet" href="../css/base/variables.css" />
     <link rel="stylesheet" href="../css/pages/global.css" />
     <link rel="stylesheet" href="../css/pages/menu.css" />
-
     <link rel="stylesheet" href="../css/components/header.css" />
     <link rel="stylesheet" href="../css/components/footer.css" />
   </head>
   <body>
-    <header class="header">
-      <div class="container header-inner">
-        <a href="global.html" class="logo">
-          <img src="../assets/images/logo.png" alt="Sakedo Logo" />
-        </a>
-        <nav class="navbar">
-          <ul class="nav-list">
-            <li><a href="global.html" class="nav-link">Trang Chủ</a></li>
-            <li><a href="menu.html" class="nav-link active">Thực Đơn</a></li>
-            <li><a href="booking.html" class="nav-link">Đặt Bàn</a></li>
-            <li><a href="contact.html" class="nav-link">Liên Hệ</a></li>
-            <li><a href="profile.html" class="nav-link">Cá Nhân</a></li>
-          </ul>
-        </nav>
-        <div class="header-actions">
-          <a href="#" class="cart-btn">
-            <i class="fas fa-shopping-basket"></i>
-            <span class="cart-count">0</span>
-          </a>
-          <a
-            href="auth.html"
-            class="btn btn-primary"
-            style="
-              background-color: var(--primary-color);
-              color: #fff !important;
-            "
-            >Đăng Nhập</a
-          >
-        </div>
-      </div>
-    </header>
+    <div id="header-placeholder"></div>
     <main>
       <section class="menu-hero">
         <div class="container">
@@ -60,23 +29,13 @@
             <div class="menu-hero-content">
               <h2 class="hero-sub-title">Cơm nhà Việt - Vị mẹ nấu</h2>
               <h1 class="hero-main-title">Combo Gà 4 món</h1>
-
               <div class="hero-actions">
                 <a href="#menu-list" class="btn-view-menu">Xem thực đơn</a>
-                <div class="hero-stars">
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                </div>
               </div>
             </div>
-
             <div class="menu-hero-image">
               <div class="img-box">
                 <img src="../assets/images/setga.png" alt="Combo Gà 4 món" />
-
                 <div class="discount-badge">
                   <span class="percent">20%</span>
                   <span class="text">Giảm giá</span>
@@ -87,180 +46,23 @@
         </div>
       </section>
 
-      <section class="best-selling-section">
+      <section class="best-selling-section" id="menu-list">
         <div class="container">
           <h2 class="menu-section-title">BEST SELLER</h2>
-
           <div class="product-grid">
-            <div class="product-card">
-              <div class="card-img">
-                <img src="../assets/images/suonbi.png" alt="Cơm tấm sườn" />
-              </div>
-              <div class="card-info">
-                <div class="rating">
-                  <i class="fas fa-star"></i><i class="fas fa-star"></i
-                  ><i class="fas fa-star"></i><i class="fas fa-star"></i
-                  ><i class="fas fa-star"></i>
-                </div>
-                <h3 class="product-name">Cơm tấm sườn</h3>
-                <div class="price-row">
-                  <span class="price">65.000đ</span>
-                  <button class="add-cart-btn">
-                    <i class="fas fa-shopping-basket"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <div class="product-card">
-              <div class="card-img">
-                <img src="../assets/images/bunrieuu.png" alt="Bún Riêu" />
-              </div>
-              <div class="card-info">
-                <div class="rating">
-                  <i class="fas fa-star"></i><i class="fas fa-star"></i
-                  ><i class="fas fa-star"></i><i class="fas fa-star"></i
-                  ><i class="fas fa-star"></i>
-                </div>
-                <h3 class="product-name">Bún Riêu Cua</h3>
-                <div class="price-row">
-                  <span class="price">70.000đ</span>
-                  <button class="add-cart-btn">
-                    <i class="fas fa-shopping-basket"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <div class="product-card">
-              <div class="card-img">
-                <img src="../assets/images/goibakhia.png" alt="Gỏi đu đủ đâm" />
-              </div>
-              <div class="card-info">
-                <div class="rating">
-                  <i class="fas fa-star"></i><i class="fas fa-star"></i
-                  ><i class="fas fa-star"></i><i class="fas fa-star"></i
-                  ><i class="fas fa-star"></i>
-                </div>
-                <h3 class="product-name">Gỏi đu đủ đâm</h3>
-                <div class="price-row">
-                  <span class="price">100.000đ</span>
-                  <button class="add-cart-btn">
-                    <i class="fas fa-shopping-basket"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <div class="product-card">
-              <div class="card-img">
-                <img src="../assets/images/setcuon.png" alt="Combo Cuốn" />
-              </div>
-              <div class="card-info">
-                <div class="rating">
-                  <i class="fas fa-star"></i><i class="fas fa-star"></i
-                  ><i class="fas fa-star"></i><i class="fas fa-star"></i
-                  ><i class="fas fa-star"></i>
-                </div>
-                <h3 class="product-name">Combo Cuốn</h3>
-                <div class="price-row">
-                  <span class="price">120.000đ</span>
-                  <button class="add-cart-btn">
-                    <i class="fas fa-shopping-basket"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <div class="product-card">
-              <div class="card-img">
-                <img src="../assets/images/canhchuaca.png" alt="Canh chua cá" />
-              </div>
-              <div class="card-info">
-                <div class="rating">
-                  <i class="fas fa-star"></i><i class="fas fa-star"></i
-                  ><i class="fas fa-star"></i><i class="fas fa-star"></i
-                  ><i class="fas fa-star"></i>
-                </div>
-                <h3 class="product-name">Canh chua cá bông lau</h3>
-                <div class="price-row">
-                  <span class="price">130.000đ</span>
-                  <button class="add-cart-btn">
-                    <i class="fas fa-shopping-basket"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <div class="product-card">
-              <div class="card-img">
-                <img src="../assets/images/phobo.png" alt="Phở bò" />
-              </div>
-              <div class="card-info">
-                <div class="rating">
-                  <i class="fas fa-star"></i><i class="fas fa-star"></i
-                  ><i class="fas fa-star"></i><i class="fas fa-star"></i
-                  ><i class="fas fa-star"></i>
-                </div>
-                <h3 class="product-name">Phở bò tái nạm</h3>
-                <div class="price-row">
-                  <span class="price">85.000đ</span>
-                  <button class="add-cart-btn">
-                    <i class="fas fa-shopping-basket"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <div class="product-card">
-              <div class="card-img">
-                <img src="../assets/images/comchien.png" alt="Cơm chiên" />
-              </div>
-              <div class="card-info">
-                <div class="rating">
-                  <i class="fas fa-star"></i><i class="fas fa-star"></i
-                  ><i class="fas fa-star"></i><i class="fas fa-star"></i
-                  ><i class="fas fa-star"></i>
-                </div>
-                <h3 class="product-name">Cơm chiên hải sản</h3>
-                <div class="price-row">
-                  <span class="price">140.000đ</span>
-                  <button class="add-cart-btn">
-                    <i class="fas fa-shopping-basket"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <div class="product-card">
-              <div class="card-img">
-                <img src="../assets/images/banhplan.png" alt="Bánh Flan" />
-              </div>
-              <div class="card-info">
-                <div class="rating">
-                  <i class="fas fa-star"></i><i class="fas fa-star"></i
-                  ><i class="fas fa-star"></i><i class="fas fa-star"></i
-                  ><i class="fas fa-star"></i>
-                </div>
-                <h3 class="product-name">Bánh Flan</h3>
-                <div class="price-row">
-                  <span class="price">30.000đ</span>
-                  <button class="add-cart-btn">
-                    <i class="fas fa-shopping-basket"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
+            <p style="text-align: center; width: 100%; color: #777">
+              Đang tải món ngon...
+            </p>
           </div>
         </div>
       </section>
+
       <section class="services-section">
         <div class="container">
           <div class="section-header-center">
             <h2 class="service-title">DỊCH VỤ CỦA SAKEDO</h2>
             <div class="title-underline-yellow"></div>
           </div>
-
           <div class="services-grid">
             <div class="service-item">
               <div class="service-img-frame">
@@ -269,7 +71,6 @@
               <h3 class="service-name">Cơm văn phòng</h3>
               <p class="service-desc">Tiện lợi, đầy đủ dinh dưỡng</p>
             </div>
-
             <div class="service-item">
               <div class="service-img-frame">
                 <img
@@ -280,7 +81,6 @@
               <h3 class="service-name">Mâm Cơm Gia Đình</h3>
               <p class="service-desc">Cơm 3-4 món cho nhóm</p>
             </div>
-
             <div class="service-item">
               <div class="service-img-frame">
                 <img src="../assets/images/tiecnho.png" alt="Đặt Tiệc Nhỏ" />
@@ -291,529 +91,47 @@
           </div>
         </div>
       </section>
+
       <section class="suggestion-section">
         <div class="container">
           <div class="section-header-center">
             <h2 class="suggestion-title">Gợi Ý Cho Bữa Ăn</h2>
             <div class="title-underline-yellow"></div>
           </div>
-
           <div class="suggestion-grid">
-            <div class="suggest-card">
-              <div class="suggest-img-wrap">
-                <div class="bg-circle"></div>
-                <img
-                  src="../assets/images/banhxeo.png"
-                  alt="Bánh xèo Miền Tây"
-                />
-              </div>
-              <div class="suggest-info">
-                <h3 class="suggest-name">Bánh xèo Miền Tây</h3>
-                <div class="suggest-price-row">
-                  <span class="s-price">65.000</span>
-                  <button class="btn-s-cart">
-                    <i class="fas fa-shopping-basket"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <div class="suggest-card">
-              <div class="suggest-img-wrap">
-                <div class="bg-circle"></div>
-                <img
-                  src="../assets/images/banhmithit.png"
-                  alt="Bánh mì thập cẩm"
-                />
-              </div>
-              <div class="suggest-info">
-                <h3 class="suggest-name">Bánh mì thập cẩm</h3>
-                <div class="suggest-price-row">
-                  <span class="s-price">35.000</span>
-                  <button class="btn-s-cart">
-                    <i class="fas fa-shopping-basket"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <div class="suggest-card">
-              <div class="suggest-img-wrap">
-                <div class="bg-circle"></div>
-                <img src="../assets/images/supcua.png" alt="Súp cua" />
-              </div>
-              <div class="suggest-info">
-                <h3 class="suggest-name">Súp cua trứng bắc thảo</h3>
-                <div class="suggest-price-row">
-                  <span class="s-price">60.000</span>
-                  <button class="btn-s-cart">
-                    <i class="fas fa-shopping-basket"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <div class="suggest-card">
-              <div class="suggest-img-wrap">
-                <div class="bg-circle"></div>
-                <img src="../assets/images/bundau2.png" alt="Bún đậu mắm tôm" />
-              </div>
-              <div class="suggest-info">
-                <h3 class="suggest-name">Bún đậu mắm tôm</h3>
-                <div class="suggest-price-row">
-                  <span class="s-price">110.000</span>
-                  <button class="btn-s-cart">
-                    <i class="fas fa-shopping-basket"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <div class="suggest-card">
-              <div class="suggest-img-wrap">
-                <div class="bg-circle"></div>
-                <img src="../assets/images/bunbo.png" alt="Bún bò" />
-              </div>
-              <div class="suggest-info">
-                <h3 class="suggest-name">Bún bò</h3>
-                <div class="suggest-price-row">
-                  <span class="s-price">75.000</span>
-                  <button class="btn-s-cart">
-                    <i class="fas fa-shopping-basket"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <div class="suggest-card">
-              <div class="suggest-img-wrap">
-                <div class="bg-circle"></div>
-                <img src="../assets/images/goicuonthit.png" alt="Gỏi cuốn" />
-              </div>
-              <div class="suggest-info">
-                <h3 class="suggest-name">Gỏi cuốn tôm thịt</h3>
-                <div class="suggest-price-row">
-                  <span class="s-price">50.000</span>
-                  <button class="btn-s-cart">
-                    <i class="fas fa-shopping-basket"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <div class="suggest-card">
-              <div class="suggest-img-wrap">
-                <div class="bg-circle"></div>
-                <img src="../assets/images/miquang2.png" alt="Mì Quảng" />
-              </div>
-              <div class="suggest-info">
-                <h3 class="suggest-name">Mì Quảng</h3>
-                <div class="suggest-price-row">
-                  <span class="s-price">70.000</span>
-                  <button class="btn-s-cart">
-                    <i class="fas fa-shopping-basket"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <div class="suggest-card">
-              <div class="suggest-img-wrap">
-                <div class="bg-circle"></div>
-                <img
-                  src="../assets/images/ganuong.png"
-                  alt="Gà nướng cơm lam"
-                />
-              </div>
-              <div class="suggest-info">
-                <h3 class="suggest-name">Gà nướng</h3>
-                <div class="suggest-price-row">
-                  <span class="s-price">250.000</span>
-                  <button class="btn-s-cart">
-                    <i class="fas fa-shopping-basket"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <div class="suggest-card">
-              <div class="suggest-img-wrap">
-                <div class="bg-circle"></div>
-                <img src="../assets/images/hutieu.png" alt="Hủ tiếu" />
-              </div>
-              <div class="suggest-info">
-                <h3 class="suggest-name">Hủ tiếu</h3>
-                <div class="suggest-price-row">
-                  <span class="s-price">70.000</span>
-                  <button class="btn-s-cart">
-                    <i class="fas fa-shopping-basket"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
+            <p style="text-align: center; width: 100%; color: #777">
+              Đang tải gợi ý...
+            </p>
           </div>
         </div>
       </section>
+
       <section class="daily-offer-section">
         <div class="container">
           <h2 class="offer-title">ƯU ĐÃI TRONG NGÀY</h2>
-
           <div class="offer-grid">
-            <div class="product-card">
-              <div class="card-img">
-                <img src="../assets/images/suonbi.png" alt="Cơm tấm sườn chả" />
-              </div>
-              <div class="card-info">
-                <div class="rating">
-                  <i class="fas fa-star"></i><i class="fas fa-star"></i
-                  ><i class="fas fa-star"></i><i class="fas fa-star"></i
-                  ><i class="fas fa-star"></i>
-                </div>
-                <h3 class="product-name">Cơm tấm sườn chả</h3>
-                <div class="price-row">
-                  <span class="price">59.000</span>
-                  <button class="add-cart-btn">
-                    <i class="fas fa-shopping-basket"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <div class="product-card">
-              <div class="card-img">
-                <img src="../assets/images/setcom.png" alt="Set cơm 3 người" />
-              </div>
-              <div class="card-info">
-                <div class="rating">
-                  <i class="fas fa-star"></i><i class="fas fa-star"></i
-                  ><i class="fas fa-star"></i><i class="fas fa-star"></i
-                  ><i class="fas fa-star"></i>
-                </div>
-                <h3 class="product-name">Set cơm 3 người</h3>
-                <div class="price-row">
-                  <span class="price">150.000</span>
-                  <button class="add-cart-btn">
-                    <i class="fas fa-shopping-basket"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <div class="product-card">
-              <div class="card-img">
-                <img
-                  src="../assets/images/banhmithit.png"
-                  alt="Bánh mì thập cẩm"
-                />
-              </div>
-              <div class="card-info">
-                <div class="rating">
-                  <i class="fas fa-star"></i><i class="fas fa-star"></i
-                  ><i class="fas fa-star"></i><i class="fas fa-star"></i
-                  ><i class="fas fa-star-half-alt"></i>
-                </div>
-                <h3 class="product-name">Bánh mì thập cẩm</h3>
-                <div class="price-row">
-                  <span class="price">27.000</span>
-                  <button class="add-cart-btn">
-                    <i class="fas fa-shopping-basket"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <div class="product-card">
-              <div class="card-img">
-                <img src="../assets/images/bundau2.png" alt="Bún đậu mắm tôm" />
-              </div>
-              <div class="card-info">
-                <div class="rating">
-                  <i class="fas fa-star"></i><i class="fas fa-star"></i
-                  ><i class="fas fa-star"></i><i class="fas fa-star"></i
-                  ><i class="fas fa-star"></i>
-                </div>
-                <h3 class="product-name">Bún đậu mắm tôm</h3>
-                <div class="price-row">
-                  <span class="price">99.000</span>
-                  <button class="add-cart-btn">
-                    <i class="fas fa-shopping-basket"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <div class="product-card">
-              <div class="card-img">
-                <img
-                  src="../assets/images/goicuonthit.png"
-                  alt="Gỏi cuốn tôm thịt"
-                />
-              </div>
-              <div class="card-info">
-                <div class="rating">
-                  <i class="fas fa-star"></i><i class="fas fa-star"></i
-                  ><i class="fas fa-star"></i><i class="fas fa-star"></i
-                  ><i class="far fa-star"></i>
-                </div>
-                <h3 class="product-name">Gỏi cuốn tôm thịt</h3>
-                <div class="price-row">
-                  <span class="price">30.000</span>
-                  <button class="add-cart-btn">
-                    <i class="fas fa-shopping-basket"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
+            <p style="text-align: center; width: 100%; color: #777">
+              Đang tìm ưu đãi...
+            </p>
           </div>
         </div>
       </section>
+
       <section class="dessert-section">
         <div class="container">
           <div class="section-header-center">
             <h2 class="dessert-title">MÁT LÀNH & NGỌT NGÀO</h2>
             <div class="title-underline-yellow"></div>
           </div>
-
           <div class="dessert-grid">
-            <div class="dessert-card">
-              <div class="dessert-img-wrap">
-                <div class="dessert-bg-shape"></div>
-                <img src="../assets/images/khucbach.png" alt="Chè khúc bạch" />
-              </div>
-              <div class="dessert-info">
-                <h3 class="dessert-name">Chè khúc bạch</h3>
-                <div class="dessert-price-row">
-                  <span class="d-price">40.000</span>
-                  <button class="btn-d-cart">
-                    <i class="fas fa-shopping-basket"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <div class="dessert-card">
-              <div class="dessert-img-wrap">
-                <div class="dessert-bg-shape"></div>
-                <img src="../assets/images/chechuoi.png" alt="Chè chuối" />
-              </div>
-              <div class="dessert-info">
-                <h3 class="dessert-name">Chè chuối</h3>
-                <div class="dessert-price-row">
-                  <span class="d-price">30.000</span>
-                  <button class="btn-d-cart">
-                    <i class="fas fa-shopping-basket"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <div class="dessert-card">
-              <div class="dessert-img-wrap">
-                <div class="dessert-bg-shape"></div>
-                <img src="../assets/images/tralai.png" alt="Trà hoa cúc" />
-              </div>
-              <div class="dessert-info">
-                <h3 class="dessert-name">Trà hoa cúc</h3>
-                <div class="dessert-price-row">
-                  <span class="d-price">35.000</span>
-                  <button class="btn-d-cart">
-                    <i class="fas fa-shopping-basket"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <div class="dessert-card">
-              <div class="dessert-img-wrap">
-                <div class="dessert-bg-shape"></div>
-                <img
-                  src="../assets/images/duongnhan.png"
-                  alt="Chè dưỡng nhan"
-                />
-              </div>
-              <div class="dessert-info">
-                <h3 class="dessert-name">Chè dưỡng nhan</h3>
-                <div class="dessert-price-row">
-                  <span class="d-price">35.000</span>
-                  <button class="btn-d-cart">
-                    <i class="fas fa-shopping-basket"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
+            <p style="text-align: center; width: 100%; color: #777">
+              Đang tải tráng miệng...
+            </p>
           </div>
         </div>
       </section>
-      <section class="more-menu-section">
-        <div class="container">
-          <h2 class="menu-section-title">Món Ngon Đề Xuất</h2>
 
-          <div class="product-grid">
-            <div class="product-card">
-              <div class="card-img">
-                <img src="../assets/images/xoiman.png" alt="Set cơm 2 người" />
-              </div>
-              <div class="card-info">
-                <div class="rating">
-                  <i class="fas fa-star"></i><i class="fas fa-star"></i
-                  ><i class="fas fa-star"></i><i class="fas fa-star"></i
-                  ><i class="far fa-star"></i>
-                </div>
-                <h3 class="product-name">Set cơm 2 người</h3>
-                <div class="price-row">
-                  <span class="price">70.000</span>
-                  <button class="add-cart-btn">
-                    <i class="fas fa-shopping-basket"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <div class="product-card">
-              <div class="card-img">
-                <img src="../assets/images/bokho.png" alt="Bò kho" />
-              </div>
-              <div class="card-info">
-                <div class="rating">
-                  <i class="fas fa-star"></i><i class="fas fa-star"></i
-                  ><i class="fas fa-star"></i><i class="fas fa-star"></i
-                  ><i class="fas fa-star-half-alt"></i>
-                </div>
-                <h3 class="product-name">Bò kho</h3>
-                <div class="price-row">
-                  <span class="price">90.000</span>
-                  <button class="add-cart-btn">
-                    <i class="fas fa-shopping-basket"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <div class="product-card">
-              <div class="card-img">
-                <img
-                  src="../assets/images/banhxeo.png"
-                  alt="Bánh xèo tôm thịt"
-                />
-              </div>
-              <div class="card-info">
-                <div class="rating">
-                  <i class="fas fa-star"></i><i class="fas fa-star"></i
-                  ><i class="fas fa-star"></i><i class="fas fa-star"></i
-                  ><i class="far fa-star"></i>
-                </div>
-                <h3 class="product-name">Bánh xèo tôm thịt</h3>
-                <div class="price-row">
-                  <span class="price">60.000</span>
-                  <button class="add-cart-btn">
-                    <i class="fas fa-shopping-basket"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <div class="product-card">
-              <div class="card-img">
-                <img src="../assets/images/vitquay.png" alt="Vịt quay" />
-              </div>
-              <div class="card-info">
-                <div class="rating">
-                  <i class="fas fa-star"></i><i class="fas fa-star"></i
-                  ><i class="fas fa-star"></i><i class="fas fa-star"></i
-                  ><i class="fas fa-star"></i>
-                </div>
-                <h3 class="product-name">Vịt quay</h3>
-                <div class="price-row">
-                  <span class="price">250.000</span>
-                  <button class="add-cart-btn">
-                    <i class="fas fa-shopping-basket"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <div class="product-card">
-              <div class="card-img">
-                <img src="../assets/images/goitom.png" alt="Phở gà" />
-              </div>
-              <div class="card-info">
-                <div class="rating">
-                  <i class="fas fa-star"></i><i class="fas fa-star"></i
-                  ><i class="fas fa-star"></i><i class="fas fa-star"></i
-                  ><i class="far fa-star"></i>
-                </div>
-                <h3 class="product-name">Phở gà</h3>
-                <div class="price-row">
-                  <span class="price">80.000</span>
-                  <button class="add-cart-btn">
-                    <i class="fas fa-shopping-basket"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <div class="product-card">
-              <div class="card-img">
-                <img src="../assets/images/trasen.png" alt="Trà sen" />
-              </div>
-              <div class="card-info">
-                <div class="rating">
-                  <i class="fas fa-star"></i><i class="fas fa-star"></i
-                  ><i class="fas fa-star"></i><i class="fas fa-star"></i
-                  ><i class="fas fa-star"></i>
-                </div>
-                <h3 class="product-name">Trà sen</h3>
-                <div class="price-row">
-                  <span class="price">40.000</span>
-                  <button class="add-cart-btn">
-                    <i class="fas fa-shopping-basket"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <div class="product-card">
-              <div class="card-img">
-                <img src="../assets/images/dautay.png" alt="Bánh Dâu" />
-              </div>
-              <div class="card-info">
-                <div class="rating">
-                  <i class="fas fa-star"></i><i class="fas fa-star"></i
-                  ><i class="fas fa-star"></i><i class="fas fa-star"></i
-                  ><i class="far fa-star"></i>
-                </div>
-                <h3 class="product-name">Bánh Dâu</h3>
-                <div class="price-row">
-                  <span class="price">60.000</span>
-                  <button class="add-cart-btn">
-                    <i class="fas fa-shopping-basket"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <div class="product-card">
-              <div class="card-img">
-                <img src="../assets/images/nuocchanh.png" alt="Trà chanh" />
-              </div>
-              <div class="card-info">
-                <div class="rating">
-                  <i class="fas fa-star"></i><i class="fas fa-star"></i
-                  ><i class="fas fa-star"></i><i class="fas fa-star"></i
-                  ><i class="fas fa-star-half-alt"></i>
-                </div>
-                <h3 class="product-name">Trà chanh</h3>
-                <div class="price-row">
-                  <span class="price">30.000</span>
-                  <button class="add-cart-btn">
-                    <i class="fas fa-shopping-basket"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <section class="more-menu-section" style="display: none"></section>
     </main>
     <div id="footer-placeholder"></div>
 

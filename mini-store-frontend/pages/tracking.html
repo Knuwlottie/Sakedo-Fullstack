@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Theo Dõi Đơn Hàng - Sakedo</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;600;700&family=Fruktur&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+
+    <link rel="stylesheet" href="../css/base/variables.css" />
+    <link rel="stylesheet" href="../css/pages/global.css" />
+    <link rel="stylesheet" href="../css/pages/tracking.css" />
+
+    <link rel="stylesheet" href="../css/components/header.css" />
+    <link rel="stylesheet" href="../css/components/footer.css" />
+  </head>
+  <body>
+    <div id="header-placeholder"></div>
+
+    <main class="tracking-page">
+      <div class="container">
+        <div class="tracking-card">
+          <div class="tracking-header">
+            <h1 class="order-title">
+              Đơn Hàng <span id="display-id">#ORD-???</span>
+            </h1>
+            <p class="order-subtitle">
+              Dự kiến giao hàng: <span id="delivery-time">30 phút</span>
+            </p>
+          </div>
+
+          <div class="progress-track">
+            <div class="progress-bg-line"></div>
+            <div class="progress-active-line" id="progress-line"></div>
+
+            <div class="step" id="step-1">
+              <div class="step-icon"><i class="fas fa-file-invoice"></i></div>
+              <div class="step-text">Chờ xác nhận</div>
+              <div class="step-time">10:30</div>
+            </div>
+
+            <div class="step" id="step-2">
+              <div class="step-icon"><i class="fas fa-fire-alt"></i></div>
+              <div class="step-text">Đang chuẩn bị</div>
+              <div class="step-time">10:35</div>
+            </div>
+
+            <div class="step" id="step-3">
+              <div class="step-icon"><i class="fas fa-motorcycle"></i></div>
+              <div class="step-text">Đang giao hàng</div>
+              <div class="step-time">--:--</div>
+            </div>
+
+            <div class="step" id="step-4">
+              <div class="step-icon"><i class="fas fa-check-circle"></i></div>
+              <div class="step-text">Đã nhận đơn</div>
+              <div class="step-time">--:--</div>
+            </div>
+          </div>
+
+          <div class="info-grid">
+            <div class="info-box driver-box">
+              <h3><i class="fas fa-user-shield"></i> Thông Tin Tài Xế</h3>
+              <div class="driver-profile" id="driver-info-container">
+                <p class="waiting-text">Đang tìm tài xế gần bạn...</p>
+              </div>
+            </div>
+
+            <div class="info-box detail-box">
+              <h3><i class="fas fa-receipt"></i> Chi Tiết Đơn Hàng</h3>
+              <ul class="item-list">
+                <li>
+                  <span>1x Cơm Gà Xối Mỡ</span>
+                  <span>55.000đ</span>
+                </li>
+                <li>
+                  <span>1x Trà Đào Cam Sả</span>
+                  <span>45.000đ</span>
+                </li>
+                <li class="total-row">
+                  <span>Tổng cộng</span>
+                  <span class="total-price">100.000đ</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="tracking-actions">
+            <a href="profile.html" class="btn-back"
+              ><i class="fas fa-arrow-left"></i> Quay lại</a
+            >
+            <button class="btn-contact-support">
+              <i class="fas fa-headset"></i> Hỗ trợ
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="../js/components/header.js"></script>
+    <script src="../js/components/footer.js"></script>
+    <script src="../js/pages/tracking.js"></script>
+  </body>
+</html>

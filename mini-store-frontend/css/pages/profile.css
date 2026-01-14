@@ -92,6 +92,7 @@
   padding: 5px;
   background: linear-gradient(135deg, #ffd200 0%, #d8b26e 50%, #d8b26e 100%);
   box-shadow: 0 10px 30px rgba(216, 178, 110, 0.3);
+  position: relative; /* Thêm position relative để chứa avatar-upload */
 }
 
 .avatar-frame img {
@@ -100,6 +101,37 @@
   border-radius: 50%;
   object-fit: cover;
   border: 4px solid #fff;
+}
+
+/* Thêm CSS cho Avatar Upload (nút máy ảnh khi edit) */
+.avatar-upload {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  background: rgba(0, 0, 0, 0.5);
+  border-bottom-left-radius: 80px; /* Bo góc dưới cho khớp */
+  border-bottom-right-radius: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: 0.3s;
+  opacity: 0; /* Mặc định ẩn */
+  pointer-events: none;
+}
+
+/* Hiển thị khi có class active hoặc style display flex từ JS */
+.avatar-upload[style*="display: flex"] {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.avatar-upload:hover {
+  background: rgba(0, 0, 0, 0.7);
 }
 
 /* Form Column */
@@ -137,7 +169,7 @@
   padding: 14px 18px;
   border: 1px solid #e0e0e0;
   border-radius: 10px;
-  font-family: "Consolas", "Monaco", monospace;
+  font-family: "Consolas", "Monaco", monospace; /* Hoặc font chữ chính của web */
   font-size: 1rem;
   color: #333;
   background-color: #fff;
@@ -155,6 +187,14 @@
 .form-group textarea:read-only {
   background-color: #fafafa;
   cursor: default;
+  border-color: transparent; /* Ẩn viền khi readonly */
+}
+/* Trạng thái Edit (Đang sửa - ghi đè style readonly) */
+.form-group input:not([readonly]),
+.form-group textarea:not([readonly]) {
+  border-color: #d8b26e;
+  background-color: #fff;
+  box-shadow: 0 0 0 3px rgba(216, 178, 110, 0.1);
 }
 
 .form-group textarea {
@@ -174,6 +214,203 @@
   right: 15px;
   font-size: 0.8rem;
   color: #999;
+}
+
+/* =========================================
+   ORDER HISTORY SECTION (MỤC ĐƠN HÀNG - MỚI THÊM)
+   ========================================= */
+.view-all-link {
+  color: #999;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.view-all-link:hover {
+  color: #d8b26e; /* Màu vàng */
+}
+
+.order-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.order-item {
+  border: 1px solid #eee;
+  border-radius: 12px;
+  padding: 20px;
+  transition: 0.3s;
+  background: #fff;
+}
+
+/* Hiệu ứng nổi bật cho đơn đang xử lý */
+.order-item.active-process {
+  border: 2px solid #d8b26e; /* Viền vàng */
+  box-shadow: 0 5px 15px rgba(214, 178, 104, 0.15);
+}
+
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px dashed #eee;
+}
+
+.order-left {
+  display: flex;
+  flex-direction: column; /* Hoặc row tùy thiết kế, ở đây column cho gọn mobile */
+}
+
+.order-id {
+  font-family: "Epilogue", sans-serif; /* Hoặc font chính */
+  font-weight: 800;
+  color: #333;
+  margin-right: 10px;
+  font-size: 1rem;
+}
+
+.order-date {
+  font-size: 0.85rem;
+  color: #888;
+}
+
+/* Badge trạng thái */
+.status-badge {
+  font-size: 0.8rem;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.status-delivering {
+  background-color: #fff8e1;
+  color: #d8b26e; /* Vàng */
+}
+
+.status-success {
+  background-color: #e6fffa;
+  color: #28a745; /* Xanh lá */
+}
+
+/* Body đơn hàng */
+.product-preview {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.product-preview img {
+  width: 60px;
+  height: 60px;
+  border-radius: 10px;
+  object-fit: cover;
+  background-color: #f0f0f0; /* Màu nền giữ chỗ ảnh */
+}
+
+.product-info-short h4 {
+  margin: 0 0 5px 0;
+  font-size: 1rem;
+  color: #333;
+  font-weight: 600;
+}
+
+.product-info-short p {
+  margin: 0;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.product-info-short b {
+  color: #d32f2f; /* Giá màu đỏ */
+}
+
+/* Thanh tiến trình mini */
+.mini-progress-bar {
+  width: 100%;
+  height: 6px;
+  background: #f0f0f0;
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.bar-fill {
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    #d8b26e,
+    #f3274c
+  ); /* Gradient Vàng -> Đỏ */
+  border-radius: 3px;
+  animation: loading 2s infinite linear;
+  background-size: 200% 100%;
+}
+
+@keyframes loading {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
+
+.status-text-mini {
+  font-size: 0.85rem;
+  color: #d8b26e;
+  font-weight: 600;
+  font-style: italic;
+  margin: 0;
+}
+
+/* Footer nút bấm */
+.order-footer {
+  margin-top: 15px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn-track-order {
+  background-color: #d8b26e;
+  color: #fff;
+  padding: 10px 25px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 700;
+  transition: 0.3s;
+  box-shadow: 0 4px 10px rgba(214, 178, 104, 0.3);
+  font-size: 0.9rem;
+}
+
+.btn-track-order:hover {
+  background-color: #c5a059;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(214, 178, 104, 0.4);
+}
+
+.btn-reorder {
+  background: #fff;
+  border: 1px solid #ddd;
+  padding: 8px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  color: #555;
+  transition: 0.3s;
+  font-size: 0.9rem;
+}
+
+.btn-reorder:hover {
+  border-color: #d8b26e;
+  color: #d8b26e;
 }
 
 /* --- SECURITY SECTION --- */
@@ -281,9 +518,9 @@
   color: #fff;
 }
 
+/* Thêm icon toggle */
 .btn-security.btn-toggle.active i::before {
-  content: "\f205";
-  /* fa-toggle-on */
+  content: "\f205"; /* fa-toggle-on */
 }
 
 /* --- RESPONSIVE --- */
@@ -322,14 +559,30 @@
     width: 100%;
   }
 
+  /* Responsive cho Order Item */
+  .order-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .status-badge {
+    align-self: flex-start;
+  }
+  .btn-track-order {
+    width: 100%;
+    text-align: center;
+  }
+
   .security-item {
     flex-direction: column;
     gap: 15px;
     text-align: center;
+    align-items: center; /* Căn giữa */
   }
 
   .security-info {
     flex-direction: column;
+    align-items: center;
   }
 }
 
@@ -363,17 +616,18 @@
   cursor: text;
 }
 
-.btn-edit.btn-save-mode {
+.btn-edit.active {
+  /* Đổi tên class cho khớp JS */
   background-color: #4caf50;
   box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
 }
 
-.btn-edit.btn-save-mode:hover {
+.btn-edit.active:hover {
   background-color: #45a049;
   box-shadow: 0 8px 20px rgba(76, 175, 80, 0.4);
 }
 
-/* --- NOTIFICATION --- */
+/* --- NOTIFICATION (Có thể dùng lại hoặc xóa nếu không cần) --- */
 .profile-notification {
   position: fixed;
   top: 100px;
@@ -424,7 +678,8 @@
   transition: all 0.3s ease;
 }
 
-.modal-overlay.active {
+.modal-overlay.open {
+  /* Đổi class active thành open cho khớp JS */
   opacity: 1;
   visibility: visible;
 }
@@ -443,7 +698,7 @@
   transition: transform 0.3s ease;
 }
 
-.modal-overlay.active .modal-content {
+.modal-overlay.open .modal-content {
   transform: translateY(0);
 }
 
@@ -467,6 +722,8 @@
 .modal-header {
   display: flex;
   align-items: center;
+  justify-content: center; /* Căn giữa header modal */
+  flex-direction: column; /* Icon trên text */
   gap: 12px;
   margin-bottom: 30px;
 }
@@ -554,6 +811,7 @@
   color: #888;
   display: block;
   margin-bottom: 5px;
+  text-align: right;
 }
 
 .strength-bar {
@@ -570,26 +828,7 @@
   border-radius: 2px;
   transition: all 0.3s ease;
 }
-
-.strength-fill.weak {
-  width: 25%;
-  background-color: #f44336;
-}
-
-.strength-fill.fair {
-  width: 50%;
-  background-color: #ff9800;
-}
-
-.strength-fill.good {
-  width: 75%;
-  background-color: #d8b26e;
-}
-
-.strength-fill.strong {
-  width: 100%;
-  background-color: #4caf50;
-}
+/* Các class màu sắc cho thanh strength được xử lý bằng JS inline style hoặc class helper */
 
 /* Password Requirements */
 .password-requirements {
@@ -610,6 +849,9 @@
   list-style: none;
   padding: 0;
   margin: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Chia 2 cột */
+  gap: 10px;
 }
 
 .password-requirements li {
@@ -618,23 +860,33 @@
   gap: 10px;
   font-size: 0.9rem;
   color: #666;
-  padding: 5px 0;
+  padding: 0;
 }
 
 .req-dot {
-  width: 10px;
-  height: 10px;
+  width: 8px; /* Nhỏ lại chút */
+  height: 8px;
   border-radius: 50%;
   background-color: #ccc;
   transition: background-color 0.3s ease;
+  display: inline-block;
 }
 
+/* JS sẽ thêm class valid vào li */
 .password-requirements li.valid .req-dot {
-  background-color: #4caf50;
+  /* Class .req-dot bên trong li.valid nhưng ở đây dùng i.fas.fa-circle */
 }
-
+/* Style lại cho icon tròn thay vì div */
+.password-requirements li i.fas.fa-circle {
+  font-size: 0.5rem;
+  color: #ddd;
+}
+.password-requirements li.valid i.fas.fa-circle {
+  color: #4caf50;
+}
 .password-requirements li.valid {
   color: #4caf50;
+  font-weight: 600;
 }
 
 /* Modal Buttons */
