@@ -62,13 +62,12 @@ function setupCharCounter() {
 // 3. XỬ LÝ GỬI FORM (GỌI API BACKEND)
 // ============================================================
 function setupFormSubmit() {
-  // Tìm form theo ID (Lưu ý: Bên HTML phải có id="contact-form")
   const form = document.getElementById("contact-form");
   const submitBtn = document.getElementById("btn-submit-contact");
 
   if (!form) {
     console.error(
-      "🔴 LỖI: Không tìm thấy <form id='contact-form'>. Vui lòng kiểm tra file HTML!"
+      "🔴 LỖI: Không tìm thấy <form id='contact-form'>. Vui lòng kiểm tra file HTML!",
     );
     return;
   }
@@ -76,6 +75,25 @@ function setupFormSubmit() {
   form.addEventListener("submit", async function (e) {
     // QUAN TRỌNG: Chặn hành vi reload trang mặc định
     e.preventDefault();
+
+    // 🔥 CHẶN QUYỀN KHÁCH (MỚI THÊM)
+    if (typeof window.checkLoginRequired === "function") {
+      if (!window.checkLoginRequired()) return;
+    } else {
+      // Fallback nếu hàm check chưa load kịp
+      const user = JSON.parse(localStorage.getItem("user"));
+      if (user && user.role === "guest") {
+        if (
+          confirm(
+            "Chức năng gửi liên hệ chỉ dành cho thành viên. Bạn có muốn đăng ký không?",
+          )
+        ) {
+          localStorage.removeItem("user");
+          window.location.href = "auth.html";
+        }
+        return;
+      }
+    }
 
     // 1. Thu thập dữ liệu từ các ô input
     const formData = {
@@ -111,7 +129,7 @@ function setupFormSubmit() {
       if (response.ok) {
         // Thành công
         alert(
-          `✅ Cảm ơn ${formData.name}! Chúng tôi đã nhận được tin nhắn và sẽ phản hồi sớm nhất.`
+          `✅ Cảm ơn ${formData.name}! Chúng tôi đã nhận được tin nhắn và sẽ phản hồi sớm nhất.`,
         );
 
         // Reset form về trắng
@@ -129,7 +147,7 @@ function setupFormSubmit() {
       // Lỗi mạng hoặc Server chưa bật
       console.error("🔴 Lỗi kết nối:", error);
       alert(
-        "⚠️ Không thể kết nối đến máy chủ. Vui lòng kiểm tra kết nối mạng!"
+        "⚠️ Không thể kết nối đến máy chủ. Vui lòng kiểm tra kết nối mạng!",
       );
     } finally {
       // 5. Trả nút bấm về trạng thái ban đầu (dù thành công hay thất bại)

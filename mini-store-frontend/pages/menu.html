@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="vi">
   <head>
     <meta charset="UTF-8" />
@@ -22,6 +22,7 @@
   </head>
   <body>
     <div id="header-placeholder"></div>
+
     <main>
       <section class="menu-hero">
         <div class="container">
@@ -35,7 +36,13 @@
             </div>
             <div class="menu-hero-image">
               <div class="img-box">
-                <img src="../assets/images/setga.png" alt="Combo Gà 4 món" />
+                <img
+                  src="../assets/images/setga.png"
+                  alt="Combo Gà 4 món"
+                  onerror="
+                    this.src = 'https://placehold.co/600x400?text=Combo+Ga'
+                  "
+                />
                 <div class="discount-badge">
                   <span class="percent">20%</span>
                   <span class="text">Giảm giá</span>
@@ -50,9 +57,17 @@
         <div class="container">
           <h2 class="menu-section-title">BEST SELLER</h2>
           <div class="product-grid">
-            <p style="text-align: center; width: 100%; color: #777">
-              Đang tải món ngon...
-            </p>
+            <div
+              style="
+                text-align: center;
+                width: 100%;
+                padding: 40px;
+                color: #999;
+              "
+            >
+              <i class="fas fa-spinner fa-spin fa-2x"></i>
+              <p style="margin-top: 10px">Đang tải món ngon...</p>
+            </div>
           </div>
         </div>
       </section>
@@ -66,7 +81,13 @@
           <div class="services-grid">
             <div class="service-item">
               <div class="service-img-frame">
-                <img src="../assets/images/cvanphong.png" alt="Cơm văn phòng" />
+                <img
+                  src="../assets/images/cvanphong.png"
+                  alt="Cơm văn phòng"
+                  onerror="
+                    this.src = 'https://placehold.co/200x200?text=Com+VP'
+                  "
+                />
               </div>
               <h3 class="service-name">Cơm văn phòng</h3>
               <p class="service-desc">Tiện lợi, đầy đủ dinh dưỡng</p>
@@ -76,6 +97,9 @@
                 <img
                   src="../assets/images/comgiadinh.png"
                   alt="Mâm Cơm Gia Đình"
+                  onerror="
+                    this.src = 'https://placehold.co/200x200?text=Com+Gia+Dinh'
+                  "
                 />
               </div>
               <h3 class="service-name">Mâm Cơm Gia Đình</h3>
@@ -83,7 +107,13 @@
             </div>
             <div class="service-item">
               <div class="service-img-frame">
-                <img src="../assets/images/tiecnho.png" alt="Đặt Tiệc Nhỏ" />
+                <img
+                  src="../assets/images/tiecnho.png"
+                  alt="Đặt Tiệc Nhỏ"
+                  onerror="
+                    this.src = 'https://placehold.co/200x200?text=Tiec+Nho'
+                  "
+                />
               </div>
               <h3 class="service-name">Đặt Tiệc Nhỏ</h3>
               <p class="service-desc">Nhận đặt tiệc, liên hoan</p>
@@ -98,22 +128,14 @@
             <h2 class="suggestion-title">Gợi Ý Cho Bữa Ăn</h2>
             <div class="title-underline-yellow"></div>
           </div>
-          <div class="suggestion-grid">
-            <p style="text-align: center; width: 100%; color: #777">
-              Đang tải gợi ý...
-            </p>
-          </div>
+          <div class="suggestion-grid"></div>
         </div>
       </section>
 
       <section class="daily-offer-section">
         <div class="container">
           <h2 class="offer-title">ƯU ĐÃI TRONG NGÀY</h2>
-          <div class="offer-grid">
-            <p style="text-align: center; width: 100%; color: #777">
-              Đang tìm ưu đãi...
-            </p>
-          </div>
+          <div class="offer-grid"></div>
         </div>
       </section>
 
@@ -123,16 +145,13 @@
             <h2 class="dessert-title">MÁT LÀNH & NGỌT NGÀO</h2>
             <div class="title-underline-yellow"></div>
           </div>
-          <div class="dessert-grid">
-            <p style="text-align: center; width: 100%; color: #777">
-              Đang tải tráng miệng...
-            </p>
-          </div>
+          <div class="dessert-grid"></div>
         </div>
       </section>
 
       <section class="more-menu-section" style="display: none"></section>
     </main>
+
     <div id="footer-placeholder"></div>
 
     <script src="../js/components/header.js"></script>

@@ -13,4 +13,6 @@ public interface OrderRepository extends MongoRepository<Order, String> {
     List<Order> findByStatusIn(List<Integer> statuses);
 
     List<Order> findByStatus(int status);
+
+    List<Order> findByUserIdOrderByCreatedAtDesc(String userId);
 }

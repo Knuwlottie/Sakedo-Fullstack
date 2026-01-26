@@ -1,116 +1,175 @@
 .header {
-    background-color: #fff;
-    /* 3. CHIỀU CAO GỌN LẠI: Đặt cố định 70px và bỏ padding thừa */
-    height: 70px;
-    display: flex;
-    align-items: center;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    border-bottom: 1px solid #eee;
+  background-color: #fff;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9999;
+
+  border-bottom: 1px solid #eee;
+  transition: all 0.3s ease;
 }
 
 .header-inner {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  padding: 0 15px;
+  width: 100%;
 }
 
 /* 1. LOGO  */
 .logo img {
-    height: 68px; 
-    width: auto;
-    object-fit: contain;
-    display: block; 
+  height: 55px;
+  width: auto;
+  object-fit: contain;
+  display: block;
 }
 
-/* 2. KHOẢNG CÁCH MENU*/
 .nav-list {
-    display: flex;
-    list-style: none;
-    gap: 40px; 
-    margin: 0;
-    padding: 0;
+  display: flex;
+  list-style: none;
+  gap: 30px;
+  margin: 0;
+  padding: 0;
 }
 
 .nav-link {
-    text-decoration: none;
-    color: #1A1A1A; 
-    font-weight: 700; 
-    font-size: 15px;
-    text-transform: uppercase;
-    transition: 0.2s;
-    display: flex;
-    align-items: center;
-    letter-spacing: 0.5px;
+  text-decoration: none;
+  color: #1a1a1a;
+  font-weight: 700;
+  font-size: 15px;
+  text-transform: uppercase;
+  transition: 0.2s;
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.5px;
 }
 
-/* Hiệu ứng hover màu vàng */
-.nav-link:hover, .nav-link.active {
-    color: #D8B26E;
+.nav-link:hover,
+.nav-link.active {
+  color: #d8b26e;
 }
 
-/* Icon mũi tên nhỏ ở Trang Chủ */
 .nav-link i {
-    font-size: 11px;
-    margin-left: 6px;
-    margin-top: -2px; /* Canh chỉnh vị trí mũi tên */
-    color: #D8B26E;
+  font-size: 11px;
+  margin-left: 6px;
+  margin-top: -2px;
+  color: #d8b26e;
 }
 
-/* ================= PHẦN BÊN PHẢI (Đúng chuẩn Figma) ================= */
 .header-actions {
-    display: flex;
-    align-items: center;
-    gap: 30px; /* Tăng khoảng cách giữa giỏ hàng và nút */
+  display: flex;
+  align-items: center;
+  gap: 25px; /* Tăng khoảng cách giữa giỏ hàng và nút */
 }
 
-/* Giỏ hàng màu xanh lá */
+/* Giỏ hàng */
 .cart-btn {
-    position: relative;
-    color: #D8B26E;
-    font-size: 22px;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
+  position: relative;
+  color: #d8b26e !important; /* Ép màu vàng */
+  font-size: 22px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
 }
 
 /* Số lượng: Nền đen chữ trắng */
 .cart-count {
-    position: absolute;
-    top: -7px;
-    right: -10px;
-    background: #000;
-    color: #fff;
-    font-size: 10px;
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: bold;
+  position: absolute;
+  top: -8px;
+  right: -10px;
+  background: #000;
+  color: #fff;
+  font-size: 10px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  border: 2px solid #fff;
 }
 
 /* Nút Đăng Nhập: Nền vàng CHỮ TRẮNG */
 .btn-primary {
-    background-color: #D8B26E; /* Màu vàng */
-    color: #FFFFFF !important; /* BẮT BUỘC CHỮ TRẮNG */
-    padding: 10px 28px; /* Padding gọn gàng */
-    border-radius: 4px;
-    font-weight: 700;
-    font-size: 14px;
-    text-decoration: none;
-    text-transform: uppercase;
-    border: none;
-    box-shadow: 0 4px 6px rgba(216, 178, 110, 0.2);
-    transition: 0.3s;
-    white-space: nowrap; /* Giữ chữ trên 1 dòng */
+  background-color: #d8b26e; /* Màu vàng */
+  color: #ffffff !important; /* BẮT BUỘC CHỮ TRẮNG */
+  padding: 10px 24px; /* Padding gọn gàng */
+  border-radius: 4px;
+  font-weight: 700;
+  font-size: 14px;
+  text-decoration: none;
+  text-transform: uppercase;
+  border: none;
+  box-shadow: 0 4px 6px rgba(216, 178, 110, 0.2);
+  transition: 0.3s;
+  white-space: nowrap; /* Giữ chữ trên 1 dòng */
 }
 
 .btn-primary:hover {
-    background-color: #c59f5e; /* Màu vàng tối hơn khi hover */
-    transform: translateY(-1px);
+  background-color: #c59f5e; /* Màu vàng tối hơn khi hover */
+  transform: translateY(-1px);
+}
+
+/* =================================================================
+   🔥 PHẦN MỚI: ĐỊNH DẠNG CHO USER ĐĂNG NHẬP (QUAN TRỌNG)
+   (Phần này giúp ảnh không bị to chà bá)
+   ================================================================= */
+
+.user-dropdown {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  position: relative;
+}
+
+/* Khung tròn chứa ảnh - Kích thước cố định */
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden; /* Cắt bỏ phần thừa */
+  border: 2px solid #d8b26e; /* Viền vàng */
+  flex-shrink: 0; /* Không cho bị bóp méo */
+  background: #eee;
+}
+
+/* Ảnh bên trong - Ép vừa khung */
+.user-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Giữ tỷ lệ ảnh đẹp */
+  display: block;
+}
+
+/* Tên người dùng */
+.user-name {
+  font-weight: 700;
+  font-size: 14px;
+  color: #333;
+  max-width: 120px; /* Giới hạn độ dài tên */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Nút đăng xuất */
+.btn-logout {
+  margin-left: 8px;
+  color: #999;
+  font-size: 14px;
+  transition: 0.2s;
+}
+
+.btn-logout:hover {
+  color: #d32f2f; /* Đỏ khi hover nút thoát */
 }

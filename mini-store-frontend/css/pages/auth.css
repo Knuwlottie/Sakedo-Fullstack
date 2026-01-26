@@ -5,7 +5,8 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; /* Hoặc font bạn thích */
+  font-family:
+    "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; /* Hoặc font bạn thích */
 }
 
 body {
@@ -149,7 +150,9 @@ body {
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
 }
 
 .btn-submit:hover {
@@ -206,4 +209,190 @@ body {
   .auth-form-wrapper {
     padding: 20px;
   }
+}
+/* --- CSS MỚI CHO SOCIAL & GUEST --- */
+
+/* Style lại icon social thành nút tròn đẹp hơn */
+.social-icons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+.btn-social {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  border: 1px solid #ddd;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1.2rem;
+}
+
+.btn-social.google {
+  color: #db4437;
+  border-color: #db4437;
+}
+.btn-social.facebook {
+  color: #4267b2;
+  border-color: #4267b2;
+}
+
+.btn-social:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Style nút Khách */
+.btn-guest {
+  background: none;
+  border: 1px solid #777;
+  padding: 8px 20px;
+  border-radius: 30px;
+  color: #555;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-guest:hover {
+  background: #333;
+  color: #fff;
+  border-color: #333;
+}
+/* Style cho 2 nút tùy chọn mới */
+.btn-alt {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 0.95rem;
+}
+
+/* Nút Google */
+.btn-alt.google-check {
+  color: #db4437;
+  border-color: #db4437;
+}
+.btn-alt.google-check:hover {
+  background: #fff5f5;
+  box-shadow: 0 3px 8px rgba(219, 68, 55, 0.2);
+}
+
+/* Nút Khách */
+.btn-alt.guest-mode {
+  color: #555;
+  border-color: #555;
+}
+.btn-alt.guest-mode:hover {
+  background: #333;
+  color: #fff;
+  border-color: #333;
+}
+/* --- GIAO DIỆN SOCIAL LOGIN (BẢN UPDATE: GOOGLE ONLY) --- */
+
+.social-login-wrapper {
+  margin-top: 30px;
+  width: 100%;
+}
+
+/* Đường kẻ ngang */
+.divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 25px;
+  color: #999;
+  font-size: 0.85rem;
+}
+.divider::before,
+.divider::after {
+  content: "";
+  flex: 1;
+  border-bottom: 1px solid #eee;
+}
+.divider::before {
+  margin-right: 10px;
+}
+.divider::after {
+  margin-left: 10px;
+}
+
+/* Khu vực nút bấm - Căn giữa tuyệt đối */
+.social-buttons {
+  display: flex;
+  justify-content: center; /* Căn giữa */
+  margin-bottom: 25px;
+}
+
+/* Nút Google tròn to đẹp */
+.btn-social {
+  width: 55px; /* Tăng kích thước lên xíu cho nổi bật vì đứng 1 mình */
+  height: 55px;
+  border-radius: 50%; /* Tròn vo */
+  border: 1px solid #eee;
+  background: #fff;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+/* Màu sắc Google */
+.btn-social.google {
+  color: #db4437;
+  border-color: #db4437;
+}
+.btn-social.google:hover {
+  background-color: #db4437;
+  color: #fff;
+  transform: translateY(-5px) scale(1.1); /* Hiệu ứng bay lên và phóng to nhẹ */
+  box-shadow: 0 10px 25px rgba(219, 68, 55, 0.3);
+}
+
+/* Link Khách (Dưới cùng) */
+.guest-option {
+  text-align: center;
+}
+
+.btn-link-guest {
+  background: none;
+  border: none;
+  font-size: 0.9rem;
+  color: #777;
+  cursor: pointer;
+  transition: 0.3s;
+  padding: 5px 10px;
+}
+
+.btn-link-guest strong {
+  color: #d8b26e; /* Màu vàng Sakedo */
+  font-weight: 700;
+  margin-left: 3px;
+}
+
+.btn-link-guest:hover {
+  color: #333;
+}
+.btn-link-guest:hover strong {
+  text-decoration: underline;
 }

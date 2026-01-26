@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="vi">
   <head>
     <meta charset="UTF-8" />
@@ -6,16 +6,19 @@
     <title>Chi Tiết Món Ăn - Sakedo</title>
 
     <link
-      href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;600;700;800&family=Fruktur&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;600;700;800&family=Fruktur&family=Pacifico&display=swap"
       rel="stylesheet"
     />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
     />
+
     <link rel="stylesheet" href="../css/base/variables.css" />
     <link rel="stylesheet" href="../css/pages/global.css" />
-    <link rel="stylesheet" href="../css/base/header.css" />
+
+    <link rel="stylesheet" href="../css/components/header.css" />
+    <link rel="stylesheet" href="../css/components/footer.css" />
 
     <link rel="stylesheet" href="../css/pages/product-detail.css" />
   </head>
@@ -32,14 +35,14 @@
           <h1 id="detail-name">Đang tải...</h1>
 
           <div class="rating-overview">
-            <span class="review-stars"
-              ><i class="fas fa-star"></i><i class="fas fa-star"></i
-              ><i class="fas fa-star"></i><i class="fas fa-star"></i
-              ><i class="fas fa-star"></i
-            ></span>
-            <span style="color: #777; margin-left: 10px; font-size: 0.9rem"
-              >(Đánh giá khách hàng)</span
-            >
+            <span class="review-stars">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i>
+              <i class="fas fa-star"></i><i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </span>
+            <span style="color: #777; margin-left: 10px; font-size: 0.9rem">
+              (Đánh giá khách hàng)
+            </span>
           </div>
 
           <div class="product-price" id="detail-price">...</div>
@@ -47,9 +50,9 @@
           <p class="product-desc" id="detail-desc">...</p>
 
           <div class="note-box">
-            <label class="note-label"
-              ><i class="fas fa-pen"></i> Ghi chú cho món ăn:</label
-            >
+            <label class="note-label">
+              <i class="fas fa-pen"></i> Ghi chú cho món ăn:
+            </label>
             <textarea
               id="order-note"
               class="note-input"
@@ -127,6 +130,10 @@
       </div>
     </main>
 
+    <div id="footer-placeholder"></div>
+
+    <script src="../js/components/header.js"></script>
+    <script src="../js/components/footer.js"></script>
     <script src="../js/pages/global.js"></script>
     <script src="../js/pages/product-detail.js"></script>
   </body>

@@ -1,7 +1,60 @@
 document.addEventListener("DOMContentLoaded", function () {
   console.log(
-    "--> Global Page JS đã tải: Chỉ xử lý nội dung trang chủ (Slider, API, Tab)."
+    "--> Global Page JS đã tải: Chỉ xử lý nội dung trang chủ (Slider, API, Tab).",
   );
+
+  // ============================================================
+  // 🔥 MỚI THÊM: LOGIC DỌN DẸP GIỎ HÀNG CHO KHÁCH (FIX DƯ ÂM)
+  // ============================================================
+  try {
+    const currentUser = JSON.parse(localStorage.getItem("user"));
+    // Nếu là Guest -> Xóa sạch giỏ hàng cũ đi
+    if (currentUser && currentUser.role === "guest") {
+      localStorage.removeItem("cart");
+      console.log("🧹 Đã tự động xóa giỏ hàng của Khách.");
+
+      // Cập nhật lại số 0 trên Header (Gọi hàm bên header.js nếu có)
+      if (typeof window.updateCartBadge === "function") {
+        window.updateCartBadge();
+      }
+    }
+  } catch (err) {
+    console.error("Lỗi dọn dẹp giỏ hàng:", err);
+  }
+  // ============================================================
+
+  window.checkLoginRequired = function () {
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    // 1. Nếu chưa đăng nhập tí nào
+    if (!user) {
+      if (
+        confirm(
+          "Bạn cần đăng nhập để sử dụng tính năng này. Đi tới trang đăng nhập ngay?",
+        )
+      ) {
+        window.location.href = "auth.html";
+      }
+      return false;
+    }
+
+    // 2. Nếu là Khách (Guest) -> CHẶN LẠI
+    if (user.role === "guest") {
+      if (
+        confirm(
+          "Tính năng này chỉ dành cho Thành viên chính thức.\nBạn đang ở chế độ Khách xem.\n\nBạn có muốn Đăng ký tài khoản ngay không?",
+        )
+      ) {
+        localStorage.removeItem("user"); // Xóa chế độ khách
+        localStorage.removeItem("cart"); // Tiện tay xóa luôn giỏ hàng
+        window.location.href = "auth.html";
+      }
+      return false; // Ngăn không cho thực hiện hành động
+    }
+
+    // 3. Nếu là Member xịn -> CHO QUA
+    return true;
+  };
 
   // ==================================================================
   // 1. LOGIC TRANG CHỦ: GỌI API & RENDER SẢN PHẨM
@@ -74,8 +127,8 @@ document.addEventListener("DOMContentLoaded", function () {
                         <div class="img-bg"></div>
                         <a href="${detailLink}">
                             <img src="${imgPath}" alt="${
-            product.name
-          }" class="food-img"
+                              product.name
+                            }" class="food-img"
                                  onerror="this.src='https://placehold.co/200x200?text=Mon+Ngon'"/>
                         </a>
                     </div>
@@ -216,7 +269,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // --- SLIDERS ---
   const track1 = document.getElementById("mustTryTrack");
   const dots1 = document.querySelectorAll(
-    ".must-try-section .carousel-dots .dot"
+    ".must-try-section .carousel-dots .dot",
   );
   if (track1 && dots1.length > 0) {
     dots1.forEach((dot) => {
@@ -265,6 +318,3 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 });
-
-// Lưu ý: Các hàm global như handleLogout, updateCartBadge đã có bên header.js
-// Không cần khai báo lại ở đây để tránh trùng lặp.

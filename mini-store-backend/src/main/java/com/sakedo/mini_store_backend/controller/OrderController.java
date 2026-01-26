@@ -71,4 +71,25 @@ public class OrderController {
         orderRepository.save(order);
         return ResponseEntity.ok("Cập nhật thành công");
     }
+
+    @GetMapping("/user/{userId}")
+    public List<Order> getOrdersByUser(@PathVariable String userId) {
+        return orderRepository.findByUserIdOrderByCreatedAtDesc(userId);
+    }
+
+    @PutMapping("/{id}/cancel")
+    public ResponseEntity<?> cancelOrder(@PathVariable String id) {
+        return orderRepository.findById(id)
+                .map(order -> {
+                    // Chỉ cho phép hủy khi đơn đang ở trạng thái 0 (Chờ xác nhận)
+                    if (order.getStatus() == 0) {
+                        order.setStatus(4); // 4 là trạng thái ĐÃ HỦY
+                        orderRepository.save(order);
+                        return ResponseEntity.ok(order);
+                    } else {
+                        return ResponseEntity.badRequest().body("Đơn hàng đã được xử lý, không thể hủy!");
+                    }
+                })
+                .orElse(ResponseEntity.notFound().build());
+    }
 }

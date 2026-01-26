@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="vi">
   <head>
     <meta charset="UTF-8" />
@@ -32,41 +32,24 @@
         <section class="profile-card">
           <div class="card-header-row">
             <div class="card-title">
-              <i class="fas fa-box-open"></i>
-              <h2>Đơn Hàng Của Tôi</h2>
+              <i class="fas fa-box-open" style="color: #d8b26e"></i>
+              <h2>Đơn Đang Thực Hiện</h2>
             </div>
-            <a href="#" class="view-all-link">Xem tất cả đơn ></a>
+            <button
+              id="btn-view-history"
+              class="view-all-link"
+              style="
+                background: none;
+                border: none;
+                cursor: pointer;
+                font-size: 0.9rem;
+              "
+            >
+              <i class="fas fa-history"></i> Xem lịch sử đơn hàng >
+            </button>
           </div>
-          <div class="order-list">
-            <div class="order-item active-process">
-              <div class="order-header">
-                <div class="order-left">
-                  <span class="order-id">#ORD-001</span>
-                  <span class="order-date">25/10/2025 - 10:30</span>
-                </div>
-                <span class="status-badge status-delivering"
-                  ><i class="fas fa-motorcycle"></i> Đang giao hàng</span
-                >
-              </div>
-              <div class="order-body">
-                <div class="product-preview">
-                  <img
-                    src="../assets/images/comga.png"
-                    alt="Món ăn"
-                    onerror="this.src='https://placehold.co/60x60?text=Food'"
-                  />
-                  <div class="product-info-short">
-                    <h4>Cơm Gà Xối Mỡ (và 2 món khác)</h4>
-                    <p>Tổng tiền: <b>185.300đ</b></p>
-                  </div>
-                </div>
-                <div class="mini-progress-bar">
-                  <div class="bar-fill" style="width: 75%"></div>
-                </div>
-                <p class="status-text-mini">Tài xế đang giao đến bạn...</p>
-              </div>
-            </div>
-          </div>
+
+          <div class="order-list" id="active-order-list"></div>
         </section>
 
         <section class="profile-card">
@@ -92,9 +75,8 @@
                   alt="Avatar"
                   id="profile-avatar-img"
                   style="object-fit: cover"
-                  onerror="this.src='https://via.placeholder.com/150'"
+                  onerror="this.src = 'https://via.placeholder.com/150'"
                 />
-
                 <div
                   class="avatar-upload"
                   id="btn-trigger-upload"
@@ -102,7 +84,6 @@
                 >
                   <i class="fas fa-camera"></i>
                 </div>
-
                 <input
                   type="file"
                   id="file-upload-input"
@@ -110,13 +91,12 @@
                   style="display: none"
                 />
               </div>
-
               <h3
                 class="profile-hero-name"
                 style="
                   text-align: center;
                   margin-top: 15px;
-                  font-family: 'Fruktur';
+                  font-family: &quot;Fruktur&quot;;
                 "
               >
                 ...
@@ -133,7 +113,6 @@
                   disabled
                 />
               </div>
-
               <div class="form-group">
                 <label><i class="fas fa-envelope"></i> Email</label>
                 <input
@@ -144,7 +123,6 @@
                   style="opacity: 0.7"
                 />
               </div>
-
               <div class="form-group">
                 <label><i class="fas fa-phone"></i> Số điện thoại</label>
                 <input
@@ -154,7 +132,6 @@
                   disabled
                 />
               </div>
-
               <div class="form-group">
                 <label><i class="fas fa-map-marker-alt"></i> Địa chỉ</label>
                 <div class="textarea-wrapper">
@@ -203,15 +180,15 @@
 
     <div class="modal-overlay" id="password-modal">
       <div class="modal-content">
-        <button class="modal-close" id="modal-close">&times;</button>
+        <button class="modal-close" id="close-password-modal">&times;</button>
         <div class="modal-header">
           <i class="fas fa-key"></i>
           <h3>Đổi Mật Khẩu</h3>
         </div>
         <form id="password-form">
           <div class="form-group" style="margin-bottom: 15px">
-            <label>Mật khẩu hiện tại</label>
-            <input
+            <label>Mật khẩu hiện tại</label
+            ><input
               type="password"
               id="current-password"
               class="form-control"
@@ -225,8 +202,8 @@
             />
           </div>
           <div class="form-group" style="margin-bottom: 15px">
-            <label>Mật khẩu mới</label>
-            <input
+            <label>Mật khẩu mới</label
+            ><input
               type="password"
               id="new-password"
               class="form-control"
@@ -240,8 +217,8 @@
             />
           </div>
           <div class="form-group" style="margin-bottom: 20px">
-            <label>Xác nhận mật khẩu mới</label>
-            <input
+            <label>Xác nhận mật khẩu mới</label
+            ><input
               type="password"
               id="confirm-password"
               class="form-control"
@@ -255,12 +232,42 @@
             />
           </div>
           <div class="modal-buttons">
-            <button type="submit" class="btn-update-password">Cập nhật</button>
-            <button type="button" class="btn-cancel" id="btn-cancel">
+            <button type="submit" class="btn-update-password">Cập nhật</button
+            ><button type="button" class="btn-cancel" id="btn-cancel-pass">
               Hủy
             </button>
           </div>
         </form>
+      </div>
+    </div>
+
+    <div
+      class="modal-overlay"
+      id="history-modal"
+      style="
+        display: none;
+        align-items: flex-start;
+        padding-top: 50px;
+        overflow-y: auto;
+      "
+    >
+      <div
+        class="modal-content"
+        style="max-width: 800px; width: 95%; max-height: 85vh; overflow-y: auto"
+      >
+        <button class="modal-close" id="close-history-modal">&times;</button>
+        <div class="modal-header">
+          <i
+            class="fas fa-history"
+            style="background: #e3f2fd; color: #1976d2"
+          ></i>
+          <h3>Lịch Sử Đơn Hàng</h3>
+          <p style="margin: 0; font-size: 0.9rem; color: #666">
+            (Đã giao thành công & Đã hủy)
+          </p>
+        </div>
+
+        <div id="history-list-container" style="margin-top: 20px"></div>
       </div>
     </div>
 

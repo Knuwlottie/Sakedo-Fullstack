@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="vi">
   <head>
     <meta charset="UTF-8" />
@@ -6,22 +6,23 @@
     <title>Trang Chủ - Sakedo</title>
 
     <link
-      href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;600;700;800&family=Fruktur&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;600;700;800&family=Fruktur&family=Pacifico&display=swap"
       rel="stylesheet"
     />
-
-    <link rel="stylesheet" href="../css/base/variables.css" />
-    <link rel="stylesheet" href="../css/components/header.css" />
-    <link rel="stylesheet" href="../css/pages/global.css" />
-    <link rel="stylesheet" href="../css/pages/home.css" />
-    <link rel="stylesheet" href="../css/pages/menu.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
     />
+
+    <link rel="stylesheet" href="../css/base/variables.css" />
+    <link rel="stylesheet" href="../css/pages/global.css" />
+    <link rel="stylesheet" href="../css/pages/home.css" />
+    <link rel="stylesheet" href="../css/components/header.css" />
+    <link rel="stylesheet" href="../css/components/footer.css" />
   </head>
   <body>
     <div id="header-placeholder"></div>
+
     <main>
       <section class="hero-section">
         <div class="container hero-container">
@@ -377,82 +378,9 @@
           </div>
         </div>
       </section>
-
-      <footer class="footer-section">
-        <div class="container">
-          <div class="footer-top">
-            <div class="footer-card-box">
-              <div class="footer-logo">
-                <img src="../assets/images/logo.png" alt="Logo Sakedo" />
-              </div>
-              <div class="footer-info-text">
-                <p class="time">Thứ 2 - Thứ 7: 09:20 - 22:30</p>
-                <p class="slogan">Cơm ngon - Canh ngọt - An lành</p>
-              </div>
-              <p class="footer-note">Nguyên liệu tươi sạch mỗi ngày</p>
-            </div>
-            <div class="footer-col">
-              <h3 class="footer-heading">SAKEDO</h3>
-              <ul class="footer-links">
-                <li>
-                  <a href="#"
-                    ><i class="fas fa-chevron-right"></i> Món Ngon
-                    Best-seller</a
-                  >
-                </li>
-                <li>
-                  <a href="#"
-                    ><i class="fas fa-chevron-right"></i> Đặt Bàn / Đặt Tiệc</a
-                  >
-                </li>
-                <li>
-                  <a href="#"
-                    ><i class="fas fa-chevron-right"></i> Liên Hệ & Góp Ý</a
-                  >
-                </li>
-              </ul>
-            </div>
-            <div class="footer-col">
-              <h3 class="footer-heading">Menu</h3>
-              <ul class="footer-links">
-                <li>
-                  <a href="#"
-                    ><i class="fas fa-chevron-right"></i> Set Cơm Gia Đình</a
-                  >
-                </li>
-                <li>
-                  <a href="#"
-                    ><i class="fas fa-chevron-right"></i> Món Mặn / Món Kho</a
-                  >
-                </li>
-                <li>
-                  <a href="#"
-                    ><i class="fas fa-chevron-right"></i> Các món có nước</a
-                  >
-                </li>
-                <li>
-                  <a href="#"
-                    ><i class="fas fa-chevron-right"></i> Thức Uống Nhà Làm</a
-                  >
-                </li>
-                <li>
-                  <a href="#"
-                    ><i class="fas fa-chevron-right"></i> Tráng Miệng</a
-                  >
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div class="footer-bottom">
-            <p class="copyright">© 2025 SAKEDO | Hương vị cơm nhà Việt.</p>
-            <div class="social-links">
-              <a href="#">Facebook</a>
-              <a href="#">Instagram</a>
-            </div>
-          </div>
-        </div>
-      </footer>
     </main>
+
+    <div id="footer-placeholder"></div>
 
     <div id="videoModal" class="video-modal-overlay" aria-hidden="true">
       <div class="video-modal-content">
@@ -465,7 +393,14 @@
             src="https://www.youtube.com/embed/P2lDw3yyX3g?enablejsapi=1"
             title="Video giới thiệu nhà hàng Sakedo"
             frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allow="
+              accelerometer;
+              autoplay;
+              clipboard-write;
+              encrypted-media;
+              gyroscope;
+              picture-in-picture;
+            "
             allowfullscreen
           ></iframe>
         </div>
@@ -473,6 +408,8 @@
     </div>
 
     <script src="../js/components/header.js"></script>
+    <script src="../js/components/footer.js"></script>
     <script src="../js/pages/global.js"></script>
+    <script src="../js/pages/home.js"></script>
   </body>
 </html>

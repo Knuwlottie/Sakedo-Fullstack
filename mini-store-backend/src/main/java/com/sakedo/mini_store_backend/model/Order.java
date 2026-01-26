@@ -10,7 +10,10 @@ import java.util.List;
 public class Order {
 
     @Id
-    private String id; // MongoDB tự sinh ID là chuỗi (String), không phải Long
+    private String id; // MongoDB tự sinh ID là chuỗi (String)
+
+    // --- [MỚI] THÊM TRƯỜNG NÀY ĐỂ HIỆN LỊCH SỬ ĐƠN HÀNG ---
+    private String userId; // ID của khách hàng (lấy từ User đang đăng nhập)
 
     private String customerName;
     private String customerPhone;
@@ -19,10 +22,11 @@ public class Order {
     private double shippingFee;
     private double totalAmount;
 
-    private int status; // 0: Chờ xác nhận, 1: Bếp làm, 2: Chờ ship...
+    private String driverId;
+    private int status;
+
     private Date createdAt;
 
-    // Trong MongoDB, List này sẽ được nhúng thẳng vào trong Document Order
     private List<OrderItem> items = new ArrayList<>();
 
     public Order() {
@@ -30,9 +34,13 @@ public class Order {
         this.status = 0;
     }
 
-    // Getters và Setters
+
     public String getId() { return id; }
     public void setId(String id) { this.id = id; }
+
+    // [MỚI] Getter/Setter cho userId
+    public String getUserId() { return userId; }
+    public void setUserId(String userId) { this.userId = userId; }
 
     public String getCustomerName() { return customerName; }
     public void setCustomerName(String customerName) { this.customerName = customerName; }
@@ -51,6 +59,10 @@ public class Order {
 
     public double getTotalAmount() { return totalAmount; }
     public void setTotalAmount(double totalAmount) { this.totalAmount = totalAmount; }
+
+    // [MỚI] Getter/Setter cho driverId
+    public String getDriverId() { return driverId; }
+    public void setDriverId(String driverId) { this.driverId = driverId; }
 
     public int getStatus() { return status; }
     public void setStatus(int status) { this.status = status; }

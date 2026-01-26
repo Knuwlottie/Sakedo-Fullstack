@@ -1,6 +1,5 @@
-let currentProduct = null; // Biến toàn cục lưu món ăn hiện tại
+let currentProduct = null;
 
-// Chạy khi trang tải xong
 document.addEventListener("DOMContentLoaded", () => {
   const urlParams = new URLSearchParams(window.location.search);
   const productId = urlParams.get("id");
@@ -10,81 +9,61 @@ document.addEventListener("DOMContentLoaded", () => {
   if (productId) {
     fetchProductDetail(productId);
   } else {
-    alert("Không tìm thấy ID sản phẩm trên đường dẫn!");
-    window.location.href = "/pages/menu.html";
+    alert("Không tìm thấy ID sản phẩm!");
+    window.location.href = "menu.html";
   }
 
   updateCartBadge();
   initStarRating();
 });
 
+// ============================================================
+// 1. TẢI VÀ HIỂN THỊ DỮ LIỆU
+// ============================================================
 async function fetchProductDetail(id) {
   try {
     const response = await fetch(`http://localhost:8080/api/products/${id}`);
-
-    if (!response.ok) {
-      throw new Error(`Lỗi API: ${response.status}`);
-    }
+    if (!response.ok) throw new Error(`Lỗi API: ${response.status}`);
 
     const product = await response.json();
-
-    console.log("--> Dữ liệu nhận được từ Backend:", product);
-
     currentProduct = product;
     renderProductInfo(product);
   } catch (error) {
-    console.error("Lỗi khi tải sản phẩm:", error);
-    // Xử lý lỗi hiển thị nếu cần
+    console.error("Lỗi:", error);
     document.getElementById("detail-name").textContent = "Lỗi tải dữ liệu";
   }
 }
 
-// --- 1. HÀM HIỂN THỊ THÔNG TIN (SỬA LOGIC GIÁ) ---
 function renderProductInfo(product) {
-  // 1. Hiển thị Tên & Mô tả
-  document.title = `${product.name || "Chi tiết món"} - Sakedo`;
-  document.getElementById("detail-name").textContent =
-    product.name || "Đang cập nhật...";
+  // 1. Tên & Mô tả
+  document.title = `${product.name} - Sakedo`;
+  document.getElementById("detail-name").textContent = product.name;
   document.getElementById("detail-desc").textContent =
-    product.description || "Món ngon tuyệt vời từ Sakedo.";
+    product.description || "Món ngon từ Sakedo.";
 
-  // 2. Hiển thị Ảnh
+  // 2. Ảnh
   const imgElement = document.getElementById("detail-img");
   if (imgElement) {
-    let rawImage = product.image || product.imageUrl || "";
+    let rawImage = product.image || "";
+    // Xử lý đường dẫn ảnh
+    if (!rawImage) imgElement.src = "https://placehold.co/500x400?text=Sakedo";
+    else if (rawImage.startsWith("http")) imgElement.src = rawImage;
+    else imgElement.src = `../assets/images/${rawImage}`;
 
-    // Xử lý đường dẫn ảnh (Dùng ../ để lùi ra khỏi thư mục pages)
-    let finalImageSrc = "";
-    if (!rawImage) {
-      finalImageSrc = "https://via.placeholder.com/500x400?text=Sakedo";
-    } else if (rawImage.startsWith("http")) {
-      finalImageSrc = rawImage;
-    } else {
-      finalImageSrc = `../assets/images/${rawImage}`;
-    }
-
-    imgElement.src = finalImageSrc;
-    imgElement.onerror = function () {
-      this.src = "https://via.placeholder.com/500x400?text=Anh+Loi";
-    };
+    imgElement.onerror = () =>
+      (imgElement.src = "https://placehold.co/500x400?text=No+Image");
   }
 
-  // 3. Hiển thị Giá (LOGIC MỚI: TÍNH TOÁN GIẢM GIÁ)
+  // 3. Giá & Khuyến mãi
   const priceBox = document.getElementById("detail-price");
   if (priceBox) {
-    let finalPrice = product.price; // Mặc định là giá gốc
-    let htmlContent = "";
+    let finalPrice = product.price;
 
-    // Kiểm tra xem có giảm giá (discount > 0) không
     if (product.discount && product.discount > 0) {
-      // Công thức: Giá sau giảm = Giá gốc * (100 - %giảm) / 100
       finalPrice = (product.price * (100 - product.discount)) / 100;
+      currentProduct.finalPrice = finalPrice; // Lưu giá đã giảm
 
-      // Lưu giá đã giảm vào biến toàn cục để tí nữa thêm vào giỏ dùng
-      currentProduct.finalPrice = finalPrice;
-
-      // HTML: Hiện giá cũ gạch ngang, giá mới to đỏ, và tem giảm giá
-      htmlContent = `
+      priceBox.innerHTML = `
         <div style="display: flex; align-items: center; gap: 15px; flex-wrap: wrap;">
             <span class="old-price" style="text-decoration: line-through; color: #999; font-size: 1.3rem;">
                 ${product.price.toLocaleString("vi-VN")}đ
@@ -95,59 +74,56 @@ function renderProductInfo(product) {
             <span style="background: #d32f2f; color: white; padding: 4px 10px; border-radius: 15px; font-weight: bold; font-size: 0.9rem;">
                 -${product.discount}%
             </span>
-        </div>
-      `;
+        </div>`;
     } else {
-      // Không giảm giá
       currentProduct.finalPrice = product.price;
-      htmlContent = `<span class="current-price" style="color: #d32f2f; font-size: 2.2rem; font-weight: 800;">${product.price.toLocaleString(
-        "vi-VN"
-      )}đ</span>`;
+      priceBox.innerHTML = `
+        <span class="current-price" style="color: #d32f2f; font-size: 2.2rem; font-weight: 800;">
+            ${product.price.toLocaleString("vi-VN")}đ
+        </span>`;
     }
-
-    priceBox.innerHTML = htmlContent;
   }
 }
 
-// --- 2. HÀM THÊM VÀO GIỎ (SỬA ĐỂ LẤY GIÁ ĐÃ GIẢM) ---
+// ============================================================
+// 2. XỬ LÝ GIỎ HÀNG (CHẶN KHÁCH)
+// ============================================================
 function addToCartDetail(isBuyNow) {
+  // 🔥 CHẶN KHÁCH: Kiểm tra quyền trước
+  if (typeof window.checkLoginRequired === "function") {
+    if (!window.checkLoginRequired()) return;
+  }
+
   if (!currentProduct) return;
 
   const qtyInput = document.getElementById("qty-input");
   const qty = parseInt(qtyInput.value) || 1;
   const note = document.getElementById("order-note").value;
 
-  // Lấy giá bán (đã giảm)
-  const priceToAdd = currentProduct.finalPrice
-    ? currentProduct.finalPrice
-    : currentProduct.price;
-
-  // --- QUAN TRỌNG: Lấy giá gốc để lưu vào ---
+  // Lấy giá bán thực tế và giá gốc
+  const priceToAdd = currentProduct.finalPrice || currentProduct.price;
   const originalPriceToAdd = currentProduct.price;
 
-  // Xử lý ảnh
-  let imgSrc = currentProduct.image;
-  if (imgSrc && !imgSrc.startsWith("http"))
-    imgSrc = `../assets/images/${imgSrc}`;
+  // Xử lý ảnh để lưu vào cart (chỉ lưu tên file cho gọn nếu là ảnh local)
+  let imageToSave = currentProduct.image;
 
   const cartItem = {
     id: currentProduct.id,
     name: currentProduct.name,
-    price: priceToAdd, // Giá bán thực tế
-    originalPrice: originalPriceToAdd, // <--- THÊM DÒNG NÀY: Lưu giá gốc
-    image: imgSrc,
+    price: priceToAdd,
+    originalPrice: originalPriceToAdd,
+    image: imageToSave,
     quantity: qty,
     note: note,
   };
 
-  // ... (Đoạn dưới lưu vào localStorage giữ nguyên) ...
+  // Logic lưu vào LocalStorage
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
   const existingItem = cart.find((item) => item.id == cartItem.id);
 
   if (existingItem) {
     existingItem.quantity += qty;
     if (note) existingItem.note = note;
-    // Cập nhật lại giá gốc nếu món cũ chưa có
     existingItem.originalPrice = originalPriceToAdd;
   } else {
     cart.push(cartItem);
@@ -157,13 +133,15 @@ function addToCartDetail(isBuyNow) {
   updateCartBadge();
 
   if (isBuyNow) {
-    window.location.href = "/pages/cart.html";
+    window.location.href = "cart.html";
   } else {
     alert(`Đã thêm ${qty} phần "${currentProduct.name}" vào giỏ!`);
   }
 }
 
-// ... (Các hàm hỗ trợ giữ nguyên) ...
+// ============================================================
+// 3. CÁC HÀM HỖ TRỢ
+// ============================================================
 function updateCartBadge() {
   const cart = JSON.parse(localStorage.getItem("cart")) || [];
   const totalQty = cart.reduce((sum, item) => sum + item.quantity, 0);
@@ -189,5 +167,10 @@ function initStarRating() {
 }
 
 function submitReview() {
+  // 🔥 CHẶN KHÁCH ĐÁNH GIÁ
+  if (typeof window.checkLoginRequired === "function") {
+    if (!window.checkLoginRequired()) return;
+  }
+
   alert("Cảm ơn bạn đã đánh giá!");
 }

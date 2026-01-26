@@ -1,25 +1,37 @@
 package com.sakedo.mini_store_backend.model;
 
-// Không cần @Entity, @Table nữa
 public class OrderItem {
-    // Trong MongoDB, item con không bắt buộc phải có ID riêng, nhưng có thể giữ nếu muốn
+
     private String productName;
     private int quantity;
     private double price;
 
+    // --- [THÊM MỚI] Biến này để lưu tên ảnh (vd: comga.jpg) ---
+    private String image;
+
+    // Constructor mặc định
     public OrderItem() {}
 
-    public OrderItem(String productName, int quantity, double price) {
+    // Constructor đầy đủ (Cập nhật thêm image)
+    public OrderItem(String productName, int quantity, double price, String image) {
         this.productName = productName;
         this.quantity = quantity;
         this.price = price;
+        this.image = image;
     }
 
-    // Getters và Setters
+    // --- Getters và Setters ---
+
     public String getProductName() { return productName; }
     public void setProductName(String productName) { this.productName = productName; }
+
     public int getQuantity() { return quantity; }
     public void setQuantity(int quantity) { this.quantity = quantity; }
+
     public double getPrice() { return price; }
     public void setPrice(double price) { this.price = price; }
+
+    // [QUAN TRỌNG] Phải có 2 hàm này thì MongoDB mới lưu được ảnh
+    public String getImage() { return image; }
+    public void setImage(String image) { this.image = image; }
 }
