@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="vi">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Trang Chủ - Sakedo</title>
+    <title>Giỏ Hàng - Sakedo</title>
 
     <!-- Google Fonts -->
     <link
@@ -11,17 +11,20 @@
       rel="stylesheet"
     />
 
-    <!-- Stylesheets -->
-    <link rel="stylesheet" href="/css/base/variables.css" />
-    <link rel="stylesheet" href="/css/base/header.css" />
-    <link rel="stylesheet" href="/css/pages/global.css" />
-    <link rel="stylesheet" href="/css/pages/home.css" />
-    <link rel="stylesheet" href="../css/pages/cart.css" />
+    <!-- Font Awesome -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
     />
+
+    <!-- Stylesheets - Dùng đường dẫn tương đối -->
+    <link rel="stylesheet" href="../css/base/variables.css" />
+    <link rel="stylesheet" href="../css/components/header.css" />
+    <link rel="stylesheet" href="../css/components/footer.css" />
+    <link rel="stylesheet" href="../css/pages/global.css" />
+    <link rel="stylesheet" href="../css/pages/cart.css" />
   </head>
+
   <body>
     <div id="header-placeholder"></div>
 
@@ -48,12 +51,7 @@
               <span>Tổng cộng:</span>
               <span id="final-total" style="color: #d32f2f">0đ</span>
             </div>
-            <button
-              class="btn-checkout"
-              onclick="window.location.href='/pages/checkout.html'"
-            >
-              THANH TOÁN NGAY
-            </button>
+            <button class="btn-checkout">THANH TOÁN NGAY</button>
           </div>
         </div>
 
@@ -61,12 +59,16 @@
           <i class="fas fa-shopping-cart"></i>
           <h3>Giỏ hàng đang trống</h3>
           <p>Bạn chưa thêm món nào vào giỏ cả.</p>
-          <a href="/index.html" class="btn-back">Quay lại thực đơn</a>
+          <a href="menu.html" class="btn-back">Quay lại thực đơn</a>
         </div>
       </div>
     </main>
 
-    <script src="../js/pages/global.js"></script>
+    <div id="footer-placeholder"></div>
+
+    <!-- Scripts -->
+    <script src="../js/components/header.js"></script>
+    <script src="../js/components/footer.js"></script>
     <script src="../js/pages/cart.js"></script>
   </body>
 </html>

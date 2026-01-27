@@ -1,172 +1,238 @@
+// global.js (hoặc tên file tương ứng)
+
 document.addEventListener("DOMContentLoaded", function () {
   console.log(
-    "--> Global Page JS đã tải: Chỉ xử lý nội dung trang chủ (Slider, API, Tab).",
+    "--> Global Page JS đã tải: Xử lý giỏ hàng guest, callback PayOS, trang chủ & UI tĩnh",
   );
 
-  // ============================================================
-  // 🔥 MỚI THÊM: LOGIC DỌN DẸP GIỎ HÀNG CHO KHÁCH (FIX DƯ ÂM)
-  // ============================================================
+  // ────────────────────────────────────────────────
+  // Phần 1: Xử lý giỏ hàng cho tài khoản Guest
+  // ────────────────────────────────────────────────
   try {
     const currentUser = JSON.parse(localStorage.getItem("user"));
-    // Nếu là Guest -> Xóa sạch giỏ hàng cũ đi
     if (currentUser && currentUser.role === "guest") {
       localStorage.removeItem("cart");
-      console.log("🧹 Đã tự động xóa giỏ hàng của Khách.");
+      console.log("🧹 Đã tự động xóa giỏ hàng của Khách (guest).");
 
-      // Cập nhật lại số 0 trên Header (Gọi hàm bên header.js nếu có)
       if (typeof window.updateCartBadge === "function") {
         window.updateCartBadge();
       }
     }
   } catch (err) {
-    console.error("Lỗi dọn dẹp giỏ hàng:", err);
+    console.error("Lỗi khi dọn dẹp giỏ hàng guest:", err);
   }
-  // ============================================================
 
-  window.checkLoginRequired = function () {
-    const user = JSON.parse(localStorage.getItem("user"));
+  // ────────────────────────────────────────────────
+  // Phần 2: Xử lý callback thanh toán từ PayOS
+  // ────────────────────────────────────────────────
+  async function handlePaymentCallback() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const payment = urlParams.get("payment");
+    const payosStatus = urlParams.get("status");
 
-    // 1. Nếu chưa đăng nhập tí nào
-    if (!user) {
-      if (
-        confirm(
-          "Bạn cần đăng nhập để sử dụng tính năng này. Đi tới trang đăng nhập ngay?",
-        )
-      ) {
-        window.location.href = "auth.html";
+    console.log(
+      `--> Callback params: payment=${payment}, status=${payosStatus}`,
+    );
+
+    if (payment === "success") {
+      console.log("--> Thanh toán thành công → xử lý lưu đơn hàng");
+
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+      if (cart.length === 0) {
+        console.log("--> Giỏ hàng trống, bỏ qua lưu đơn");
+        cleanupAfterSuccess();
+        return;
       }
-      return false;
-    }
 
-    // 2. Nếu là Khách (Guest) -> CHẶN LẠI
-    if (user.role === "guest") {
-      if (
-        confirm(
-          "Tính năng này chỉ dành cho Thành viên chính thức.\nBạn đang ở chế độ Khách xem.\n\nBạn có muốn Đăng ký tài khoản ngay không?",
-        )
-      ) {
-        localStorage.removeItem("user"); // Xóa chế độ khách
-        localStorage.removeItem("cart"); // Tiện tay xóa luôn giỏ hàng
-        window.location.href = "auth.html";
+      // Chuẩn bị dữ liệu đơn hàng
+      let subTotal = 0;
+      const orderItems = cart.map((item) => {
+        let price =
+          Number(
+            String(item.price || 0)
+              .replace(/\./g, "")
+              .replace(/[^\d]/g, ""),
+          ) || 0;
+
+        let image = item.image || "no-image.png";
+        if (image.startsWith("data:")) image = "no-image.png";
+        else if (image.includes("/")) image = image.split("/").pop();
+
+        subTotal += price * (Number(item.quantity) || 1);
+
+        return {
+          productName: item.name || "Sản phẩm không tên",
+          quantity: Number(item.quantity) || 1,
+          price,
+          image,
+        };
+      });
+
+      // Thông tin khách hàng
+      let customerName = "Khách Thanh Toán QR";
+      let customerPhone = "";
+      let customerAddress = "Thanh toán qua PayOS";
+
+      try {
+        const user = JSON.parse(localStorage.getItem("user"));
+        if (user) {
+          customerName = user.name || user.fullName || customerName;
+          customerPhone = user.phone || customerPhone;
+          customerAddress = user.address || customerAddress;
+        }
+      } catch {}
+
+      const orderData = {
+        customerName,
+        customerPhone,
+        customerAddress,
+        note: "Thanh toán online qua PayOS",
+        shippingFee: 15000,
+        totalAmount: subTotal + 15000,
+        status: 1, // Đã thanh toán
+        items: orderItems,
+      };
+
+      try {
+        const res = await fetch("http://localhost:8080/api/orders", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify(orderData),
+        });
+
+        if (res.ok) {
+          const result = await res.json();
+          console.log("✅ Đơn hàng đã lưu thành công:", result);
+          alert("Thanh toán thành công! Đơn hàng đã được ghi nhận.");
+        } else {
+          const errorText = await res.text();
+          console.error("Lỗi server:", res.status, errorText);
+          alert("Lưu đơn hàng thất bại. Vui lòng liên hệ hỗ trợ.");
+        }
+      } catch (err) {
+        console.error("Lỗi gọi API tạo đơn hàng:", err);
+        alert("Không kết nối được server. Vui lòng thử lại sau.");
       }
-      return false; // Ngăn không cho thực hiện hành động
+
+      cleanupAfterSuccess();
+    } else if (payosStatus === "CANCELLED") {
+      console.log("--> Người dùng đã hủy thanh toán");
+      alert("Bạn đã hủy thanh toán. Giỏ hàng vẫn được giữ nguyên.");
+      window.history.replaceState({}, document.title, window.location.pathname);
     }
+  }
 
-    // 3. Nếu là Member xịn -> CHO QUA
-    return true;
-  };
+  function cleanupAfterSuccess() {
+    localStorage.removeItem("cart");
+    window.history.replaceState({}, document.title, window.location.pathname);
+    if (typeof window.updateCartBadge === "function") {
+      window.updateCartBadge();
+    }
+    location.reload();
+  }
 
-  // ==================================================================
-  // 1. LOGIC TRANG CHỦ: GỌI API & RENDER SẢN PHẨM
-  // ==================================================================
+  // Gọi ngay lập tức
+  handlePaymentCallback();
 
-  async function fetchAndRenderHomeData() {
-    const promoContainer = document.getElementById("promo-container");
-    const mustTryContainer = document.getElementById("mustTryTrack");
+  // ────────────────────────────────────────────────
+  // Phần 3: Trang chủ – Load sản phẩm từ API
+  // ────────────────────────────────────────────────
+  function getImageUrl(img) {
+    if (!img || img.trim() === "")
+      return "https://placehold.co/300x300?text=No+Image";
+    if (img.startsWith("http") || img.startsWith("data:")) return img;
+    if (img.startsWith("../") || img.startsWith("./")) return img;
+    return `../assets/images/${img}`;
+  }
 
-    // Nếu không tìm thấy các container này, dừng lại
-    if (!promoContainer && !mustTryContainer) return;
+  async function loadHomeProducts() {
+    const promoEl = document.getElementById("promo-container");
+    const mustTryEl = document.getElementById("mustTryTrack");
+
+    if (!promoEl && !mustTryEl) return;
 
     try {
-      console.log("--> Đang gọi API: http://localhost:8080/api/products");
-      const response = await fetch("http://localhost:8080/api/products");
+      const res = await fetch("http://localhost:8080/api/products");
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
-      if (!response.ok)
-        throw new Error("Không thể kết nối đến Backend Spring Boot");
+      const products = await res.json();
 
-      const products = await response.json();
-      console.log(`--> Đã tải được ${products.length} sản phẩm.`);
-
-      // --- A. RENDER MỤC ƯU ĐÃI (Discount > 0) ---
-      if (promoContainer) {
-        const promoList = products.filter((p) => p.discount > 0).slice(0, 4);
-        promoContainer.innerHTML = "";
-
-        if (promoList.length === 0) {
-          promoContainer.innerHTML =
-            "<p>Hiện chưa có chương trình khuyến mãi.</p>";
-        } else {
-          promoList.forEach((product) => {
-            // LƯU Ý: Đường dẫn ảnh dùng ../ để lùi ra ngoài thư mục pages
-            const imgPath = `../assets/images/${product.image}`;
-            const detailLink = `product-detail.html?id=${product.id}`;
-
-            const html = `
-                <div class="promo-card">
-                    <a href="${detailLink}" style="display:block; width:100%; height:100%;">
-                        <img src="${imgPath}" alt="${product.name}" class="promo-img" 
-                             onerror="this.src='https://placehold.co/300x300?text=Sakedo'"/>
-                        <div class="promo-overlay">
-                            <h3 class="dish-name">${product.name}</h3>
-                        </div>
-                        <div class="discount-badge"><span>-${product.discount}%</span></div>
-                    </a>
-                </div>
-            `;
-            promoContainer.innerHTML += html;
-          });
-        }
+      // Ưu đãi
+      if (promoEl) {
+        const promos = products.filter((p) => p.discount > 0).slice(0, 4);
+        promoEl.innerHTML =
+          promos.length === 0
+            ? "<p>Hiện chưa có chương trình khuyến mãi.</p>"
+            : promos
+                .map(
+                  (p) => `
+              <div class="promo-card">
+                <a href="product-detail.html?id=${p.id}" style="display:block;height:100%;">
+                  <img src="${getImageUrl(p.image)}" alt="${p.name}" class="promo-img"
+                       onerror="this.src='https://placehold.co/300x300?text=Sakedo'"/>
+                  <div class="promo-overlay"><h3 class="dish-name">${p.name}</h3></div>
+                  <div class="discount-badge"><span>-${p.discount}%</span></div>
+                </a>
+              </div>
+            `,
+                )
+                .join("");
       }
 
-      // --- B. RENDER MỤC MÓN NGON PHẢI THỬ (Best Seller) ---
-      if (mustTryContainer) {
-        const bestSellerList = products
-          .filter((p) => p.bestSeller === true)
-          .slice(0, 8);
-        mustTryContainer.innerHTML = "";
-
-        bestSellerList.forEach((product) => {
-          const oldPrice = product.price * (1 + (product.discount || 10) / 100);
-          const detailLink = `product-detail.html?id=${product.id}`;
-          const imgPath = `../assets/images/${product.image}`; // Dùng ../
-
-          const html = `
-                <div class="food-card">
-                    <div class="card-header">
-                        <span class="sale-badge">HOT</span>
-                        <div class="img-bg"></div>
-                        <a href="${detailLink}">
-                            <img src="${imgPath}" alt="${
-                              product.name
-                            }" class="food-img"
-                                 onerror="this.src='https://placehold.co/200x200?text=Mon+Ngon'"/>
-                        </a>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="food-title">
-                            <a href="${detailLink}" style="color: inherit; text-decoration: none;">
-                                ${product.name}
-                            </a>
-                        </h3>
-                        <div class="price-row">
-                            <div class="price-info">
-                                <span class="old-price">${oldPrice.toLocaleString()}đ</span>
-                                <span class="new-price">${product.price.toLocaleString()}đ</span>
-                            </div>
-                            <button class="cart-btn-small" onclick="window.location.href='${detailLink}'">
-                                <i class="fas fa-shopping-bag"></i>
-                            </button>
-                        </div>
-                    </div>
+      // Món ngon phải thử
+      if (mustTryEl) {
+        const best = products.filter((p) => p.bestSeller).slice(0, 8);
+        mustTryEl.innerHTML = best
+          .map((p) => {
+            const oldPrice = p.price * (1 + (p.discount || 10) / 100);
+            const img = getImageUrl(p.image);
+            return `
+            <div class="food-card">
+              <div class="card-header">
+                <span class="sale-badge">HOT</span>
+                <div class="img-bg"></div>
+                <a href="product-detail.html?id=${p.id}">
+                  <img src="${img}" alt="${p.name}" class="food-img"
+                       onerror="this.src='https://placehold.co/200x200?text=Mon+Ngon'"/>
+                </a>
+              </div>
+              <div class="card-body">
+                <h3 class="food-title">
+                  <a href="product-detail.html?id=${p.id}" style="color:inherit;text-decoration:none;">
+                    ${p.name}
+                  </a>
+                </h3>
+                <div class="price-row">
+                  <div class="price-info">
+                    <span class="old-price">${oldPrice.toLocaleString()}đ</span>
+                    <span class="new-price">${p.price.toLocaleString()}đ</span>
+                  </div>
+                  <button class="cart-btn-small" onclick="window.location.href='product-detail.html?id=${p.id}'">
+                    <i class="fas fa-shopping-bag"></i>
+                  </button>
                 </div>
-            `;
-          mustTryContainer.innerHTML += html;
-        });
+              </div>
+            </div>
+          `;
+          })
+          .join("");
       }
-    } catch (error) {
-      console.error("Lỗi khi gọi API:", error);
-      if (promoContainer)
-        promoContainer.innerHTML =
-          '<p style="color:red; text-align:center">Không kết nối được Server Backend!</p>';
+    } catch (err) {
+      console.error("Lỗi tải sản phẩm:", err);
+      if (promoEl)
+        promoEl.innerHTML =
+          '<p style="color:red;text-align:center">Không kết nối được server!</p>';
     }
   }
 
-  fetchAndRenderHomeData();
+  loadHomeProducts();
 
-  // ==================================================================
-  // 2. LOGIC UI TĨNH: TAB MENU, SLIDER, MODAL
-  // ==================================================================
-
+  // ────────────────────────────────────────────────
+  // Phần 4: UI tĩnh – Tab menu, Slider dots, Video modal
+  // ────────────────────────────────────────────────
   const menuImg = document.getElementById("menu-img");
   const menuTitle = document.getElementById("menu-title");
   const menuList = document.getElementById("menu-list");
@@ -214,7 +280,7 @@ document.addEventListener("DOMContentLoaded", function () {
       },
       coffee: {
         title: "Coffee",
-        image: "../assets/images/coffee_set.png",
+        image: "../assets/images/icon_coffee.png",
         items: [
           { name: "Coffee đen", price: "35.000 VND", desc: "Đậm đà hương vị." },
           {
@@ -235,38 +301,41 @@ document.addEventListener("DOMContentLoaded", function () {
       const data = menuData[type];
       if (!data) return;
 
-      menuImg.style.opacity = 0;
+      menuImg.style.opacity = "0";
       setTimeout(() => {
         menuImg.src = data.image;
-        menuImg.style.opacity = 1;
+        menuImg.style.opacity = "1";
       }, 200);
 
       menuTitle.textContent = data.title;
-      menuList.innerHTML = "";
-
-      data.items.forEach((item) => {
-        menuList.innerHTML += `
+      menuList.innerHTML = data.items
+        .map(
+          (item) => `
             <div class="menu-item">
-                <div class="item-header">
-                    <span class="item-name">${item.name}</span>
-                    <span class="item-price">${item.price}</span>
-                </div>
-                <p class="item-desc">${item.desc}</p>
-            </div>`;
-      });
+              <div class="item-header">
+                <span class="item-name">${item.name}</span>
+                <span class="item-price">${item.price}</span>
+              </div>
+              <p class="item-desc">${item.desc}</p>
+            </div>
+          `,
+        )
+        .join("");
     }
 
     tabs.forEach((tab) => {
       tab.addEventListener("click", function () {
         document.querySelector(".cat-item.active")?.classList.remove("active");
         this.classList.add("active");
-        renderMenu(this.getAttribute("data-type"));
+        renderMenu(this.dataset.type);
       });
     });
+
+    // Load mặc định
     renderMenu("dessert");
   }
 
-  // --- SLIDERS ---
+  // Slider dots – must try
   const track1 = document.getElementById("mustTryTrack");
   const dots1 = document.querySelectorAll(
     ".must-try-section .carousel-dots .dot",
@@ -276,12 +345,13 @@ document.addEventListener("DOMContentLoaded", function () {
       dot.addEventListener("mouseover", function () {
         dots1.forEach((d) => d.classList.remove("active"));
         this.classList.add("active");
-        const index = parseInt(this.getAttribute("data-index"));
-        track1.style.transform = `translateX(${index * -300}px)`;
+        const idx = parseInt(this.dataset.index, 10);
+        track1.style.transform = `translateX(${idx * -300}px)`;
       });
     });
   }
 
+  // Slider dots – review
   const track2 = document.getElementById("reviewTrack");
   const dots2 = document.querySelectorAll(".review-dots .dot");
   if (track2 && dots2.length > 0) {
@@ -289,32 +359,52 @@ document.addEventListener("DOMContentLoaded", function () {
       dot.addEventListener("mouseover", function () {
         dots2.forEach((d) => d.classList.remove("active"));
         this.classList.add("active");
-        const index = parseInt(this.getAttribute("data-index"));
-        track2.style.transform = `translateX(${index * -1200}px)`;
+        const idx = parseInt(this.dataset.index, 10);
+        track2.style.transform = `translateX(${idx * -1200}px)`;
       });
     });
   }
 
-  // --- VIDEO MODAL ---
+  // Video modal
   const videoBtn = document.getElementById("openVideoBtn");
   const videoModal = document.getElementById("videoModal");
-  const closeVideo = document.querySelector(".close-video");
+  const closeBtn = document.querySelector(".close-video");
   const iframe = document.getElementById("youtubeIframe");
 
   if (videoBtn && videoModal && iframe) {
-    videoBtn.addEventListener("click", function (e) {
+    videoBtn.addEventListener("click", (e) => {
       e.preventDefault();
       videoModal.style.display = "flex";
     });
-    function closeVideoModal() {
+
+    const closeModal = () => {
       videoModal.style.display = "none";
-      const currentSrc = iframe.src;
+      const src = iframe.src;
       iframe.src = "";
-      iframe.src = currentSrc;
-    }
-    if (closeVideo) closeVideo.addEventListener("click", closeVideoModal);
-    videoModal.addEventListener("click", function (e) {
-      if (e.target === videoModal) closeVideoModal();
+      iframe.src = src; // reset video
+    };
+
+    closeBtn?.addEventListener("click", closeModal);
+    videoModal.addEventListener("click", (e) => {
+      if (e.target === videoModal) closeModal();
     });
   }
+
+  // ────────────────────────────────────────────────
+  // Hàm check login (nếu các trang khác gọi)
+  // ────────────────────────────────────────────────
+  window.checkLoginRequired = function () {
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (!user) {
+      if (
+        confirm(
+          "Bạn cần đăng nhập để sử dụng tính năng này.\nĐi tới trang đăng nhập ngay?",
+        )
+      ) {
+        window.location.href = "auth.html";
+      }
+      return false;
+    }
+    return true;
+  };
 });

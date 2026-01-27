@@ -5,51 +5,45 @@ document.addEventListener("DOMContentLoaded", () => {
     bookingForm.addEventListener("submit", async (e) => {
       e.preventDefault();
 
-      // 🔥 CHẶN KHÁCH: Kiểm tra quyền trước
-      if (typeof window.checkLoginRequired === "function") {
-        if (!window.checkLoginRequired()) return;
-      }
-
-      // 1. Lấy dữ liệu form
       const name = document.getElementById("name").value;
       const phone = document.getElementById("phone").value;
       const date = document.getElementById("date").value;
       const time = document.getElementById("time").value;
       const quantity = parseInt(document.getElementById("quantity").value);
-      const note = document.getElementById("note").value;
+      const note = document.getElementById("note")
+        ? document.getElementById("note").value
+        : "";
 
-      // Kiểm tra dữ liệu đầu vào
       if (!date || !time) {
-        alert("Vui lòng chọn đầy đủ ngày và giờ đặt bàn!");
+        alert("Vui lòng chọn ngày giờ!");
         return;
       }
-
-      // Kiểm tra quy định số lượng khách
-      if (quantity > 20) {
-        alert(
-          "Sakedo chỉ phục vụ tối đa 20 khách mỗi bàn. Vui lòng liên hệ hotline để đặt tiệc lớn hơn!",
-        );
-        return;
-      }
-      if (quantity <= 0) {
+      if (quantity <= 0 || quantity > 50) {
         alert("Số lượng khách không hợp lệ!");
         return;
       }
 
-      // 2. Chuẩn bị dữ liệu gửi Backend
       const bookingDateISO = `${date}T${time}:00`;
-      const user = JSON.parse(localStorage.getItem("user")); // Chắc chắn có user vì đã check ở trên
+
+      // Xử lý User ID an toàn
+      let userId = null;
+      try {
+        const user = JSON.parse(localStorage.getItem("user"));
+        if (user && user.id) userId = user.id;
+      } catch (err) {}
 
       const bookingData = {
-        userId: user.id,
+        userId: userId, // Backend chấp nhận null
         fullName: name,
         phone: phone,
         guestCount: quantity,
         bookingDate: bookingDateISO,
         status: "PENDING",
+        note: note,
       };
 
-      // 3. Gọi API
+      console.log("Đang gửi Booking:", bookingData);
+
       try {
         const response = await fetch(
           "http://localhost:8080/api/bookings/create",
@@ -60,23 +54,25 @@ document.addEventListener("DOMContentLoaded", () => {
           },
         );
 
+        // Kiểm tra nếu response không phải JSON
+        const contentType = response.headers.get("content-type");
+        if (!contentType || !contentType.includes("application/json")) {
+          throw new Error("Server trả về lỗi không phải JSON (Có thể lỗi 500)");
+        }
+
         const result = await response.json();
 
         if (response.ok) {
-          alert(`ĐẶT BÀN THÀNH CÔNG!
-- Số bàn: ${result.tableNumber}
-- Thời gian giữ bàn: 3 tiếng`);
+          alert(
+            `✅ ĐẶT BÀN THÀNH CÔNG!\nSố bàn: ${result.tableNumber || "Đang xếp"}\nThời gian: ${time} ngày ${date}`,
+          );
           window.location.reload();
         } else {
-          alert(
-            "Thông báo: " +
-              (result.message ||
-                "Hiện tại đã hết bàn phù hợp trong khung giờ này!"),
-          );
+          alert("❌ Lỗi: " + (result.message || "Không thể đặt bàn lúc này."));
         }
       } catch (err) {
-        console.error("Lỗi:", err);
-        alert("Lỗi kết nối đến máy chủ!");
+        console.error("Kết nối thất bại:", err);
+        alert("❌ Lỗi kết nối Server! Vui lòng kiểm tra lại Console.");
       }
     });
   }
