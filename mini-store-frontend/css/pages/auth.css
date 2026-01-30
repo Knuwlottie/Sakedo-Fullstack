@@ -1,12 +1,10 @@
-/* css/pages/auth.css */
+/*AUTH PAGE STYLES*/
 
-/* 1. CẤU TRÚC CHUNG (LAYOUT) */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family:
-    "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; /* Hoặc font bạn thích */
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
@@ -21,16 +19,16 @@ body {
   display: flex;
   width: 90%;
   max-width: 1100px;
-  height: 600px; /* Chiều cao cố định hoặc auto */
+  height: 600px;
   background: #fff;
   border-radius: 20px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  overflow: hidden; /* Bo tròn góc đè lên ảnh */
+  overflow: hidden;
 }
 
-/* 2. CỘT HÌNH ẢNH (BÊN TRÁI) */
+/*CỘT HÌNH ẢNH*/
 .auth-image {
-  flex: 1; /* Chiếm 50% hoặc phần còn lại */
+  flex: 1;
   position: relative;
   background-color: #eee;
 }
@@ -38,23 +36,23 @@ body {
 .auth-image img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Đảm bảo ảnh phủ kín mà không méo */
+  object-fit: cover;
 }
 
-/* 3. CỘT FORM (BÊN PHẢI) */
+/*CỘT FORM*/
 .auth-form-wrapper {
-  flex: 1; /* Chiếm 50% */
+  flex: 1;
   padding: 40px;
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Căn giữa dọc */
-  align-items: center; /* Căn giữa ngang */
+  justify-content: center;
+  align-items: center;
   background-color: #fff;
 }
 
 .auth-content {
   width: 100%;
-  max-width: 400px; /* Giới hạn chiều rộng nội dung cho đẹp */
+  max-width: 400px;
 }
 
 .auth-content h2 {
@@ -67,7 +65,7 @@ body {
   text-transform: uppercase;
 }
 
-/* 4. TABS CHUYỂN ĐỔI (ĐĂNG NHẬP / ĐĂNG KÝ) */
+/*TABS CHUYỂN ĐỔI*/
 .auth-tabs {
   display: flex;
   justify-content: space-around;
@@ -87,22 +85,21 @@ body {
   position: relative;
 }
 
-/* Hiệu ứng khi tab đang active */
 .auth-tabs button.active {
-  color: #d4af37; /* Màu vàng kim giống ảnh */
+  color: #d4af37;
 }
 
 .auth-tabs button.active::after {
   content: "";
   position: absolute;
-  bottom: -1px; /* Đè lên đường viền dưới */
+  bottom: -1px;
   left: 0;
   width: 100%;
   height: 2px;
   background-color: #d4af37;
 }
 
-/* 5. CÁC Ô NHẬP LIỆU */
+/*INPUT*/
 .input-group {
   margin-bottom: 20px;
 }
@@ -123,7 +120,7 @@ body {
   background-color: #fff;
 }
 
-/* 6. NÚT SUBMIT & LIÊN KẾT */
+/*NÚT SUBMIT*/
 .form-footer {
   text-align: right;
   margin-bottom: 20px;
@@ -139,13 +136,9 @@ body {
   width: 100%;
   padding: 12px;
   border: none;
-  border-radius: 25px; /* Nút bo tròn */
-  background-color: #dfcda4; /* Màu be vàng nhạt */
-  background: linear-gradient(
-    to right,
-    #dfcda4,
-    #d4b685
-  ); /* Gradient cho sang */
+  border-radius: 25px;
+  background-color: #dfcda4;
+  background: linear-gradient(to right, #dfcda4, #d4b685);
   color: white;
   font-size: 16px;
   font-weight: 600;
@@ -160,7 +153,7 @@ body {
   box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
 }
 
-/* 7. SOCIAL LOGIN (FACEBOOK/GOOGLE) */
+/*SOCIAL LOGIN*/
 .social-login {
   margin-top: 30px;
   text-align: center;
@@ -175,7 +168,7 @@ body {
 .social-icons {
   display: flex;
   justify-content: center;
-  gap: 20px;
+  gap: 15px;
 }
 
 .social-icons i {
@@ -185,58 +178,55 @@ body {
   transition: color 0.3s;
 }
 
-/* Icon giả lập (vì bạn chưa chắc đã cài FontAwesome) */
 .icon-facebook::before {
   content: "FB";
   font-weight: bold;
   font-style: normal;
 }
+
 .icon-google::before {
   content: "G+";
   font-weight: bold;
   font-style: normal;
 }
 
-/* Responsive cho màn hình điện thoại */
+/*RESPONSIVE*/
 @media (max-width: 768px) {
   .auth-container {
-    flex-direction: column; /* Xếp chồng dọc */
+    flex-direction: column;
     height: auto;
   }
+
   .auth-image {
-    display: none; /* Ẩn ảnh trên mobile cho gọn */
+    display: none;
   }
+
   .auth-form-wrapper {
     padding: 20px;
   }
 }
-/* --- CSS MỚI CHO SOCIAL & GUEST --- */
 
-/* Style lại icon social thành nút tròn đẹp hơn */
-.social-icons {
-  display: flex;
-  gap: 15px;
-  justify-content: center;
-}
-
+/*SOCIAL BUTTONS*/
 .btn-social {
-  width: 45px;
-  height: 45px;
+  width: 55px;
+  height: 55px;
   border-radius: 50%;
-  border: 1px solid #ddd;
+  border: 1px solid #eee;
   background: #fff;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-size: 1.2rem;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
 }
 
 .btn-social.google {
   color: #db4437;
   border-color: #db4437;
 }
+
 .btn-social.facebook {
   color: #4267b2;
   border-color: #4267b2;
@@ -247,7 +237,14 @@ body {
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
-/* Style nút Khách */
+.btn-social.google:hover {
+  background-color: #db4437;
+  color: #fff;
+  transform: translateY(-5px) scale(1.1);
+  box-shadow: 0 10px 25px rgba(219, 68, 55, 0.3);
+}
+
+/*NÚT KHÁCH*/
 .btn-guest {
   background: none;
   border: 1px solid #777;
@@ -268,7 +265,8 @@ body {
   color: #fff;
   border-color: #333;
 }
-/* Style cho 2 nút tùy chọn mới */
+
+/*NÚT ALT*/
 .btn-alt {
   width: 100%;
   padding: 10px;
@@ -285,34 +283,33 @@ body {
   font-size: 0.95rem;
 }
 
-/* Nút Google */
 .btn-alt.google-check {
   color: #db4437;
   border-color: #db4437;
 }
+
 .btn-alt.google-check:hover {
   background: #fff5f5;
   box-shadow: 0 3px 8px rgba(219, 68, 55, 0.2);
 }
 
-/* Nút Khách */
 .btn-alt.guest-mode {
   color: #555;
   border-color: #555;
 }
+
 .btn-alt.guest-mode:hover {
   background: #333;
   color: #fff;
   border-color: #333;
 }
-/* --- GIAO DIỆN SOCIAL LOGIN (BẢN UPDATE: GOOGLE ONLY) --- */
 
+/*SOCIAL LOGIN WRAPPER*/
 .social-login-wrapper {
   margin-top: 30px;
   width: 100%;
 }
 
-/* Đường kẻ ngang */
 .divider {
   display: flex;
   align-items: center;
@@ -321,55 +318,29 @@ body {
   color: #999;
   font-size: 0.85rem;
 }
+
 .divider::before,
 .divider::after {
   content: "";
   flex: 1;
   border-bottom: 1px solid #eee;
 }
+
 .divider::before {
   margin-right: 10px;
 }
+
 .divider::after {
   margin-left: 10px;
 }
 
-/* Khu vực nút bấm - Căn giữa tuyệt đối */
 .social-buttons {
   display: flex;
-  justify-content: center; /* Căn giữa */
+  justify-content: center;
   margin-bottom: 25px;
 }
 
-/* Nút Google tròn to đẹp */
-.btn-social {
-  width: 55px; /* Tăng kích thước lên xíu cho nổi bật vì đứng 1 mình */
-  height: 55px;
-  border-radius: 50%; /* Tròn vo */
-  border: 1px solid #eee;
-  background: #fff;
-  font-size: 1.5rem;
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-}
-
-/* Màu sắc Google */
-.btn-social.google {
-  color: #db4437;
-  border-color: #db4437;
-}
-.btn-social.google:hover {
-  background-color: #db4437;
-  color: #fff;
-  transform: translateY(-5px) scale(1.1); /* Hiệu ứng bay lên và phóng to nhẹ */
-  box-shadow: 0 10px 25px rgba(219, 68, 55, 0.3);
-}
-
-/* Link Khách (Dưới cùng) */
+/*GUEST OPTION*/
 .guest-option {
   text-align: center;
 }
@@ -385,7 +356,7 @@ body {
 }
 
 .btn-link-guest strong {
-  color: #d8b26e; /* Màu vàng Sakedo */
+  color: #d8b26e;
   font-weight: 700;
   margin-left: 3px;
 }
@@ -393,6 +364,28 @@ body {
 .btn-link-guest:hover {
   color: #333;
 }
+
 .btn-link-guest:hover strong {
   text-decoration: underline;
+}
+
+/*FORGOT PASSWORD*/
+.auth-container-forgot {
+  height: 500px;
+}
+
+.forgot-desc {
+  text-align: center;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.form-footer-center {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.back-link {
+  color: #d4af37;
+  font-weight: 600;
 }

@@ -1,10 +1,9 @@
-/* =====================================================
-   CONTACT PAGE STYLES - BẢN ĐẦY ĐỦ (FULL)
-   ===================================================== */
+/*CONTACT PAGE STYLES*/
 
-/* --- 1. PHẦN MỞ ĐẦU (HERO) --- */
+/* 1. PHẦN MỞ ĐẦU */
 .contact-hero {
   padding: 60px 0 80px 0;
+  padding-top: 130px;
   text-align: center;
   background-color: #fff;
 }
@@ -25,7 +24,7 @@
   font-weight: 500;
 }
 
-/* --- 2. GRID 3 THẺ THỐNG KÊ (STATS) --- */
+/* 2. GRID 3 THẺ THỐNG KÊ*/
 .contact-stats-grid {
   display: flex;
   justify-content: center;
@@ -81,9 +80,7 @@
   letter-spacing: 0.5px;
 }
 
-/* =====================================================
-   3. SECTION FORM LIÊN HỆ & THÔNG TIN
-   ===================================================== */
+/*3. SECTION FORM LIÊN HỆ & THÔNG TIN */
 .contact-form-section {
   padding: 80px 0 120px 0;
   background-color: #fff;
@@ -97,9 +94,7 @@
   margin: 0 auto;
 }
 
-/* =====================================================
-   STYLE CỘT TRÁI - THÔNG TIN LIÊN HỆ (NEW DESIGN)
-   ===================================================== */
+/*THÔNG TIN LIÊN HỆ*/
 
 /* 1. Phần Tiêu đề cột */
 .col-header {
@@ -114,7 +109,7 @@
 }
 
 .col-header-text h2 {
-  font-family: "Epilogue", sans-serif; /* Dùng font hiện đại */
+  font-family: "Epilogue", sans-serif;
   font-size: 1.6rem;
   font-weight: 800;
   color: #333;
@@ -126,39 +121,38 @@
   color: #777;
 }
 
-/* 2. Danh sách thẻ (Card List) */
+/* 2. Danh sách thẻ */
 .info-card-list {
   display: flex;
   flex-direction: column;
-  gap: 20px; /* Khoảng cách giữa các thẻ */
+  gap: 20px;
 }
 
-/* 3. Style từng thẻ (Card) */
+/* 3. Card */
 .info-card {
-  background-color: #f8f9fa; /* Màu nền xám nhẹ sạch sẽ */
-  border-radius: 12px; /* Bo góc */
+  background-color: #f8f9fa;
+  border-radius: 12px;
   padding: 20px 25px;
   display: flex;
   align-items: center;
-  position: relative; /* Để căn chỉnh thanh dọc bên trái */
-  overflow: hidden; /* Để thanh dọc không bị lòi ra ngoài góc bo */
+  position: relative;
+  overflow: hidden;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
   transition: 0.3s;
 }
 
-/* Thanh dọc màu vàng bên trái - GIỐNG HÌNH MẪU */
 .info-card::before {
   content: "";
   position: absolute;
   left: 0;
   top: 0;
   bottom: 0;
-  width: 6px; /* Độ dày thanh dọc */
+  width: 6px;
   background-color: #d8b26e;
 }
 
 .info-card:hover {
-  transform: translateX(5px); /* Hiệu ứng đẩy nhẹ sang phải khi hover */
+  transform: translateX(5px);
   box-shadow: 0 8px 25px rgba(216, 178, 110, 0.15);
   background-color: #fff;
 }
@@ -167,16 +161,16 @@
 .card-icon-box {
   width: 50px;
   height: 50px;
-  background-color: #d8b26e; /* Nền cam/vàng */
+  background-color: #d8b26e;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fff; /* Icon màu trắng */
+  color: #fff;
   font-size: 1.4rem;
-  margin-right: 20px; /* Khoảng cách với chữ */
+  margin-right: 20px;
   flex-shrink: 0;
-  margin-left: 10px; /* Cách thanh dọc ra một chút */
+  margin-left: 10px;
 }
 
 /* 5. Phần nội dung chữ */
@@ -199,11 +193,11 @@
 .sub-info {
   font-family: "Epilogue", sans-serif;
   font-size: 0.8rem;
-  color: #999; /* Màu chữ nhạt cho thông tin phụ */
+  color: #999;
   font-style: italic;
 }
 
-/* --- CỘT PHẢI: FORM GỬI TIN NHẮN --- */
+/* --- FORM GỬI TIN NHẮN --- */
 .contact-form-col {
   flex: 1.4;
   background: #fff;
@@ -238,7 +232,7 @@
   font-style: italic;
 }
 
-/* --- CHI TIẾT INPUT & LABEL (Đây là phần bạn bị thiếu) --- */
+/* --- INPUT & LABEL --- */
 .form-group {
   margin-bottom: 20px;
 }
@@ -318,7 +312,6 @@
   font-family: "Epilogue", sans-serif;
 }
 
-/* Nút Gửi */
 .btn-submit-gold {
   width: 100%;
   padding: 14px;
@@ -343,12 +336,12 @@
   box-shadow: 0 5px 15px rgba(216, 178, 110, 0.4);
 }
 
-/* --- RESPONSIVE --- */
 @media (max-width: 992px) {
   .contact-row {
     flex-direction: column;
     gap: 60px;
   }
+
   .contact-info-col,
   .contact-form-col {
     flex: auto;
@@ -357,14 +350,11 @@
   }
 }
 
-/* =====================================================
-   STYLE PHẦN BẢN ĐỒ (MAP)
-   ===================================================== */
+/*PHẦN BẢN ĐỒ */
 
-/* Đẩy phần Map xuống cách xa danh sách thông tin một chút */
 .map-section {
   margin-top: 50px;
-  border-top: 1px dashed #eee; /* Đường kẻ mờ ngăn cách cho đẹp */
+  border-top: 1px dashed #eee;
   padding-top: 30px;
 }
 
@@ -378,20 +368,32 @@
   font-size: 1.4rem;
 }
 
-/* Khung chứa bản đồ (Wrapper) */
 .map-wrapper {
   width: 100%;
-  height: 300px; /* Chiều cao cố định của bản đồ */
-  border-radius: 15px; /* Bo góc tròn trịa */
-  overflow: hidden; /* Ẩn phần thừa để bo góc hoạt động */
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Bóng đổ tạo chiều sâu */
-  border: 4px solid #fff; /* Viền trắng bao quanh cho giống khung tranh */
-  outline: 2px solid #d8b26e; /* Viền ngoài màu vàng Sakedo */
+  height: 300px;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  border: 4px solid #fff;
+  outline: 2px solid #d8b26e;
   transition: 0.3s;
 }
 
-/* Hiệu ứng khi rê chuột vào bản đồ */
 .map-wrapper:hover {
   box-shadow: 0 15px 40px rgba(216, 178, 110, 0.2);
   transform: translateY(-5px);
+}
+
+.email-readonly {
+  background-color: #f9f9f9;
+  cursor: not-allowed;
+}
+
+.char-count-warning {
+  color: #d32f2f;
+}
+
+/* Character counter normal */
+.char-count-normal {
+  color: #888;
 }

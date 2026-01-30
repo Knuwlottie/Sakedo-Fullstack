@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/products")
-@CrossOrigin(origins = "*") // THÊM: Cho phép Frontend gọi API thoải mái
+@CrossOrigin(origins = "*")
 public class ProductController {
 
     @Autowired
@@ -29,10 +29,9 @@ public class ProductController {
         return productRepository.findByCategory(type);
     }
 
-    // 3. (MỚI) API Lấy chi tiết 1 món ăn theo ID (Dùng cho trang Product Detail)
+    // 3. API Lấy chi tiết 1 món ăn theo ID
     @GetMapping("/{id}")
     public ResponseEntity<?> getProductById(@PathVariable int id) {
-        // Tìm món ăn trong danh sách có ID trùng khớp
         Product product = productRepository.findAll().stream()
                 .filter(p -> p.getId() == id)
                 .findFirst()
@@ -45,24 +44,21 @@ public class ProductController {
         }
     }
 
-    // 4. API Khởi tạo dữ liệu (Đã thêm ID vào từng món)
+    // 4. API Khởi tạo dữ liệu
     @GetMapping("/init")
     public ResponseEntity<?> initData() {
         productRepository.deleteAll();
 
         List<Product> list = new ArrayList<>();
-        int idCounter = 1; // THÊM: Biến đếm ID bắt đầu từ 1
+        int idCounter = 1;
 
-        // ==========================================
-        // 1. MÓN CHÍNH (Category: "steak")
-        // ==========================================
-        // Giữ nguyên các món cũ của bạn
+        // 1. MÓN CHÍNH
         list.add(new Product(idCounter++, "Bánh Xèo Miền Tây", 50000, "Vỏ bánh vàng giòn, nhân tôm thịt đầy đặn, rau sống tươi ngon.", "banhxeo.png", "steak", true, 30));
         list.add(new Product(idCounter++, "Nem Nướng Nha Trang", 65000, "Nem nướng thơm lừng, nước chấm tương đặc biệt.", "nemnuong.png", "steak", false, 15));
         list.add(new Product(idCounter++, "Cơm Gà Xối Mỡ", 55000, "Da gà giòn tan, cơm chiên dương châu đậm vị.", "comga.png", "steak", true, 18));
         list.add(new Product(idCounter++, "Bún Bò Huế Đặc Biệt", 70000, "Hương vị cố đô, chả cua to, nước dùng cay nồng.", "bunbo.png", "steak", true, 14));
 
-        // --- CÁC MÓN CŨ (Giữ nguyên) ---
+        // --- CÁC MÓN CŨ ---
         list.add(new Product(idCounter++, "CƠM TẤM SIÊU TO KHỔNG LỒ", 999999, "Món đặc biệt chỉ dành cho người sành ăn.", "comtam.png", "steak", true, 50));
         list.add(new Product(idCounter++, "Phở Bò Tái Nạm", 85000, "Nước dùng hầm xương 24h, bò tái mềm ngọt.", "phobo.png", "steak", true, 0)); // chỉnh giá cho khớp web
         list.add(new Product(idCounter++, "Bún Riêu Cua", 70000, "Riêu cua đồng tươi ngon, đậm đà hương vị quê hương.", "bunrieuu.png", "steak", false, 0)); // chỉnh ảnh + giá
@@ -72,7 +68,6 @@ public class ProductController {
         list.add(new Product(idCounter++, "Bánh Mì Đặc Biệt", 35000, "Bánh mì giòn tan, full topping chả thịt.", "banhmithit.png", "steak", false, 23)); // chỉnh ảnh + ưu đãi
         list.add(new Product(idCounter++, "Canh Chua Cá Lóc", 130000, "Vị chua thanh mát, giải nhiệt ngày hè.", "canhchuaca.png", "steak", false, 0)); // chỉnh giá + ảnh
 
-        // Thêm các món chính mới từ thực đơn HTML
         list.add(new Product(idCounter++, "Cơm tấm sườn", 65000, "Cơm tấm nóng hổi với sườn nướng thơm lừng", "suonbi.png", "steak", true, 0));
         list.add(new Product(idCounter++, "Cơm tấm sườn chả", 59000, "Phiên bản ưu đãi đặc biệt trong ngày", "suonbi.png", "steak", true, 10));
         list.add(new Product(idCounter++, "Cơm chiên hải sản", 140000, "Cơm chiên nhiều hải sản tươi ngon", "comchien.png", "steak", false, 0));
@@ -82,7 +77,6 @@ public class ProductController {
         list.add(new Product(idCounter++, "Hủ tiếu", 70000, "Hủ tiếu Nam Vang hoặc khô tùy chọn", "hutieu.png", "steak", false, 0));
         list.add(new Product(idCounter++, "Súp cua trứng bắc thảo", 60000, "Súp cua thơm ngon, topping trứng bắc thảo", "supcua.png", "steak", false, 0));
 
-        // Combo & Set (vẫn để trong steak cho đơn giản, hoặc sau này bạn có thể tách category)
         list.add(new Product(idCounter++, "Combo Gà 4 món", 0, "Combo đặc biệt đang giảm 20% - giá gốc liên hệ", "setga.png", "steak", true, 20));
         list.add(new Product(idCounter++, "Combo Cuốn", 120000, "Set cuốn tươi ngon đa dạng", "setcuon.png", "steak", false, 0));
         list.add(new Product(idCounter++, "Set cơm 2 người", 70000, "Set tiết kiệm cho 2 người", "xoiman.png", "steak", false, 0));
@@ -92,9 +86,7 @@ public class ProductController {
         list.add(new Product(idCounter++, "Gà nướng", 250000, "Gà nướng nguyên con hoặc đùi", "ganuong.png", "steak", false, 0));
         list.add(new Product(idCounter++, "Vịt quay", 250000, "Vịt quay giòn da, thịt mềm", "vitquay.png", "steak", false, 0));
 
-        // ==========================================
-        // 2. TRÁNG MIỆNG (Category: "dessert")
-        // ==========================================
+        // 2. TRÁNG MIỆNG
         list.add(new Product(idCounter++, "Chè Thái Sầu Riêng", 40000, "Sầu riêng tươi nguyên chất, béo ngậy.", "chethai.png", "dessert", false, 20));
         list.add(new Product(idCounter++, "Bánh Flan Caramen", 30000, "Mềm mịn, tan ngay trong miệng.", "banhplan.png", "dessert", false, 0)); // chỉnh giá + ảnh
         list.add(new Product(idCounter++, "Bánh Đậu Xanh", 40000, "Đặc sản Hải Dương, ngọt thanh.", "banhdau.png", "dessert", false, 25));
@@ -105,15 +97,12 @@ public class ProductController {
         list.add(new Product(idCounter++, "Chè dưỡng nhan", 35000, "Ngọt thanh, tốt cho làn da", "duongnhan.png", "dessert", false, 0));
         list.add(new Product(idCounter++, "Bánh Dâu", 60000, "Bánh ngọt vị dâu tươi", "dautay.png", "dessert", false, 0));
 
-        // ==========================================
-        // 3. ĐỒ UỐNG (Category: "coffee")
-        // ==========================================
+        // 3. ĐỒ UỐNG
         list.add(new Product(idCounter++, "Coffee Latte", 55000, "Cà phê Ý pha máy, lớp bọt sữa bồng bềnh.", "cafee.png", "coffee", true, 0));
         list.add(new Product(idCounter++, "Nước Cam Vắt", 40000, "Cam sành tươi, bổ sung Vitamin C.", "nuoccam.png", "coffee", false, 0));
         list.add(new Product(idCounter++, "Trà Xoài Macchiato", 45000, "Trà xoài tươi mát kết hợp kem cheese.", "traxoai.png", "coffee", false, 0));
         list.add(new Product(idCounter++, "Nước Sâm Bí Đao", 20000, "Nhà làm, thanh lọc cơ thể.", "nuocsam.png", "coffee", false, 0));
 
-        // Thêm đồ uống mới từ thực đơn
         list.add(new Product(idCounter++, "Trà hoa cúc", 35000, "Thơm nhẹ, thư giãn", "tralai.png", "coffee", false, 0));
         list.add(new Product(idCounter++, "Trà sen", 40000, "Trà sen thanh mát", "trasen.png", "coffee", false, 0));
         list.add(new Product(idCounter++, "Trà chanh", 30000, "Trà chanh tươi mát, giải nhiệt", "nuocchanh.png", "coffee", true, 0));
@@ -138,7 +127,7 @@ public class ProductController {
         // 2. Thêm review mới vào danh sách review của món đó
         product.getReviews().add(review);
 
-        // 3. Lưu lại vào Database (Cập nhật dữ liệu mới)
+        // 3. Lưu lại vào Database
         productRepository.save(product);
 
         return ResponseEntity.ok("Đã thêm đánh giá thành công!");

@@ -10,7 +10,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/auth")
-@CrossOrigin(origins = "*") // Cho phép Frontend (127.0.0.1:5500) gọi API
+@CrossOrigin(origins = "*")
 public class AuthController {
 
     @Autowired

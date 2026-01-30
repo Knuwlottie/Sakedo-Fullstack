@@ -1,5 +1,3 @@
-// --- FILE: js/pages/checkout.js (PHIÊN BẢN ĐÃ FIX USER ID) ---
-
 console.log("--> FILE JS CHECKOUT ĐÃ TẢI THÀNH CÔNG!");
 
 let subTotalAmount = 0;
@@ -7,25 +5,19 @@ let subTotalAmount = 0;
 document.addEventListener("DOMContentLoaded", function () {
   console.log("1. Trang đã tải xong HTML");
 
-  // Tự động điền thông tin nếu đã đăng nhập (UX tốt hơn)
   autoFillUserInfo();
 
-  // Kiểm tra giỏ hàng
   const cart = JSON.parse(localStorage.getItem("cart")) || [];
 
   if (cart.length === 0) {
     console.warn("Giỏ hàng trống!");
-    // Nếu muốn chặn người dùng vào trang này khi giỏ trống thì mở comment dưới ra
-    // alert("Giỏ hàng đang trống!");
-    // window.location.href = "menu.html";
     return;
   }
 
   const miniList = document.getElementById("mini-cart-list");
   if (miniList) {
-    // Render Giỏ hàng nhỏ
     subTotalAmount = 0;
-    miniList.innerHTML = ""; // Xóa cũ
+    miniList.innerHTML = "";
     cart.forEach((item) => {
       let price = item.price;
       if (typeof price === "string") {
@@ -41,7 +33,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // Hiển thị tạm tính
   const subTotalEl = document.getElementById("ck-subtotal");
   if (subTotalEl)
     subTotalEl.textContent = subTotalAmount.toLocaleString() + "đ";
@@ -49,7 +40,6 @@ document.addEventListener("DOMContentLoaded", function () {
   calculateShipping();
 });
 
-// Hàm tự điền thông tin user (Mới thêm)
 function autoFillUserInfo() {
   const user = JSON.parse(localStorage.getItem("user"));
   if (user) {
@@ -57,7 +47,6 @@ function autoFillUserInfo() {
     const phoneEl = document.getElementById("cus-phone");
     const addrEl = document.getElementById("cus-address-detail");
 
-    // Ưu tiên lấy tên hiển thị hoặc họ tên đầy đủ
     if (nameEl) nameEl.value = user.name || user.fullName || "";
     if (phoneEl) phoneEl.value = user.phone || "";
     if (addrEl) addrEl.value = user.address || "";
@@ -79,11 +68,9 @@ function calculateShipping() {
     totalEl.textContent = (subTotalAmount + shippingFee).toLocaleString() + "đ";
 }
 
-// --- HÀM QUAN TRỌNG NHẤT: SUBMIT ---
 async function submitOrder() {
   console.log(">>> BẮT ĐẦU ẤN NÚT ĐẶT HÀNG <<<");
 
-  // 1. Lấy dữ liệu từ Form HTML
   const nameEl = document.getElementById("cus-name");
   const phoneEl = document.getElementById("cus-phone");
   const addrEl = document.getElementById("cus-address-detail");
@@ -101,7 +88,6 @@ async function submitOrder() {
   const districtValue = distEl.value;
   const note = noteEl ? noteEl.value.trim() : "";
 
-  // 2. Validate cơ bản
   if (!name || !phone || !addressDetail) {
     alert("Vui lòng điền đủ: Họ tên, SĐT, Địa chỉ chi tiết!");
     return;
@@ -111,59 +97,71 @@ async function submitOrder() {
     return;
   }
 
-  // 3. Chuẩn bị dữ liệu gửi đi
+  // Lấy phương thức thanh toán
+  const paymentMethodEl = document.querySelector(
+    'input[name="paymentMethod"]:checked',
+  );
+  const paymentMethod = paymentMethodEl
+    ? paymentMethodEl.value.toUpperCase()
+    : "COD";
+
   const districtName = distEl.options[distEl.selectedIndex].text;
   const fullAddress = `${addressDetail}, ${districtName}, TP. Hồ Chí Minh`;
   const shippingFee = parseInt(districtValue);
   const totalAmount = subTotalAmount + shippingFee;
 
-  // Map Items từ localStorage
   const cart = JSON.parse(localStorage.getItem("cart")) || [];
   const itemsToSend = cart.map((item) => {
     let p = item.price;
     if (typeof p === "string")
       p = parseFloat(p.replace(/\./g, "").replace("đ", ""));
 
-    // Đảm bảo gửi đủ ảnh và tên
+    // Lấy image name an toàn
+    let safeImage = item.image || "no-image.png";
+    if (safeImage.startsWith("data:")) {
+      safeImage = "no-image.png";
+    } else if (safeImage.includes("/")) {
+      safeImage = safeImage.split("/").pop();
+    }
+
     return {
       productName: item.name,
       quantity: item.quantity,
       price: p,
-      image: item.image || "", // Gửi kèm ảnh để hiện bên lịch sử
+      image: safeImage,
+      note: item.note || "",
     };
   });
 
-  // --- [QUAN TRỌNG] LẤY USER ID ---
   let userId = localStorage.getItem("currentUserId");
   if (!userId) {
-    // Fallback: Nếu không có currentUserId, thử lấy từ object user
     const localUser = JSON.parse(localStorage.getItem("user"));
     if (localUser) userId = localUser.id || localUser._id;
   }
 
-  // Nếu vẫn không có ID -> Bắt đăng nhập
   if (!userId) {
     alert("Bạn cần đăng nhập để tích điểm và theo dõi đơn hàng!");
     window.location.href = "auth.html";
     return;
   }
 
-  // 4. Tạo gói tin JSON (Đã có userId)
+  // Status = 0: Chờ xác nhận (Admin duyệt)
+  // Đơn hàng mới sẽ đợi: Admin duyệt -> Driver nhận -> Giao hàng -> Hoàn thành
   const orderData = {
-    userId: userId, // <--- DÒNG NÀY QUYẾT ĐỊNH VIỆC HIỆN LỊCH SỬ
+    userId: userId,
     customerName: name,
     customerPhone: phone,
     customerAddress: fullAddress,
     note: note,
+    paymentMethod: paymentMethod,
     shippingFee: shippingFee,
     totalAmount: totalAmount,
-    status: 0, // 0: Chờ xác nhận
+    status: 0, // Chờ admin duyệt
     items: itemsToSend,
   };
 
   console.log("--> Đang gửi dữ liệu:", orderData);
 
-  // 5. Gửi API
   const btnSubmit =
     document.querySelector("button[onclick='submitOrder()']") ||
     document.querySelector(".btn-confirm");
@@ -173,6 +171,47 @@ async function submitOrder() {
   }
 
   try {
+    // Nếu thanh toán chuyển khoản, tạo link thanh toán trước
+    if (paymentMethod === "BANK") {
+      // Lưu order pending để khi thanh toán xong sẽ cập nhật
+      localStorage.setItem("pendingOrder", JSON.stringify(orderData));
+
+      const paymentResponse = await fetch(
+        "http://localhost:8080/api/payment/create-link",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ amount: totalAmount }),
+        },
+      );
+
+      const paymentData = await paymentResponse.json();
+      console.log("--> Response từ PayOS:", paymentData);
+
+      if (paymentResponse.ok && paymentData.checkoutUrl) {
+        // Lưu orderId để xử lý sau khi thanh toán
+        if (paymentData.orderCode) {
+          localStorage.setItem(
+            "pendingPaymentOrderCode",
+            paymentData.orderCode,
+          );
+        }
+        window.location.href = paymentData.checkoutUrl;
+        return;
+      } else {
+        alert(
+          "Lỗi tạo link thanh toán: " +
+            (paymentData.error || "Không thể kết nối"),
+        );
+        if (btnSubmit) {
+          btnSubmit.innerHTML = "XÁC NHẬN ĐẶT HÀNG";
+          btnSubmit.disabled = false;
+        }
+        return;
+      }
+    }
+
+    // Thanh toán COD - tạo đơn hàng trực tiếp
     const response = await fetch("http://localhost:8080/api/orders", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -181,11 +220,14 @@ async function submitOrder() {
 
     if (response.ok) {
       const result = await response.json();
-      alert("✅ ĐẶT HÀNG THÀNH CÔNG!");
+      console.log("--> ✅ Đơn hàng đã được tạo:", result);
 
-      // Xóa giỏ hàng và chuyển hướng về trang lịch sử
+      alert(
+        "✅ ĐẶT HÀNG THÀNH CÔNG!\n\nĐơn hàng của bạn đang chờ xác nhận từ cửa hàng.",
+      );
+
       localStorage.removeItem("cart");
-      window.location.href = "profile.html"; // Chuyển về profile để xem đơn vừa đặt
+      window.location.href = "profile.html";
     } else {
       const errText = await response.text();
       alert("Lỗi Server: " + errText);

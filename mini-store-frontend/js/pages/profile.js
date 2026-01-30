@@ -1,6 +1,3 @@
-// ============================================================
-// 1. CONFIG & STATE
-// ============================================================
 const API_BASE_URL = "http://localhost:8080/api";
 const DEFAULT_AVATAR = "../assets/images/logo.png";
 const DEFAULT_FOOD_IMG = "https://placehold.co/60?text=Food";
@@ -9,9 +6,6 @@ let isEditing = false;
 let tempAvatarBase64 = "";
 let allOrders = [];
 
-// ============================================================
-// 2. INITIALIZATION
-// ============================================================
 document.addEventListener("DOMContentLoaded", async function () {
   const localUser = getLocalUser();
 
@@ -31,9 +25,6 @@ document.addEventListener("DOMContentLoaded", async function () {
   }
 });
 
-// ============================================================
-// 3. UTILS & HELPERS
-// ============================================================
 function getLocalUser() {
   return JSON.parse(localStorage.getItem("user"));
 }
@@ -105,9 +96,6 @@ function getOrderStatusConfig(status) {
   return config[status] || config[0];
 }
 
-// ============================================================
-// 4. LOGIC RIÊNG CHO KHÁCH (GUEST MODE)
-// ============================================================
 function renderGuestProfile(guestUser) {
   setTextValue("profile-name", guestUser.name);
   setTextValue("profile-email", "Chưa đăng ký");
@@ -129,8 +117,8 @@ function renderGuestProfile(guestUser) {
   const activeContainer = document.getElementById("active-order-list");
   if (activeContainer) {
     activeContainer.innerHTML = `
-            <div style="text-align:center; padding:40px; color:#666; background:#f9f9f9; border-radius:10px;">
-                <i class="fas fa-user-secret" style="font-size: 40px; margin-bottom: 15px; color:#d8b26e;"></i>
+            <div class="guest-mode-container">
+                <i class="fas fa-user-secret"></i>
                 <p>Bạn đang ở chế độ <strong>Khách tham quan</strong>.</p>
                 <p>Khách không có lịch sử đơn hàng.</p>
             </div>
@@ -138,9 +126,6 @@ function renderGuestProfile(guestUser) {
   }
 }
 
-// ============================================================
-// 5. DATA FETCHING (MEMBER)
-// ============================================================
 async function loadProfileData() {
   const localUser = getLocalUser();
   if (!localUser?.email) return;
@@ -177,7 +162,7 @@ async function loadOrderHistory() {
   if (!userId || !activeContainer) return;
 
   try {
-    activeContainer.innerHTML = `<div style="text-align:center; padding:20px; color:#999;"><i class="fas fa-spinner fa-spin"></i> Đang tải đơn hàng...</div>`;
+    activeContainer.innerHTML = `<div class="loading-state"><i class="fas fa-spinner fa-spin"></i> Đang tải đơn hàng...</div>`;
 
     const res = await fetch(`${API_BASE_URL}/orders/user/${userId}`);
     if (!res.ok) throw new Error("Lỗi API");
@@ -186,13 +171,9 @@ async function loadOrderHistory() {
     const activeOrders = allOrders.filter((o) => [0, 1, 2].includes(o.status));
     renderOrderList(activeOrders, activeContainer, false);
   } catch (e) {
-    activeContainer.innerHTML = `<p style="text-align:center; color:#777;">Chưa có đơn hàng nào.</p>`;
+    activeContainer.innerHTML = `<p class="empty-message">Chưa có đơn hàng nào.</p>`;
   }
 }
-
-// ============================================================
-// 6. RENDERING LOGIC
-// ============================================================
 
 function renderOrderItemsHtml(items) {
   if (!items || items.length === 0) return "";
@@ -219,7 +200,7 @@ function renderOrderList(orders, container, isHistoryMode) {
     const msg = isHistoryMode
       ? "Bạn chưa có đơn hàng nào trong lịch sử."
       : "Hiện không có đơn hàng nào đang xử lý.";
-    container.innerHTML = `<div style="text-align:center; padding:30px; color:#777;">${msg}</div>`;
+    container.innerHTML = `<div class="empty-message">${msg}</div>`;
     return;
   }
 
@@ -230,7 +211,6 @@ function renderOrderList(orders, container, isHistoryMode) {
       const statusConfig = getOrderStatusConfig(order.status);
       const isCancel = order.status === 4;
 
-      // Danh sách icon chuẩn
       const steps = ["file-invoice", "utensils", "motorcycle", "house"];
 
       const timelineHtml = steps
@@ -254,7 +234,7 @@ function renderOrderList(orders, container, isHistoryMode) {
       const mapLink = getMapLink(userAddress);
 
       return `
-      <div class="order-card" style="border:1px solid ${isHistoryMode ? "#eee" : "#d8b26e"};">
+      <div class="order-card ${isHistoryMode ? "order-card-history" : "order-card-active"}">
           <div class="order-header">
               <div>
                   <div class="order-code">#${order.id.slice(-6).toUpperCase()}</div>
@@ -268,7 +248,7 @@ function renderOrderList(orders, container, isHistoryMode) {
           </div>
 
           <div class="order-body">
-              <div class="order-timeline" ${isCancel ? 'style="opacity:0.5; filter:grayscale(1)"' : ""}>
+              <div class="order-timeline ${isCancel ? "timeline-canceled" : ""}">
                   <div class="timeline-progress-bar" style="width:${statusConfig.width}"></div>
                   ${timelineHtml}
               </div>
@@ -277,7 +257,7 @@ function renderOrderList(orders, container, isHistoryMode) {
 
           <div class="order-footer">
               <div class="order-total-row">
-                  <div style="display:flex; align-items:center; gap:10px;">
+              <div class="total-row-flex">
                       <span class="total-label">Tổng cộng:</span>
                       <span class="total-price">${formatCurrency(order.totalAmount)}</span>
                   </div>
@@ -297,7 +277,7 @@ function renderOrderList(orders, container, isHistoryMode) {
                       <div class="route-info">
                           <h4>Nhận hàng</h4>
                           <p>${userAddress}</p>
-                          <a href="${mapLink}" target="_blank" style="font-size:0.85rem; color:#d8b26e; text-decoration:none; margin-top:5px; display:inline-flex; align-items:center; gap:5px; font-weight:700;">
+                          <a href="${mapLink}" target="_blank" class="map-link">
                               <i class="fas fa-directions"></i> Chỉ đường từ quán đến đây
                           </a>
                       </div>
@@ -311,9 +291,6 @@ function renderOrderList(orders, container, isHistoryMode) {
   container.insertAdjacentHTML("beforeend", html);
 }
 
-// ============================================================
-// 7. ACTION HANDLERS (ĐÃ SỬA: CẬP NHẬT HEADER NGAY LẬP TỨC)
-// ============================================================
 function openHistoryModal() {
   const historyModal = document.getElementById("history-modal");
   const historyContainer = document.getElementById("history-list-container");
@@ -380,8 +357,24 @@ function setupAvatarUpload() {
     if (!file) return;
     const reader = new FileReader();
     reader.onload = (ev) => {
-      img.src = ev.target.result;
-      tempAvatarBase64 = ev.target.result;
+      const newAvatarBase64 = ev.target.result;
+
+      // 1. Cập nhật ảnh trên profile
+      img.src = newAvatarBase64;
+      tempAvatarBase64 = newAvatarBase64;
+
+      // 2. Cập nhật ảnh trên header
+      const headerAvatarImg = document.querySelector(".user-dropdown img");
+      if (headerAvatarImg) {
+        headerAvatarImg.src = newAvatarBase64;
+      }
+
+      // 3. Cập nhật localStorage
+      const currentUser = getLocalUser();
+      if (currentUser) {
+        currentUser.avatar = newAvatarBase64;
+        localStorage.setItem("user", JSON.stringify(currentUser));
+      }
     };
     reader.readAsDataURL(file);
   };
@@ -433,8 +426,6 @@ function setupActionHandler() {
       });
 
       if (res.ok) {
-        // --- 🔥 PHẦN SỬA ĐỂ CẬP NHẬT HEADER NGAY LẬP TỨC 🔥 ---
-
         // 1. Cập nhật LocalStorage
         const currentUser = getLocalUser();
         const updatedUser = {
@@ -442,23 +433,18 @@ function setupActionHandler() {
           name: data.name,
           phone: data.phone,
           address: data.address,
-          avatar: tempAvatarBase64 || currentUser.avatar, // Nếu có ảnh mới thì dùng, không thì giữ cũ
+          avatar: tempAvatarBase64 || currentUser.avatar,
         };
         localStorage.setItem("user", JSON.stringify(updatedUser));
 
-        // 2. Tìm ảnh và tên trên HEADER để đổi luôn (Force Update)
-        const headerAvatarImg = document.querySelector(
-          ".user-dropdown .user-avatar img",
-        );
+        // 2. Tìm ảnh và tên trên HEADER
+        const headerAvatarImg = document.querySelector(".user-dropdown img");
         if (headerAvatarImg) {
           headerAvatarImg.src = updatedUser.avatar;
         }
 
-        const headerNameSpan = document.querySelector(
-          ".user-dropdown .user-name",
-        );
+        const headerNameSpan = document.querySelector(".user-dropdown span");
         if (headerNameSpan) {
-          // Lấy tên ngắn gọn
           const shortName = updatedUser.name.trim().split(" ").pop();
           headerNameSpan.textContent = shortName;
         }

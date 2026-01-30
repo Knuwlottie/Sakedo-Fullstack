@@ -5,13 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Đặt Bàn - Sakedo</title>
 
-    <!-- Google Fonts -->
     <link
       href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;600;700;800&family=Fruktur&display=swap"
       rel="stylesheet"
     />
 
-    <!-- Stylesheets (relative paths so server root doesn't matter) -->
     <link rel="stylesheet" href="../css/base/variables.css" />
     <link rel="stylesheet" href="../css/components/header.css" />
     <link rel="stylesheet" href="../css/pages/global.css" />
@@ -22,6 +20,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
     />
   </head>
+
   <body>
     <div id="header-placeholder"></div>
 
@@ -83,21 +82,22 @@
                     />
                   </div>
                 </div>
-
-                <div class="form-row">
-                  <div class="form-input">
-                    <input
-                      id="quantity"
-                      type="number"
-                      min=""
-                      value=""
-                      placeholder="Số lượng"
-                      required
-                    />
-                  </div>
-                  <div class="form-input">
-                    <input id="note" type="text" placeholder="Ghi chú" />
-                  </div>
+                <div class="form-input">
+                  <input
+                    id="quantity"
+                    type="number"
+                    min="1"
+                    max="20"
+                    placeholder="Số lượng khách"
+                    required
+                  />
+                </div>
+                <div class="form-input">
+                  <input
+                    id="note"
+                    type="text"
+                    placeholder="Ghi chú (Ví dụ: bàn ngoài trời)"
+                  />
                 </div>
 
                 <div class="btn-frame">
@@ -120,18 +120,15 @@
         </div>
       </section>
 
-      <!-- Welcome Section -->
       <section class="welcome-section">
         <div class="container">
           <div class="welcome-wrapper">
-            <!-- Left Image - Pho -->
             <div class="welcome-img-left">
               <div class="capsule-welcome">
                 <img src="../assets/images/pho3.png" alt="Phở" />
               </div>
             </div>
 
-            <!-- Center Content -->
             <div class="welcome-content">
               <span class="welcome-label">WELCOME TO SAKEDO</span>
               <h2 class="welcome-title">Cảm nhận hương <br />vị ẩm thực</h2>
@@ -145,7 +142,6 @@
               <a href="tel:+19006988" class="welcome-phone">+1900 6988</a>
             </div>
 
-            <!-- Right Images -->
             <div class="welcome-img-right">
               <div class="right-images-stack">
                 <div class="round-img top-img">
@@ -163,16 +159,12 @@
         </div>
       </section>
 
-      <!-- Promotion Section - Ăn cơm nhà -->
       <section class="promo-section">
         <div class="container">
           <div class="promo-wrapper">
-            <!-- Left Title -->
             <div class="promo-title-left">
               <h2 class="promo-heading">Ăn cơm nhà,<br />nhớ vị xưa</h2>
             </div>
-
-            <!-- Center Image with Badge -->
             <div class="promo-image-center">
               <div class="discount-badge">
                 <span class="badge-small">GIẢM GIÁ</span>
@@ -186,7 +178,6 @@
               </div>
             </div>
 
-            <!-- Right Content - Benefits -->
             <div class="promo-benefits">
               <ul class="benefits-list">
                 <li>
@@ -212,7 +203,6 @@
         </div>
       </section>
 
-      <!-- Menu Section - Bếp Nhà SAKEDO -->
       <section class="menu-region-section">
         <div class="container">
           <div class="menu-region-header">

@@ -1,9 +1,3 @@
-/* ===============================
-   FOOTER SAKEDO – FINAL VERSION
-   Tone: Vintage – Ấm – Truyền thống
-   Main color: #D8B26E
-================================ */
-
 /* ===== WRAPPER ===== */
 .footer-vintage {
   position: relative;
@@ -35,14 +29,14 @@
   max-width: 1920px;
   height: auto;
 
-  opacity: 0.28; /* làm nền chìm */
-  filter: blur(0.6px); /* làm dịu nhẹ */
+  opacity: 0.28;
+  filter: blur(0.6px);
 
   pointer-events: none;
   z-index: 0;
 }
 
-/* ===== OVERLAY (PHỦ NỀN) ===== */
+/* ===== OVERLAY ===== */
 .footer-bg-overlay {
   position: absolute;
   inset: 0;
@@ -61,7 +55,7 @@
 /* ===== CONTENT ===== */
 .footer-content {
   position: relative;
-  z-index: 3; /* cao nhất – nổi trên tất cả */
+  z-index: 3;
   max-width: 1200px;
   margin: 0 auto;
 
@@ -80,7 +74,7 @@
   gap: 56px;
 }
 
-/* ===== LEFT (LOGO) ===== */
+/* ===== LOGO ===== */
 .footer-logo-wrap {
   display: flex;
   justify-content: center;
@@ -118,7 +112,7 @@
   text-align: center;
 }
 
-/* ===== CENTER (SOCIAL) ===== */
+/* ===== SOCIAL ===== */
 .footer-social {
   display: flex;
   justify-content: center;
@@ -152,7 +146,7 @@
   transform: translateY(-2px) scale(1.08);
 }
 
-/* ===== RIGHT (CONTACT) ===== */
+/* ===== CONTACT ===== */
 .footer-title {
   font-size: 1.15rem;
   font-weight: 700;
@@ -208,7 +202,7 @@
   color: #fff;
 }
 
-/* ===== COPYRIGHT (NẾU DÙNG) ===== */
+/* ===== COPYRIGHT ===== */
 .footer-copyright {
   margin-top: 20px;
   font-size: 0.95rem;

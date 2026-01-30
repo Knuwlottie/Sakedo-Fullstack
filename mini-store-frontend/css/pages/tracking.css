@@ -28,7 +28,7 @@
 }
 
 .order-title span {
-  color: #d8b26e; /* Vàng Sakedo */
+  color: #d8b26e;
 }
 
 .order-subtitle {
@@ -41,16 +41,15 @@
   font-weight: 700;
 }
 
-/* --- THANH TIẾN TRÌNH (CORE DESIGN) --- */
+/* --- THANH TIẾN TRÌNH--- */
 .progress-track {
   display: flex;
   justify-content: space-between;
   position: relative;
   margin-bottom: 60px;
-  padding: 0 40px; /* Thụt vào để icon đầu cuối không bị sát lề */
+  padding: 0 40px;
 }
 
-/* Kẻ xám nền */
 .progress-bg-line {
   position: absolute;
   top: 25px;
@@ -62,15 +61,15 @@
   border-radius: 4px;
 }
 
-/* Kẻ xanh chạy (Active) */
+/* Kẻ xanh chạy  */
 .progress-active-line {
   position: absolute;
   top: 25px;
   left: 60px;
   height: 4px;
-  background: #28a745; /* Màu xanh lá */
+  background: #28a745;
   z-index: 0;
-  width: 0%; /* JS sẽ điều khiển cái này */
+  width: 0%;
   transition: width 1s ease-in-out;
   border-radius: 4px;
 }
@@ -79,7 +78,7 @@
   position: relative;
   z-index: 1;
   text-align: center;
-  width: 120px; /* Cố định chiều rộng để căn giữa */
+  width: 120px;
 }
 
 .step-icon {
@@ -91,7 +90,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 15px; /* Căn giữa icon */
+  margin: 0 auto 15px;
   font-size: 1.2rem;
   color: #ccc;
   transition: all 0.4s ease;
@@ -110,7 +109,7 @@
   color: #bbb;
 }
 
-/* --- TRẠNG THÁI ACTIVE (Đã hoàn thành) --- */
+/* --- TRẠNG THÁI ACTIVE  --- */
 .step.active .step-icon {
   border-color: #28a745;
   background: #28a745;
@@ -126,9 +125,9 @@
   color: #666;
 }
 
-/* --- TRẠNG THÁI CURRENT (Đang xử lý - Hiệu ứng Pulse) --- */
+/* --- TRẠNG THÁI CURRENT  --- */
 .step.current .step-icon {
-  border-color: #d8b26e; /* Màu vàng */
+  border-color: #d8b26e;
   background: #fff;
   color: #d8b26e;
   animation: pulse-yellow 1.5s infinite;
@@ -142,9 +141,11 @@
   0% {
     box-shadow: 0 0 0 0 rgba(216, 178, 110, 0.4);
   }
+
   70% {
     box-shadow: 0 0 0 10px rgba(216, 178, 110, 0);
   }
+
   100% {
     box-shadow: 0 0 0 0 rgba(216, 178, 110, 0);
   }
@@ -193,6 +194,7 @@
   background: #eee;
   overflow: hidden;
 }
+
 .driver-avatar img {
   width: 100%;
   height: 100%;
@@ -267,6 +269,7 @@
   background: #f0f0f0;
   color: #555;
 }
+
 .btn-back:hover {
   background: #e0e0e0;
 }
@@ -276,6 +279,7 @@
   color: #fff;
   border: none;
 }
+
 .btn-contact-support:hover {
   background: #c5a059;
 }
@@ -294,13 +298,13 @@
     width: 4px;
     height: 100%;
     top: 0;
-    left: 43px; /* Căn chỉnh với icon */
+    left: 43px;
     right: auto;
   }
 
   .progress-active-line {
     width: 4px;
-    height: 0%; /* JS sẽ chỉnh height */
+    height: 0%;
     transition: height 1s ease;
   }
 
@@ -310,7 +314,7 @@
     width: 100%;
     text-align: left;
     margin-bottom: 30px;
-    background: #fff; /* Che đường kẻ */
+    background: #fff;
     gap: 15px;
   }
 

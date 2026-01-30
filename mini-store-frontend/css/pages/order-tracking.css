@@ -1,0 +1,102 @@
+/* === ORDER TRACKING PAGE === */
+
+.tracking-container {
+  max-width: 800px;
+  margin: 50px auto;
+  padding: 20px;
+}
+
+.order-id-title {
+  text-align: center;
+  font-family: "Fruktur", cursive;
+  font-size: 2rem;
+  margin-bottom: 40px;
+}
+
+/* THANH TIẾN TRÌNH */
+.progress-track {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  margin-bottom: 50px;
+}
+
+.progress-track::before {
+  content: "";
+  position: absolute;
+  top: 15px;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: #eee;
+  z-index: -1;
+}
+
+.step {
+  text-align: center;
+  width: 25%;
+  position: relative;
+  opacity: 0.5;
+  transition: 0.3s;
+}
+
+.step-icon {
+  width: 35px;
+  height: 35px;
+  background: #fff;
+  border: 3px solid #ccc;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+  font-weight: bold;
+  color: #ccc;
+}
+
+.step-text {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+/* TRẠNG THÁI ACTIVE */
+.step.active {
+  opacity: 1;
+}
+
+.step.active .step-icon {
+  border-color: #28a745;
+  background: #28a745;
+  color: #fff;
+}
+
+/* CHI TIẾT ĐƠN HÀNG */
+.order-details {
+  background: #f9f9f9;
+  padding: 30px;
+  border-radius: 15px;
+  border: 1px dashed #aaa;
+}
+
+.track-total {
+  color: #d32f2f;
+  font-weight: bold;
+}
+
+/* NÚT QUAY VỀ */
+.btn-home {
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: 15px;
+  background: #d8b26e;
+  color: #fff;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 8px;
+  margin-top: 30px;
+}
+
+.btn-home:hover {
+  background: #c9a35f;
+}

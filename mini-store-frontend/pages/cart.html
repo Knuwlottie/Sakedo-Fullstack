@@ -5,19 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Giỏ Hàng - Sakedo</title>
 
-    <!-- Google Fonts -->
     <link
       href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;600;700;800&family=Fruktur&display=swap"
       rel="stylesheet"
     />
-
-    <!-- Font Awesome -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
     />
-
-    <!-- Stylesheets - Dùng đường dẫn tương đối -->
     <link rel="stylesheet" href="../css/base/variables.css" />
     <link rel="stylesheet" href="../css/components/header.css" />
     <link rel="stylesheet" href="../css/components/footer.css" />
@@ -32,26 +27,18 @@
       <div class="container cart-container">
         <h1 class="page-title">Giỏ Hàng Của Bạn</h1>
 
-        <div id="cart-content" class="cart-layout">
+        <div id="cart-content" class="cart-layout cart-layout-simple">
           <div class="cart-list" id="cart-items-wrapper"></div>
 
-          <div class="cart-summary">
-            <h3 style="margin-bottom: 20px">Tóm tắt đơn hàng</h3>
-            <div class="summary-row">
-              <span>Tạm tính:</span>
-              <span id="sub-total">0đ</span>
-            </div>
-            <div class="summary-row">
-              <span>Phí giao hàng:</span>
-              <span id="shipping-fee" style="font-size: 0.9rem; color: #666"
-                >Tính khi thanh toán</span
-              >
-            </div>
-            <div class="summary-total">
+          <!-- Tổng cộng và nút Mua hàng ngay -->
+          <div class="cart-footer">
+            <div class="cart-total-row">
               <span>Tổng cộng:</span>
-              <span id="final-total" style="color: #d32f2f">0đ</span>
+              <span id="final-total" class="final-total">0đ</span>
             </div>
-            <button class="btn-checkout">THANH TOÁN NGAY</button>
+            <button class="btn-checkout">
+              <i class="fas fa-shopping-bag"></i> MUA HÀNG NGAY
+            </button>
           </div>
         </div>
 

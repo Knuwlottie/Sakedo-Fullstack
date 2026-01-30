@@ -2,9 +2,9 @@ package com.sakedo.mini_store_backend.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import java.time.LocalDateTime; // Thư viện xử lý thời gian
+import java.time.LocalDateTime;
 
-@Document(collection = "contacts") // Tên bảng trong MongoDB sẽ là 'contacts'
+@Document(collection = "contacts")
 public class Contact {
     @Id
     private String id;
@@ -13,7 +13,7 @@ public class Contact {
     private String phone;
     private String topic;
     private String message;
-    private LocalDateTime createdAt; // Lưu thời điểm khách gửi tin
+    private LocalDateTime createdAt;
 
     public Contact() {}
 
@@ -23,7 +23,7 @@ public class Contact {
         this.phone = phone;
         this.topic = topic;
         this.message = message;
-        this.createdAt = LocalDateTime.now(); // Tự động lấy giờ hiện tại
+        this.createdAt = LocalDateTime.now();
     }
 
     // --- GETTER & SETTER ---

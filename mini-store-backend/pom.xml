@@ -28,13 +28,11 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-
         <!-- Spring Data MongoDB (kết nối MongoDB Atlas, @Id, @Document) -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-mongodb</artifactId>
         </dependency>
-
 
         <!-- Spring Security (xác thực, JWT sau này) -->
         <dependency>
@@ -42,14 +40,12 @@
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
 
-
         <!-- Lombok (giảm boilerplate code: @Data, @Getter, @Setter...) -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
-
 
         <!-- Spring Boot DevTools (tự restart khi thay đổi code) -->
         <dependency>
@@ -59,20 +55,17 @@
             <optional>true</optional>
         </dependency>
 
-
-        <!-- Test Starter (đã có sẵn) -->
+        <!-- Test Starter -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
 
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-mail</artifactId>
         </dependency>
-
 
         <dependency>
             <groupId>vn.payos</groupId>
@@ -80,15 +73,12 @@
             <version>1.0.1</version>
         </dependency>
 
-
     </dependencies>
-
-
 
 
     <build>
         <plugins>
-            <!-- Spring Boot Maven Plugin (đóng gói jar chạy được) -->
+            <!-- Spring Boot Maven Plugin  -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
@@ -104,4 +94,3 @@
         </plugins>
     </build>
 </project>
-

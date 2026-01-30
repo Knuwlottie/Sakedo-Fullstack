@@ -1,11 +1,49 @@
 .food-card .card-header a {
-  position: relative; /* Kích hoạt khả năng xếp lớp */
-  z-index: 5; /* Cao hơn z-index: 1 của .img-bg */
-  display: block; /* Để thẻ a ôm trọn ảnh */
+  position: relative;
+  z-index: 5;
+  display: block;
 }
 
-/* Đảm bảo ảnh bên trong không bị ảnh hưởng */
 .food-card .food-img {
   position: relative;
-  z-index: 6; /* An toàn thì cho cao hơn thẻ a luôn */
+  z-index: 6;
+}
+
+.clickable-card {
+  cursor: pointer;
+}
+
+.menu-item-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px dashed #eee;
+}
+
+/* Menu item content */
+.menu-item-content {
+  flex: 1;
+}
+
+/* Menu item name */
+.menu-item-name {
+  display: block;
+  font-weight: 700;
+  color: #333;
+  font-size: 16px;
+}
+
+/* Menu item description */
+.menu-item-desc {
+  margin: 5px 0 0;
+  font-size: 13px;
+  color: #777;
+}
+
+/* Menu item price */
+.menu-item-price {
+  font-weight: 700;
+  color: #d4af37;
+  margin-left: 15px;
 }

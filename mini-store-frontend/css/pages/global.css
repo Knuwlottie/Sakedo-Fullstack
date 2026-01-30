@@ -1,7 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Fruktur&family=Pacifico&family=Epilogue:wght@400;500;600;700;800&display=swap");
+
 body {
-  padding-top: 70px;
+  padding-top: 0;
 }
+
 * {
   margin: 0;
   padding: 0;
@@ -19,7 +21,7 @@ body {
   width: 100%;
 }
 
-/* ================= HEADER (GIỮ NGUYÊN) ================= */
+/*HEADER*/
 .header {
   background-color: #fff;
   height: 70px;
@@ -86,7 +88,7 @@ body {
 
 .cart-btn {
   position: relative;
-  color: #d8b26e !important; /* Ép màu vàng */
+  color: #d8b26e !important;
   font-size: 22px;
   text-decoration: none;
   display: flex;
@@ -129,7 +131,7 @@ body {
   transform: translateY(-1px);
 }
 
-/* ================= HERO SECTION (GIỮ NGUYÊN) ================= */
+/*HERO SECTION*/
 .hero-section {
   background-color: #000;
   background-image: url("../../assets/images/baner.png");
@@ -137,6 +139,7 @@ body {
   background-position: center right;
   background-repeat: no-repeat;
   padding: 150px 0;
+  padding-top: 220px;
   position: relative;
   width: 100%;
   overflow: hidden;
@@ -177,6 +180,7 @@ body {
 .hero-buttons {
   display: flex;
   gap: 20px;
+  align-items: center;
 }
 
 .btn-outline {
@@ -247,7 +251,7 @@ body {
   border: 2px solid #fff;
 }
 
-/* ================= ABOUT SECTION (GIỮ NGUYÊN) ================= */
+/* ABOUT SECTION*/
 .about-section {
   padding: 100px 0;
   background-color: #fff;
@@ -347,7 +351,7 @@ body {
   text-transform: capitalize;
 }
 
-/* ================= MENU HIGHLIGHT (GIỮ NGUYÊN) ================= */
+/* MENU HIGHLIGHT*/
 .menu-highlight-section {
   padding: 80px 0 100px 0;
   background-color: #fff;
@@ -504,9 +508,7 @@ body {
   font-style: italic;
 }
 
-/* =========================================
-   🔥 KHÁM PHÁ ƯU ĐÃI (FIX FONT & Z-INDEX)
-   ========================================= */
+/*KHÁM PHÁ ƯU ĐÃI*/
 .promotion-section {
   padding: 100px 0 130px 0;
   background-color: #fff;
@@ -528,7 +530,6 @@ body {
   position: relative;
 }
 
-/* Áp dụng Font Pacifico cho chữ "Ưu Đãi" và "Phải Thử" */
 .highlight-text {
   font-family: "Pacifico", cursive !important;
   font-weight: 400;
@@ -536,7 +537,7 @@ body {
   font-size: 3.8rem;
   margin-left: 10px;
   position: relative;
-  z-index: 100; /* Nổi lên trên cùng */
+  z-index: 100;
   text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.05);
 }
 
@@ -636,9 +637,7 @@ body {
   backdrop-filter: blur(5px);
 }
 
-/* =========================================================
-   🔥 MÓN NGON PHẢI THỬ (FIX HÌNH ĐÈ + Z-INDEX)
-   ========================================================= */
+/*MÓN NGON PHẢI THỬ*/
 .must-try-section {
   padding: 80px 0 100px 0;
   background-color: #f5f8fd;
@@ -680,7 +679,7 @@ body {
   border-color: #bfa363;
 }
 
-/* --- FIX VỊ TRÍ HÌNH TRÒN VÀ ẢNH MÓN --- */
+/* --- VỊ TRÍ HÌNH TRÒN VÀ ẢNH MÓN --- */
 .card-header {
   position: relative;
   height: 220px;
@@ -688,11 +687,9 @@ body {
   align-items: center;
   justify-content: center;
   margin-top: 10px;
-  /* Tạo tầng xếp lớp cho phần header này */
   z-index: 1;
 }
 
-/* 1. Hình bầu dục vàng (NẰM DƯỚI) */
 .img-bg {
   position: absolute;
   width: 280px;
@@ -701,12 +698,10 @@ body {
   border-radius: 50%;
   top: 50px;
   transform: rotate(-5deg);
-
-  /* Cho z-index thấp để nằm dưới */
   z-index: 1;
 }
 
-/* 2. Ảnh món ăn (NẰM TRÊN) */
+/* Ảnh món ăn  */
 .food-img {
   width: 220px;
   height: 220px;
@@ -714,10 +709,7 @@ body {
   border-radius: 50%;
   filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.2));
   transition: 0.3s;
-
-  /* Bắt buộc phải có position relative thì z-index mới ăn */
   position: relative;
-  /* Cho z-index cao hơn .img-bg */
   z-index: 5;
 }
 
@@ -725,7 +717,7 @@ body {
   transform: scale(1.05);
 }
 
-/* 3. Nhãn SALE (NẰM TRÊN CÙNG) */
+/* 3. Nhãn SALE */
 .sale-badge {
   position: absolute;
   top: 0;
@@ -740,17 +732,14 @@ body {
   justify-content: center;
   font-weight: 800;
   font-size: 11px;
-
-  /* Cao nhất */
   z-index: 10;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-/* Nội dung chữ bên dưới */
 .card-body {
   padding-top: 10px;
   position: relative;
-  z-index: 10; /* Đảm bảo chữ nổi lên */
+  z-index: 10;
 }
 
 .food-title {
@@ -760,16 +749,14 @@ body {
   line-height: 1.2;
 }
 
-/* Định dạng thẻ A bên trong để nó màu đen và không gạch chân */
 .food-title a {
-  text-decoration: none; /* Bỏ gạch chân */
-  color: #000; /* Màu đen chuẩn */
+  text-decoration: none;
+  color: #000;
   transition: color 0.3s ease;
 }
 
-/* Hiệu ứng khi di chuột vào tên món */
 .food-title a:hover {
-  color: #d8b26e; /* Chuyển màu vàng khi hover */
+  color: #d8b26e;
 }
 
 .price-row {
@@ -844,7 +831,7 @@ body {
   box-shadow: 0 4px 10px rgba(233, 30, 99, 0.4);
 }
 
-/* ================= REVIEW SECTION (GIỮ NGUYÊN) ================= */
+/*REVIEW SECTION*/
 .review-section {
   padding: 60px 0 80px 0;
   background-color: #f9f9f9;
@@ -978,7 +965,7 @@ body {
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
-/* ================= VIDEO MODAL (GIỮ NGUYÊN) ================= */
+/*VIDEO MODAL*/
 .video-modal-overlay {
   display: none;
   position: fixed;
@@ -1039,13 +1026,14 @@ body {
     transform: scale(0.8);
     opacity: 0;
   }
+
   to {
     transform: scale(1);
     opacity: 1;
   }
 }
 
-/* ================= DELIVERY SECTION (GIỮ NGUYÊN) ================= */
+/*DELIVERY SECTION */
 .delivery-section-bg {
   position: relative;
   width: 100%;
@@ -1139,7 +1127,7 @@ body {
   opacity: 0.9;
 }
 
-/* ================= NEWS SECTION (GIỮ NGUYÊN) ================= */
+/*NEWS SECTION */
 .news-section {
   padding: 80px 0;
   background-color: #fff;
@@ -1235,7 +1223,7 @@ body {
   color: #333;
 }
 
-/* ================= FOOTER (GIỮ NGUYÊN) ================= */
+/*FOOTER */
 .footer-section {
   position: relative;
   background-image: url("../../assets/images/nen.png");

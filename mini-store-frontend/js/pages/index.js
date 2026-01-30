@@ -1,12 +1,10 @@
 document.addEventListener("DOMContentLoaded", async function () {
   const urlParams = new URLSearchParams(window.location.search);
 
-  // Kiểm tra nếu URL có tham số payment=success
   if (urlParams.get("payment") === "success") {
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
 
     if (cart.length > 0) {
-      // Chuẩn bị dữ liệu
       let subTotal = 0;
       const orderItems = cart.map((item) => {
         let rawPrice =
@@ -31,9 +29,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         items: orderItems,
       };
 
-      // Lưu vào MongoDB
       try {
-        // Link API backend (đảm bảo backend đang chạy)
         await fetch("http://localhost:8080/api/orders", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -45,15 +41,9 @@ document.addEventListener("DOMContentLoaded", async function () {
       }
     }
 
-    // --- XÓA GIỎ HÀNG ---
     localStorage.removeItem("cart");
-
     alert("Thanh toán thành công! Giỏ hàng đã được làm trống.");
-
-    // Xóa tham số trên URL để nhìn cho sạch
     window.history.replaceState({}, document.title, window.location.pathname);
-
-    // Load lại trang để cập nhật giao diện (số giỏ hàng về 0)
     location.reload();
   }
 });

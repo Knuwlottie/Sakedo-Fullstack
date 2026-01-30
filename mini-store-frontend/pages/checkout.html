@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="vi">
   <head>
     <meta charset="UTF-8" />
@@ -19,16 +19,16 @@
     <link rel="stylesheet" href="../css/pages/global.css" />
     <link rel="stylesheet" href="../css/pages/checkout.css" />
   </head>
+
   <body>
     <header class="header">
       <div class="container header-inner">
-        <a href="/index.html" class="logo">
-          <img src="/assets/images/logo.png" alt="Sakedo Logo" />
+        <a href="global.html" class="logo">
+          <img src="../assets/images/logo.png" alt="Sakedo Logo" />
         </a>
         <nav class="navbar">
-          <a href="/pages/cart.html" class="nav-link">
-            <i class="fas fa-arrow-left" style="margin-right: 5px"></i> Quay lại
-            giỏ hàng
+          <a href="cart.html" class="nav-link">
+            <i class="fas fa-arrow-left nav-icon"></i> Quay lại giỏ hàng
           </a>
         </nav>
       </div>
@@ -43,7 +43,7 @@
           <span>
             <strong>Lưu ý quan trọng:</strong> Hiện tại Sakedo chỉ hỗ trợ giao
             hàng trong khu vực
-            <strong style="color: #d32f2f">TP. Hồ Chí Minh</strong> để đảm bảo
+            <strong class="highlight-text">TP. Hồ Chí Minh</strong> để đảm bảo
             hương vị và chất lượng món ăn được trọn vẹn nhất.
           </span>
         </div>
@@ -74,15 +74,9 @@
             <label class="form-label">Tỉnh / Thành phố</label>
             <input
               type="text"
-              class="form-input"
+              class="form-input form-input-readonly"
               value="TP. Hồ Chí Minh"
               readonly
-              style="
-                background-color: #eee;
-                cursor: not-allowed;
-                font-weight: bold;
-                color: #555;
-              "
             />
           </div>
 
@@ -132,9 +126,7 @@
       </div>
 
       <div class="order-summary">
-        <h2 class="section-title" style="font-size: 1.5rem; border: none">
-          Đơn Hàng Của Bạn
-        </h2>
+        <h2 class="section-title section-title-sm">Đơn Hàng Của Bạn</h2>
 
         <div id="mini-cart-list"></div>
 
@@ -144,27 +136,37 @@
         </div>
         <div class="order-row">
           <span>Phí vận chuyển:</span>
-          <span
-            id="shipping-fee-display"
-            style="font-weight: bold; color: #28a745"
-            >0đ</span
-          >
+          <span id="shipping-fee-display" class="shipping-fee">0đ</span>
         </div>
 
-        <div
-          class="summary-total"
-          style="
-            margin-top: 20px;
-            border-top: 1px dashed #ccc;
-            padding-top: 15px;
-            display: flex;
-            justify-content: space-between;
-            font-size: 1.2rem;
-            font-weight: bold;
-          "
-        >
+        <div class="checkout-summary-total">
           <span>Tổng thanh toán:</span>
-          <span id="ck-total" style="color: #d32f2f">0đ</span>
+          <span id="ck-total" class="total-price">0đ</span>
+        </div>
+
+        <!-- PHƯƠNG THỨC THANH TOÁN -->
+        <div class="payment-methods">
+          <h4>Phương thức thanh toán</h4>
+          <label class="payment-option">
+            <input type="radio" name="paymentMethod" value="cod" checked />
+            <span class="option-content">
+              <i class="fas fa-money-bill-wave"></i>
+              <div class="option-text">
+                <span class="option-title">Tiền mặt (COD)</span>
+                <span class="option-desc">Thanh toán khi nhận hàng</span>
+              </div>
+            </span>
+          </label>
+          <label class="payment-option">
+            <input type="radio" name="paymentMethod" value="bank" />
+            <span class="option-content">
+              <i class="fas fa-qrcode"></i>
+              <div class="option-text">
+                <span class="option-title">Chuyển khoản QR</span>
+                <span class="option-desc">Quét mã QR để thanh toán</span>
+              </div>
+            </span>
+          </label>
         </div>
 
         <button type="button" class="btn-confirm" onclick="submitOrder()">

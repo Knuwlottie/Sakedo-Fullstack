@@ -2,14 +2,13 @@ package com.sakedo.mini_store_backend.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field; // <--- QUAN TRỌNG
+import org.springframework.data.mongodb.core.mapping.Field;
 
 @Document(collection = "users")
 public class User {
     @Id
     private String id;
 
-    // QUAN TRỌNG NHẤT: Dòng này giúp Java map đúng chữ "Knhu" từ DB
     @Field("name")
     private String name;
 

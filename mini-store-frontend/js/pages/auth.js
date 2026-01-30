@@ -3,12 +3,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const GOOGLE_CLIENT_ID =
     "179543967912-51nveu64umt0ati2fic7onhnlopaba2p.apps.googleusercontent.com";
 
-  // ============================================================
   // 1. CẤU HÌNH GOOGLE LOGIN
-  // ============================================================
   let tokenClient;
-
-  // Khởi tạo Google Token Client
   function initGoogleClient() {
     if (typeof google !== "undefined" && google.accounts) {
       tokenClient = google.accounts.oauth2.initTokenClient({
@@ -23,8 +19,6 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     }
   }
-
-  // Xử lý thông tin trả về từ Google
   async function handleGoogleResponse(accessToken) {
     try {
       const googleRes = await fetch(
@@ -34,8 +28,6 @@ document.addEventListener("DOMContentLoaded", function () {
         },
       );
       const googleUser = await googleRes.json();
-
-      // Check email với Backend
       checkEmailInDatabase(googleUser.email, googleUser);
     } catch (error) {
       console.error(error);
@@ -43,13 +35,11 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  // Kiểm tra Email trong Database
   async function checkEmailInDatabase(email, googleInfo) {
     try {
       const response = await fetch(`${API_BASE_URL}/users/email/${email}`);
 
       if (response.ok) {
-        // Có tài khoản -> Đăng nhập
         const userData = await response.json();
         userData.loginType = "google";
 
@@ -57,7 +47,6 @@ document.addEventListener("DOMContentLoaded", function () {
         alert(`Đăng nhập thành công! Xin chào ${userData.name}.`);
         window.location.href = "../index.html";
       } else {
-        // Chưa có tài khoản -> Gợi ý đăng ký
         if (
           confirm(
             `Email ${email} chưa đăng ký. Bạn có muốn đăng ký ngay không?`,
@@ -73,14 +62,10 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  // Chờ thư viện Google load xong
   setTimeout(initGoogleClient, 500);
 
-  // ============================================================
-  // 2. XỬ LÝ SỰ KIỆN CLICK (GOOGLE & GUEST)
-  // ============================================================
+  // 2. GOOGLE & GUEST
 
-  // Nút Google
   const btnGoogle = document.getElementById("btn-google-check");
   if (btnGoogle) {
     btnGoogle.addEventListener("click", function () {
@@ -92,7 +77,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // Nút Khách (Guest)
   const btnGuest = document.getElementById("btn-guest-mode");
   if (btnGuest) {
     btnGuest.addEventListener("click", function () {
@@ -114,15 +98,12 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // ============================================================
-  // 3. LOGIC TAB & FORM LOGIN/REGISTER
-  // ============================================================
+  // 3.LOGIN/REGISTER
   const tabLogin = document.getElementById("tab-login");
   const tabRegister = document.getElementById("tab-register");
   const formLogin = document.getElementById("form-login");
   const formRegister = document.getElementById("form-register");
 
-  // Chuyển Tab
   if (tabLogin && tabRegister) {
     tabLogin.addEventListener("click", () => {
       tabLogin.classList.add("active");
@@ -138,7 +119,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // Xử lý Login Submit
   if (formLogin) {
     formLogin.addEventListener("submit", async function (e) {
       e.preventDefault();
@@ -172,7 +152,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // Xử lý Register Submit
   if (formRegister) {
     formRegister.addEventListener("submit", async function (e) {
       e.preventDefault();

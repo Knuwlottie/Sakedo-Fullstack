@@ -1,116 +1,146 @@
 document.addEventListener("DOMContentLoaded", function () {
-  renderHeader();
+  loadHeader();
 });
 
-// Gán vào window để các file khác (như profile.js) có thể gọi lại nếu cần
-window.renderHeader = function () {
+async function loadHeader() {
   const headerPlaceholder = document.getElementById("header-placeholder");
   if (!headerPlaceholder) return;
 
-  // 1. XỬ LÝ ĐƯỜNG DẪN (Để không bị lỗi ảnh khi ở trang con)
-  const isPagesFolder = window.location.pathname.includes("/pages/");
-  const assetRoot = isPagesFolder ? "../" : "./";
+  const assetRoot = "../";
 
-  // 2. LẤY USER TỪ LOCALSTORAGE (Nhanh hơn gọi API)
-  const user = JSON.parse(localStorage.getItem("user"));
-
-  // 3. XÁC ĐỊNH NỘI DUNG BÊN PHẢI (Login hay chưa)
-  let rightContentHtml = "";
-
-  if (user) {
-    // --- ĐÃ ĐĂNG NHẬP ---
-    let displayName = user.name || user.fullName || "Member";
-    if (user.role === "guest") displayName = "Khách";
-
-    // Xử lý Avatar
-    let avatarSrc = user.avatar || "";
-    if (!avatarSrc.startsWith("http") && !avatarSrc.includes("data:")) {
-      // Nếu là tên file ảnh trong thư mục
-      avatarSrc = `${assetRoot}assets/images/${avatarSrc}`;
-    }
-    // Nếu không có avatar -> dùng logo mặc định
-    if (!avatarSrc) avatarSrc = `${assetRoot}assets/images/logo.png`;
-
-    rightContentHtml = `
-            <a href="cart.html" class="cart-btn">
-                <i class="fas fa-shopping-basket"></i>
-                <span class="cart-count">0</span>
-            </a>
-            
-            <div class="user-dropdown" onclick="window.location.href='profile.html'" title="Vào trang cá nhân">
-                <div class="user-avatar">
-                     <img src="${avatarSrc}" onerror="this.src='${assetRoot}assets/images/logo.png'">
-                </div>
-                <span class="user-name">${getShortName(displayName)}</span>
-                <i class="fas fa-sign-out-alt btn-logout" onclick="event.stopPropagation(); handleLogout()" title="Đăng xuất"></i>
-            </div>
-        `;
-  } else {
-    // --- CHƯA ĐĂNG NHẬP ---
-    rightContentHtml = `
-            <a href="cart.html" class="cart-btn">
-                <i class="fas fa-shopping-basket"></i>
-                <span class="cart-count">0</span>
-            </a>
-            <a href="auth.html" class="btn-primary">ĐĂNG NHẬP</a>
-        `;
-  }
-
-  // 4. RENDER HTML (Giữ cấu trúc chuẩn class CSS)
   headerPlaceholder.innerHTML = `
-        <header class="header">
-            <div class="container header-inner">
-                <a href="global.html" class="logo">
-                    <img src="${assetRoot}assets/images/logo.png" alt="Sakedo Logo">
-                </a>
+    <header class="header">
+      <div class="container header-inner">
+        <a href="global.html" class="logo">
+          <img src="${assetRoot}assets/images/logo.png" alt="Sakedo Logo" />
+        </a>
+        <nav class="navbar">
+          <ul class="nav-list">
+            <li><a href="global.html" class="nav-link">Trang Chủ</a></li>
+            <li><a href="menu.html" class="nav-link">Thực Đơn</a></li>
+            <li><a href="booking.html" class="nav-link">Đặt Bàn</a></li>
+            <li><a href="contact.html" class="nav-link">Liên Hệ</a></li>
+            <li><a href="profile.html" class="nav-link">Cá Nhân</a></li>
+          </ul>
+        </nav>
+        <div class="header-actions" id="header-user-area">
+            <a href="cart.html" class="cart-btn">
+                <i class="fas fa-shopping-basket"></i><span class="cart-count">0</span>
+            </a>
+            <a href="auth.html" class="btn btn-primary btn-login-primary">Đăng Nhập</a>
+        </div>
+      </div>
+    </header>
+  `;
 
-                <ul class="nav-list">
-                    <li><a href="global.html" class="nav-link" data-page="global.html">Trang Chủ</a></li>
-                    <li><a href="menu.html" class="nav-link" data-page="menu.html">Thực Đơn</a></li>
-                    <li><a href="booking.html" class="nav-link" data-page="booking.html">Đặt Bàn</a></li>
-                    <li><a href="contact.html" class="nav-link" data-page="contact.html">Liên Hệ</a></li>
-                    <li><a href="profile.html" class="nav-link" data-page="profile.html">Cá Nhân</a></li>
-                </ul>
-
-                <div class="header-actions">
-                    ${rightContentHtml}
-                </div>
-            </div>
-        </header>
-    `;
-
-  // 5. CHẠY CÁC HÀM PHỤ TRỢ
   highlightActiveMenu();
-  if (typeof window.updateCartBadge === "function") {
-    window.updateCartBadge();
-  }
-};
+  await updateLoginState(assetRoot);
+  updateCartBadge();
+}
 
-// --- CÁC HÀM HỖ TRỢ ---
+async function updateLoginState(assetRoot) {
+  const userArea = document.getElementById("header-user-area");
+  let localUser = JSON.parse(localStorage.getItem("user"));
+
+  if (localUser && localUser.email && userArea) {
+    let currentUser = localUser;
+
+    try {
+      const response = await fetch(
+        `http://localhost:8080/api/users/email/${localUser.email}`,
+      );
+      if (response.ok) {
+        const apiUser = await response.json();
+        currentUser = {
+          ...apiUser,
+          avatar: apiUser.avatar || localUser.avatar,
+        };
+        localStorage.setItem("user", JSON.stringify(currentUser));
+      }
+    } catch (error) {
+      console.warn("Server offline, dùng dữ liệu cũ.");
+    }
+
+    let displayName = currentUser.name || currentUser.fullName;
+
+    if (!displayName || displayName.trim() === "") {
+      if (currentUser.email) {
+        displayName = currentUser.email.split("@")[0];
+      } else {
+        displayName = "Khách hàng";
+      }
+    }
+
+    const defaultAvatarUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(
+      displayName,
+    )}&background=d8b26e&color=fff&size=128&bold=true`;
+    let finalAvatarUrl = defaultAvatarUrl;
+
+    if (currentUser.avatar && currentUser.avatar.trim() !== "") {
+      if (
+        currentUser.avatar.startsWith("http") ||
+        currentUser.avatar.startsWith("data:")
+      ) {
+        finalAvatarUrl = currentUser.avatar;
+      } else {
+        const cleanPath = currentUser.avatar.replace(
+          /^(\.\/|\/|assets\/images\/)/,
+          "",
+        );
+        finalAvatarUrl = `${assetRoot}assets/images/${cleanPath}`;
+      }
+    }
+
+    userArea.innerHTML = `
+        <a href="cart.html" class="cart-btn cart-btn-clean">
+            <i class="fas fa-shopping-basket"></i>
+            <span class="cart-count">0</span>
+        </a>
+        
+        <div class="user-dropdown user-dropdown-container" onclick="window.location.href='profile.html'">
+            <img src="${finalAvatarUrl}" 
+                 alt="${displayName}" 
+                 class="user-avatar-img"
+                 onerror="this.src='${defaultAvatarUrl}'"
+            >
+            <span class="user-display-name">${displayName}</span>
+        </div>
+        
+        <button onclick="handleLogout()" class="btn-logout-icon" title="Đăng xuất">
+            <i class="fas fa-sign-out-alt"></i>
+        </button>
+    `;
+  }
+}
 
 function highlightActiveMenu() {
-  const currentPage = window.location.pathname.split("/").pop();
+  const currentPath = window.location.pathname;
   const links = document.querySelectorAll(".nav-link");
   links.forEach((link) => {
-    if (
-      link.getAttribute("href") === currentPage ||
-      link.getAttribute("data-page") === currentPage
-    ) {
+    if (currentPath.includes(link.getAttribute("href")))
       link.classList.add("active");
-    }
   });
 }
 
-function getShortName(fullName) {
-  if (!fullName) return "U";
-  const parts = fullName.trim().split(" ");
-  return parts[parts.length - 1]; // Lấy tên cuối cùng
+function updateCartBadge() {
+  const isBuyNowMode = localStorage.getItem("buyNowMode") === "true";
+  let cart;
+
+  if (isBuyNowMode) {
+    cart = JSON.parse(localStorage.getItem("cart_backup")) || [];
+  } else {
+    cart = JSON.parse(localStorage.getItem("cart")) || [];
+  }
+
+  const total = cart.reduce((sum, item) => sum + item.quantity, 0);
+  document
+    .querySelectorAll(".cart-count")
+    .forEach((b) => (b.innerText = total));
 }
 
 window.handleLogout = function () {
   if (confirm("Bạn có chắc muốn đăng xuất?")) {
     localStorage.removeItem("user");
-    localStorage.removeItem("cart");
     window.location.href = "auth.html";
   }
 };

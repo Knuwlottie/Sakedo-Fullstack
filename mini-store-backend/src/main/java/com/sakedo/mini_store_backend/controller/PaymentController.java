@@ -1,32 +1,24 @@
-
-
 package com.sakedo.mini_store_backend.controller;
-
 
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
 
-
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
-
 
 @RestController
 @RequestMapping("/api/payment")
 @CrossOrigin(origins = "*")
 public class PaymentController {
 
-
     private final String clientId = "6d74340c-5044-4f79-9c02-4d3a1af73b67";
     private final String apiKey = "dff450a3-9c81-4679-b1fc-9e00d801e588";
     private final String checksumKey = "da3433f6c76493b96835f307946e45f369c904eed47de91e93f102599b0652e2";
 
-
-    // Tạo RestTemplate với timeout cao hơn để tránh lỗi Connection Reset
     private RestTemplate createRestTemplate() {
         SimpleClientHttpRequestFactory factory = new SimpleClientHttpRequestFactory();
         factory.setConnectTimeout(30000); // 30 giây
@@ -34,19 +26,15 @@ public class PaymentController {
         return new RestTemplate(factory);
     }
 
-
     @PostMapping("/create-link")
     public ResponseEntity<?> createPaymentLink(@RequestBody Map<String, Object> requestData) {
         try {
             int amount = Integer.parseInt(requestData.get("amount").toString());
             long orderCode = System.currentTimeMillis() / 1000;
 
-
-            // Link trả về global.html (Trang chủ của bạn)
             String cancelUrl = "http://127.0.0.1:5500/mini-store-frontend/pages/global.html?status=CANCELLED";
             String returnUrl = "http://127.0.0.1:5500/mini-store-frontend/pages/global.html?payment=success";
             String description = "Nha hang Sakedo";
-
 
             String dataToSign = "amount=" + amount +
                     "&cancelUrl=" + cancelUrl +
@@ -54,9 +42,7 @@ public class PaymentController {
                     "&orderCode=" + orderCode +
                     "&returnUrl=" + returnUrl;
 
-
             String signature = calculateHmacSHA256(dataToSign, checksumKey);
-
 
             Map<String, Object> body = new HashMap<>();
             body.put("orderCode", orderCode);
@@ -66,28 +52,21 @@ public class PaymentController {
             body.put("returnUrl", returnUrl);
             body.put("signature", signature);
 
-
-            // Sử dụng RestTemplate với cấu hình timeout
             RestTemplate restTemplate = createRestTemplate();
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
             headers.set("x-client-id", clientId);
             headers.set("x-api-key", apiKey);
 
-
             HttpEntity<Map<String, Object>> entity = new HttpEntity<>(body, headers);
-
 
             System.out.println("--> Đang gọi PayOS API...");
             System.out.println("--> Body: " + body);
 
-
             ResponseEntity<Map> response = restTemplate.postForEntity(
                     "https://api-merchant.payos.vn/v2/payment-requests", entity, Map.class);
 
-
             System.out.println("--> PayOS Response: " + response.getBody());
-
 
             if (response.getStatusCode() == HttpStatus.OK && response.getBody() != null) {
                 Map<String, Object> data = (Map<String, Object>) response.getBody().get("data");
@@ -97,14 +76,12 @@ public class PaymentController {
             }
             return ResponseEntity.status(500).body(Map.of("error", "PayOS không trả về dữ liệu"));
 
-
         } catch (Exception e) {
             e.printStackTrace();
             System.err.println("--> Lỗi PayOS: " + e.getMessage());
             return ResponseEntity.status(500).body(Map.of("error", "Lỗi kết nối PayOS: " + e.getMessage()));
         }
     }
-
 
     private String calculateHmacSHA256(String data, String key) throws Exception {
         Mac sha256_HMAC = Mac.getInstance("HmacSHA256");
@@ -120,4 +97,3 @@ public class PaymentController {
         return hash.toString();
     }
 }
-

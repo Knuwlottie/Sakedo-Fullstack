@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const btnSend = document.querySelector("button"); // Hoặc getElementById nếu bạn đặt ID
+  const btnSend = document.querySelector("button");
   const emailInput = document.querySelector('input[type="email"]');
 
   if (btnSend) {
@@ -12,7 +12,6 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
       }
 
-      // Hiệu ứng nút bấm (đang gửi...)
       btnSend.textContent = "Đang gửi...";
       btnSend.disabled = true;
 
@@ -26,11 +25,10 @@ document.addEventListener("DOMContentLoaded", function () {
             ? res.json()
             : res.json().then((err) => {
                 throw new Error(err.message);
-              })
+              }),
         )
         .then((data) => {
           alert(data.message);
-          // Lưu email lại để dùng cho trang sau
           localStorage.setItem("resetEmail", email);
           window.location.href = "verify-code.html";
         })

@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="../css/components/header.css" />
     <link rel="stylesheet" href="../css/components/footer.css" />
   </head>
+
   <body>
     <script>
       window.ROOT_PATH = "../";
@@ -32,19 +33,10 @@
         <section class="profile-card">
           <div class="card-header-row">
             <div class="card-title">
-              <i class="fas fa-box-open" style="color: #d8b26e"></i>
+              <i class="fas fa-box-open"></i>
               <h2>Đơn Đang Thực Hiện</h2>
             </div>
-            <button
-              id="btn-view-history"
-              class="view-all-link"
-              style="
-                background: none;
-                border: none;
-                cursor: pointer;
-                font-size: 0.9rem;
-              "
-            >
+            <button id="btn-view-history" class="view-all-link">
               <i class="fas fa-history"></i> Xem lịch sử đơn hàng >
             </button>
           </div>
@@ -58,11 +50,7 @@
               <i class="fas fa-id-card"></i>
               <h2>Thông Tin Cá Nhân</h2>
             </div>
-            <button
-              class="btn-edit"
-              id="btn-profile-action"
-              style="background-color: #333; color: #fff; border: none"
-            >
+            <button class="btn-edit" id="btn-profile-action">
               <i class="fas fa-edit"></i> <span>Chỉnh sửa</span>
             </button>
           </div>
@@ -74,14 +62,9 @@
                   src="../assets/images/avata1.png"
                   alt="Avatar"
                   id="profile-avatar-img"
-                  style="object-fit: cover"
                   onerror="this.src = 'https://via.placeholder.com/150'"
                 />
-                <div
-                  class="avatar-upload"
-                  id="btn-trigger-upload"
-                  style="display: none; cursor: pointer"
-                >
+                <div class="avatar-upload" id="btn-trigger-upload">
                   <i class="fas fa-camera"></i>
                 </div>
                 <input
@@ -91,16 +74,7 @@
                   style="display: none"
                 />
               </div>
-              <h3
-                class="profile-hero-name"
-                style="
-                  text-align: center;
-                  margin-top: 15px;
-                  font-family: &quot;Fruktur&quot;;
-                "
-              >
-                ...
-              </h3>
+              <h3 class="profile-hero-name">...</h3>
             </div>
 
             <div class="form-column">
@@ -120,7 +94,6 @@
                   id="profile-email"
                   placeholder="Đang tải..."
                   disabled
-                  style="opacity: 0.7"
                 />
               </div>
               <div class="form-group">
@@ -139,12 +112,6 @@
                     type="text"
                     id="profile-address"
                     placeholder="Nhập địa chỉ giao hàng..."
-                    style="
-                      width: 100%;
-                      padding: 10px;
-                      border: 1px solid #ddd;
-                      border-radius: 8px;
-                    "
                     disabled
                   />
                 </div>
@@ -186,49 +153,31 @@
           <h3>Đổi Mật Khẩu</h3>
         </div>
         <form id="password-form">
-          <div class="form-group" style="margin-bottom: 15px">
-            <label>Mật khẩu hiện tại</label
-            ><input
+          <div class="form-group">
+            <label>Mật khẩu hiện tại</label>
+            <input
               type="password"
               id="current-password"
               class="form-control"
               required
-              style="
-                width: 100%;
-                padding: 10px;
-                border: 1px solid #ddd;
-                border-radius: 5px;
-              "
             />
           </div>
-          <div class="form-group" style="margin-bottom: 15px">
-            <label>Mật khẩu mới</label
-            ><input
+          <div class="form-group">
+            <label>Mật khẩu mới</label>
+            <input
               type="password"
               id="new-password"
               class="form-control"
               required
-              style="
-                width: 100%;
-                padding: 10px;
-                border: 1px solid #ddd;
-                border-radius: 5px;
-              "
             />
           </div>
-          <div class="form-group" style="margin-bottom: 20px">
-            <label>Xác nhận mật khẩu mới</label
-            ><input
+          <div class="form-group">
+            <label>Xác nhận mật khẩu mới</label>
+            <input
               type="password"
               id="confirm-password"
               class="form-control"
               required
-              style="
-                width: 100%;
-                padding: 10px;
-                border: 1px solid #ddd;
-                border-radius: 5px;
-              "
             />
           </div>
           <div class="modal-buttons">
@@ -241,33 +190,16 @@
       </div>
     </div>
 
-    <div
-      class="modal-overlay"
-      id="history-modal"
-      style="
-        display: none;
-        align-items: flex-start;
-        padding-top: 50px;
-        overflow-y: auto;
-      "
-    >
-      <div
-        class="modal-content"
-        style="max-width: 800px; width: 95%; max-height: 85vh; overflow-y: auto"
-      >
+    <div class="modal-overlay" id="history-modal">
+      <div class="modal-content">
         <button class="modal-close" id="close-history-modal">&times;</button>
         <div class="modal-header">
-          <i
-            class="fas fa-history"
-            style="background: #e3f2fd; color: #1976d2"
-          ></i>
+          <i class="fas fa-history"></i>
           <h3>Lịch Sử Đơn Hàng</h3>
-          <p style="margin: 0; font-size: 0.9rem; color: #666">
-            (Đã giao thành công & Đã hủy)
-          </p>
+          <p>(Đã giao thành công & Đã hủy)</p>
         </div>
 
-        <div id="history-list-container" style="margin-top: 20px"></div>
+        <div id="history-list-container"></div>
       </div>
     </div>
 

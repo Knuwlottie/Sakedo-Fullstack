@@ -17,7 +17,6 @@ public class MongoConfig extends AbstractMongoClientConfiguration {
     @Override
     @Bean
     public MongoClient mongoClient() {
-        // Đây là chuỗi kết nối Atlas của bạn, mình đã gắn cứng vào đây
         return MongoClients.create("mongodb+srv://sakedo_user:rRVxCXAnSmwnDAGL@cluster0.krjlsfr.mongodb.net/mini_store_db?retryWrites=true&w=majority");
     }
 }

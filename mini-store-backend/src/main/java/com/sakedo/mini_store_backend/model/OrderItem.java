@@ -1,23 +1,21 @@
 package com.sakedo.mini_store_backend.model;
 
-
 public class OrderItem {
     private String productName;
     private int quantity;
     private double price;
     private String image;
-
+    private String note;
 
     public OrderItem() {}
 
-
-    public OrderItem(String productName, int quantity, double price, String image) {
+    public OrderItem(String productName, int quantity, double price, String image, String note) {
         this.productName = productName;
         this.quantity = quantity;
         this.price = price;
         this.image = image;
+        this.note = note;
     }
-
 
     // Getters & Setters
     public String getProductName() { return productName; }
@@ -28,5 +26,6 @@ public class OrderItem {
     public void setPrice(double price) { this.price = price; }
     public String getImage() { return image; }
     public void setImage(String image) { this.image = image; }
+    public String getNote() { return note; }
+    public void setNote(String note) { this.note = note; }
 }
-

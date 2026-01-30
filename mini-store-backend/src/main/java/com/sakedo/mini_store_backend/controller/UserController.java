@@ -8,7 +8,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Map; // <--- QUAN TRỌNG: Dòng này sửa lỗi đỏ lòm của bạn
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -45,8 +45,6 @@ public class UserController {
             user.setPhone(userDetails.getPhone());
             user.setAddress(userDetails.getAddress());
 
-            // --- THÊM DÒNG NÀY ĐỂ LƯU ẢNH ---
-            // Nếu Frontend có gửi avatar lên thì mới cập nhật
             if (userDetails.getAvatar() != null && !userDetails.getAvatar().isEmpty()) {
                 user.setAvatar(userDetails.getAvatar());
             }
@@ -79,7 +77,7 @@ public class UserController {
         }
     }
 
-    // 4. API TẠO USER MẪU (Dùng để test)
+    // 4. API TẠO USER MẪU
     @GetMapping("/init")
     public String initUser() {
         if (!userRepository.existsById("1")) {

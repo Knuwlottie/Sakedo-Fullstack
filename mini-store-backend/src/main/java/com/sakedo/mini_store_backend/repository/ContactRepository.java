@@ -6,5 +6,4 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ContactRepository extends MongoRepository<Contact, String> {
-    // Hiện tại chưa cần tìm kiếm gì phức tạp nên để trống
 }

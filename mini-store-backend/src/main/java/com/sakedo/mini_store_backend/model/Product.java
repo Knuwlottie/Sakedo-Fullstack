@@ -8,22 +8,20 @@ import java.util.List;
 @Document(collection = "products")
 public class Product {
     @Id
-    private int id; // Đã đổi từ String sang int để khớp với Controller
+    private int id;
 
     private String name;
     private double price;
     private String description;
     private String image;
-    private String category; // "steak", "dessert", "coffee"
-    private boolean isBestSeller; // Mới thêm: Để hiện ở mục Best Seller
-    private int discount; // Mới thêm: % Giảm giá (Ví dụ: 20)
+    private String category;
+    private boolean isBestSeller;
+    private int discount;
 
-    // Class con để lưu đánh giá (Review)
     public static class Review {
         private String user;
         private int rating;
         private String comment;
-        // Getter, Setter, Constructor...
         public Review() {}
         public Review(String user, int rating, String comment) {
             this.user = user;
@@ -42,7 +40,6 @@ public class Product {
 
     public Product() {}
 
-    // Constructor 8 tham số khớp với Controller bạn vừa viết
     public Product(int id, String name, double price, String description, String image, String category, boolean isBestSeller, int discount) {
         this.id = id;
         this.name = name;
@@ -54,7 +51,6 @@ public class Product {
         this.discount = discount;
     }
 
-    // Getters và Setters
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
 

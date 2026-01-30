@@ -18,28 +18,27 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                // 1. TẮT CSRF (Quan trọng: Nếu không tắt, POST sẽ bị chặn)
+                // 1. TẮT CSRF
                 .csrf(csrf -> csrf.disable())
 
-                // 2. CẤU HÌNH CORS (Cho phép Frontend gọi vào)
+                // 2. CẤU HÌNH CORS
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
 
-                // 3. PHÂN QUYỀN (Cho phép tất cả API hoạt động không cần đăng nhập)
+                // 3. PHÂN QUYỀN
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/**").permitAll() // Cho phép hết các link bắt đầu bằng /api/
-                        .anyRequest().permitAll() // Tạm thời mở hết để test cho dễ
+                        .requestMatchers("/api/**").permitAll()
+                        .anyRequest().permitAll()
                 );
 
         return http.build();
     }
 
-    // Cấu hình CORS chi tiết
     @Bean
     public UrlBasedCorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("*")); // Cho phép mọi nguồn (Frontend)
-        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS")); // Cho phép mọi hành động
-        configuration.setAllowedHeaders(Arrays.asList("*")); // Cho phép mọi header
+        configuration.setAllowedOrigins(Arrays.asList("*"));
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        configuration.setAllowedHeaders(Arrays.asList("*"));
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);

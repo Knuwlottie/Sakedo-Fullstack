@@ -23,8 +23,10 @@
 
 /* --- STYLE CHO KHUNG LƯU Ý (MỚI) --- */
 .delivery-note {
-  background-color: #fff3cd; /* Màu nền vàng nhạt */
-  color: #856404; /* Màu chữ nâu vàng */
+  background-color: #fff3cd;
+  /* Màu nền vàng nhạt */
+  color: #856404;
+  /* Màu chữ nâu vàng */
   border: 1px solid #ffeeba;
   padding: 15px;
   border-radius: 8px;
@@ -42,6 +44,7 @@
   color: #d32f2f;
   margin-top: 2px;
 }
+
 /* ----------------------------------- */
 
 .form-group {
@@ -84,7 +87,8 @@ textarea.form-input {
   border: 1px solid #eee;
   height: fit-content;
   position: sticky;
-  top: 100px; /* Trượt theo khi cuộn */
+  top: 100px;
+  /* Trượt theo khi cuộn */
 }
 
 /* List món ăn thu nhỏ */
@@ -98,6 +102,7 @@ textarea.form-input {
 #mini-cart-list::-webkit-scrollbar {
   width: 6px;
 }
+
 #mini-cart-list::-webkit-scrollbar-thumb {
   background-color: #ccc;
   border-radius: 10px;
@@ -167,7 +172,133 @@ textarea.form-input {
   .checkout-container {
     grid-template-columns: 1fr;
   }
+
   .order-summary {
     position: static;
   }
+}
+
+/* Nav icon spacing */
+.nav-icon {
+  margin-right: 5px;
+}
+
+/* Highlight text */
+.highlight-text {
+  color: #d32f2f;
+}
+
+/* Readonly input */
+.form-input-readonly {
+  background-color: #eee;
+  cursor: not-allowed;
+  font-weight: bold;
+  color: #555;
+}
+
+/* Section title small */
+.section-title-sm {
+  font-size: 1.5rem;
+  border: none;
+}
+
+/* Shipping fee display */
+.shipping-fee {
+  font-weight: bold;
+  color: #28a745;
+}
+
+/* Checkout summary total */
+.checkout-summary-total {
+  margin-top: 20px;
+  border-top: 1px dashed #ccc;
+  padding-top: 15px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+/* Total price */
+.total-price {
+  color: #d32f2f;
+}
+
+/* === PAYMENT METHODS === */
+.payment-methods {
+  margin-top: 25px;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+}
+
+.payment-methods h4 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.payment-option {
+  display: block;
+  margin-bottom: 12px;
+  cursor: pointer;
+}
+
+.payment-option input[type="radio"] {
+  display: none;
+}
+
+.payment-option .option-content {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px;
+  border: 2px solid #eee;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  background: #fff;
+}
+
+.payment-option:hover .option-content {
+  border-color: #d8b26e;
+  background: #fffbf5;
+}
+
+.payment-option input[type="radio"]:checked + .option-content {
+  border-color: #d8b26e;
+  background: linear-gradient(135deg, #fffbf5 0%, #fff9ef 100%);
+  box-shadow: 0 4px 15px rgba(216, 178, 110, 0.15);
+}
+
+.payment-option .option-content i {
+  font-size: 1.5rem;
+  color: #d8b26e;
+  width: 35px;
+  text-align: center;
+}
+
+.payment-option .option-text {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.payment-option .option-title {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+.payment-option .option-desc {
+  font-size: 0.8rem;
+  color: #888;
+}
+
+.payment-option input[type="radio"]:checked + .option-content::after {
+  content: "\f00c";
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  color: #d8b26e;
+  margin-left: auto;
+  font-size: 1.1rem;
 }

@@ -11,8 +11,6 @@ public class EmailService {
     @Autowired
     private JavaMailSender mailSender;
 
-    // SỬA LỖI: Điền trực tiếp email vào đây thay vì dùng @Value("${...}")
-    // Để tránh lỗi "Could not resolve placeholder"
     private final String fromEmail = "nhimvleggo@gmail.com";
 
     public void sendOtpEmail(String toEmail, String otp) {
